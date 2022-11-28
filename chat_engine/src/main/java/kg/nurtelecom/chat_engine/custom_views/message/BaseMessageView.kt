@@ -71,11 +71,12 @@ abstract class BaseMessageView<VB: ViewBinding> @JvmOverloads constructor(
             2 -> MessageStatus.ERROR
             else -> return
         }
-        messageStatus = status
         setupMessageStatus(status)
     }
 
-    open fun setupMessageStatus(status: MessageStatus) {  }
+    open fun setupMessageStatus(status: MessageStatus) {
+        messageStatus = status
+    }
 
     private fun setMessageType(intType: Int) {
         val type = when (intType) {
@@ -83,24 +84,19 @@ abstract class BaseMessageView<VB: ViewBinding> @JvmOverloads constructor(
             MessageType.REQUEST.ordinal -> MessageType.REQUEST
             else -> return
         }
-        messageType = type
         setupMessageType(type)
     }
 
     open fun setupMessageType(type: MessageType) {
+        messageType = type
         when (type) {
             MessageType.RESPONSE -> setupAsResponseMessage()
             MessageType.REQUEST -> setupAsRequestMessage()
         }
     }
 
-    open fun setupAsResponseMessage() {
-        messageType = MessageType.RESPONSE
-    }
-
-    open fun setupAsRequestMessage() {
-        messageType = MessageType.REQUEST
-    }
+    open fun setupAsResponseMessage() {}
+    open fun setupAsRequestMessage() {}
 
     companion object {
         const val SUPER_STATE = "super_state"

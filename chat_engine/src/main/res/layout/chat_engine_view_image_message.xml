@@ -11,7 +11,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:cardCornerRadius="@dimen/padding_16dp"
-        app:cardBackgroundColor="@color/gray_1_alpha_50"
         app:cardElevation="@dimen/elevation_0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

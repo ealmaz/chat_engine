@@ -26,7 +26,7 @@ class BubbleMessagesDecor(
             MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal -> outRect.set(oppositeOffsetPx,  topBottomOffsetPx, defaultOffsetPx, topBottomOffsetPx)
             MessageAdapterViewTypes.REQUEST_TEXT.ordinal -> outRect.set(defaultOffsetPx,  topBottomOffsetPx, oppositeOffsetPx, topBottomOffsetPx)
             MessageAdapterViewTypes.REQUEST_IMAGE.ordinal -> outRect.set(defaultOffsetPx,  topBottomOffsetPx, oppositeOffsetPx, topBottomOffsetPx)
-            else -> outRect.set(0,  5, 0, 5)
+            else -> outRect.set(defaultOffsetPx,  topBottomOffsetPx, defaultOffsetPx, topBottomOffsetPx)
         }
 
     }
@@ -36,17 +36,17 @@ class BubbleMessagesDecor(
         val adapter = parent.adapter ?: return
         parent.children.forEach { view ->
             (parent.getChildViewHolder(view) as? TextMessageViewHolder)?.let {
-                val currentPostion = parent.getChildAdapterPosition(view).takeIf { it != RecyclerView.NO_POSITION } ?: return
-                val currentViewType = adapter.getItemViewType(currentPostion)
-                val hasPrev = if (currentPostion == 0) {
+                val currentPosition = parent.getChildAdapterPosition(view).takeIf { it != RecyclerView.NO_POSITION } ?: return
+                val currentViewType = adapter.getItemViewType(currentPosition)
+                val hasPrev = if (currentPosition == 0) {
                     false
                 } else {
-                    adapter.getItemViewType(currentPostion - 1) == currentViewType
+                    adapter.getItemViewType(currentPosition - 1) == currentViewType
                 }
-                val hasNext = if (currentPostion == state.itemCount - 1) {
+                val hasNext = if (currentPosition == state.itemCount - 1) {
                     false
                 } else {
-                    adapter.getItemViewType(currentPostion + 1) == currentViewType
+                    adapter.getItemViewType(currentPosition + 1) == currentViewType
                 }
                 it.renderCorners(hasPrev, hasNext)
             }

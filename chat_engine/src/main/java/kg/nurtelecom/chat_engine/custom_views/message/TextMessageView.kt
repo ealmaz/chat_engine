@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import androidx.annotation.StringRes
+import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import kg.nurtelecom.chat_engine.R
 import kg.nurtelecom.chat_engine.databinding.ChatEngineViewTextMessageBinding
@@ -81,12 +82,7 @@ class TextMessageView @JvmOverloads constructor(
     }
 
     fun setMessageHtml(html: String) {
-        val text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Html.fromHtml(html, Html.FROM_HTML_MODE_COMPACT)
-        } else {
-            Html.fromHtml(html)
-        }
-        vb.tvMessage.text = text
+        vb.tvMessage.text = html.parseAsHtml()
     }
 
     private fun isMessageLoading(isLoading: Boolean) {
@@ -110,7 +106,6 @@ class TextMessageView @JvmOverloads constructor(
             MessageRoundedCorners.BOTTOM.ordinal -> MessageRoundedCorners.BOTTOM
             else -> return
         }
-        messageRoundedCorner = cornerType
         setupMessageRoundedCorners(cornerType)
 
     }

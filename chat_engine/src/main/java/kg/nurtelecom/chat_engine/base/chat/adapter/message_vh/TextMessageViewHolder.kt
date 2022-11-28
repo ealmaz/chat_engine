@@ -3,11 +3,10 @@ package kg.nurtelecom.chat_engine.base.chat.adapter.message_vh
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kg.nurtelecom.chat_engine.databinding.ChatEngineItemTextMessageBinding
 import kg.nurtelecom.chat_engine.custom_views.message.MessageRoundedCorners
+import kg.nurtelecom.chat_engine.databinding.ChatEngineItemTextMessageBinding
 import kg.nurtelecom.chat_engine.model.Message
 import kg.nurtelecom.chat_engine.model.MessageContentType
-import kg.nurtelecom.chat_engine.model.MessageType
 
 class TextMessageViewHolder(private val vb: ChatEngineItemTextMessageBinding) : RecyclerView.ViewHolder(vb.root) {
 
@@ -22,10 +21,6 @@ class TextMessageViewHolder(private val vb: ChatEngineItemTextMessageBinding) : 
         }
         setupMessageType(message.type)
         setupMessageStatus(message.status)
-    }
-
-    fun getMessageType(): MessageType? {
-        return message?.type
     }
 
     fun renderCorners(hasPrev: Boolean, hasNext: Boolean) {

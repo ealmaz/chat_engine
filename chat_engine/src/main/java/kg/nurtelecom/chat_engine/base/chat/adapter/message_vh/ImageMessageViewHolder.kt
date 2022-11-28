@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import kg.nurtelecom.chat_engine.custom_views.message.ImageMessageView
 import kg.nurtelecom.chat_engine.databinding.ChatEngineItemImageMessageBinding
 import kg.nurtelecom.chat_engine.model.Message
 import kg.nurtelecom.chat_engine.model.MessageContentType
@@ -16,12 +17,7 @@ class ImageMessageViewHolder(private val vb: ChatEngineItemImageMessageBinding) 
         setupMessageStatus(message.status)
     }
 
-    private fun loadImage(message: Message) = with(vb.imageMessage) {
-        getImageView().apply {
-            requestLayout()
-            invalidate()
-            scaleType = ImageView.ScaleType.CENTER_INSIDE
-        }
+    private fun ImageMessageView.loadImage(message: Message) {
         when (message.contentType) {
             MessageContentType.IMAGE_URL -> loadImageFromUrl(message.content)
             MessageContentType.IMAGE_FILE_PATH -> loadImageFormFilePath(message.content)

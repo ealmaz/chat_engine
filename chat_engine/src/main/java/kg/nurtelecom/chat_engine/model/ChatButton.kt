@@ -1,6 +1,10 @@
 package kg.nurtelecom.chat_engine.model
 
-data class ChatButton(val buttonId: String, val title: String, val style: ButtonStyle) : MessageAdapterItem  {
+data class ChatButton(
+    val buttonId: String,
+    val title: String,
+    val style: ButtonStyle
+) : MessageAdapterItem  {
 
     override fun areItemsTheSame(other: Any): Boolean {
         return if (other is ChatButton) other.buttonId == this.buttonId

@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentResultListener
+import androidx.fragment.app.commit
 import androidx.lifecycle.LifecycleOwner
 import com.design.chili.view.navigation_components.ChiliToolbar
 import io.reactivex.Single
@@ -101,12 +102,21 @@ class InputSignatureFragment : Fragment(), TouchAndDrawViewCallback {
         const val SIGNATURE_REQUEST_CODE = "signature_code"
         const val SIGNATURE_PATH_BUNDLE = "signature_bundle"
 
-        fun show(fragmentManager: FragmentManager, containerId: Int, lifecycleOwner: LifecycleOwner, fragmentResultListener: FragmentResultListener) {
-            fragmentManager.setFragmentResultListener(SIGNATURE_REQUEST_CODE, lifecycleOwner, fragmentResultListener)
-            fragmentManager.beginTransaction()
-                .replace(containerId, InputSignatureFragment())
-                .addToBackStack(null)
-                .commit()
+        fun show(
+            fragmentManager: FragmentManager,
+            containerId: Int,
+            lifecycleOwner: LifecycleOwner,
+            fragmentResultListener: FragmentResultListener
+        ) {
+            fragmentManager.setFragmentResultListener(
+                SIGNATURE_REQUEST_CODE,
+                lifecycleOwner,
+                fragmentResultListener
+            )
+            fragmentManager.commit {
+                replace(containerId, InputSignatureFragment())
+                addToBackStack(null)
+            }
         }
     }
 }

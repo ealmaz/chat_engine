@@ -5,6 +5,8 @@ import java.util.*
 
 object MessagesMocker {
 
+    val key = listOf<Int>(3, 3, 5, 7)
+
     var lastRequestId = -1
     var lastResponseId = -1
 
@@ -44,23 +46,23 @@ object MessagesMocker {
     )
 
     fun requestRequest(): Message {
+        lastRequestId =  (lastRequestId + 1) % messagesText.size
         return when(messageContentType.random()) {
             MessageContentType.TEXT -> {
-                lastRequestId =  (lastRequestId + 1) % messagesText.size
-                Message("${Date()}", messagesText[lastRequestId], MessageContentType.TEXT, MessageType.REQUEST, states.random())
+                Message("${Date().time * key.random()}", messagesText[lastRequestId], MessageContentType.TEXT, MessageType.REQUEST, states.random())
             }
-            else -> Message("${Date()}", images.random(), MessageContentType.IMAGE_URL, MessageType.REQUEST, states.random())
+            else -> Message("${Date().time * key.random()}", images.random(), MessageContentType.IMAGE_URL, MessageType.REQUEST, states.random())
         }
 
     }
 
     fun requestResponse(): Message {
+        lastResponseId = (lastResponseId + 1) % messagesText.size
         return when(messageContentType.random()) {
             MessageContentType.TEXT -> {
-                lastResponseId = (lastResponseId + 1) % messagesText.size
-                Message("${Date()}", messagesText[lastResponseId], MessageContentType.TEXT, MessageType.RESPONSE, states.random())
+                Message("${Date().time * key.random()}", messagesText[lastResponseId], MessageContentType.TEXT, MessageType.RESPONSE, states.random())
             }
-            else -> Message("${Date()}", images.random(), MessageContentType.IMAGE_URL, MessageType.RESPONSE, states.random())
+            else -> Message("${Date().time * key.random()}", images.random(), MessageContentType.IMAGE_URL, MessageType.RESPONSE, states.random())
         }
     }
 

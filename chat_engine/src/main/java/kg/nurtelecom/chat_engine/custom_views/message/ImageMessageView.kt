@@ -28,6 +28,8 @@ class ImageMessageView @JvmOverloads constructor(
     defStyle: Int = R.style.chat_engine_BaseMessageViewStyle
 ): BaseMessageView<ChatEngineViewImageMessageBinding>(context, attrs, defStyleAttr, defStyle) {
 
+    //todo: Подумать нужно ли выносить glide в переменную
+
     override fun inflateView(): ChatEngineViewImageMessageBinding {
         return ChatEngineViewImageMessageBinding.inflate(LayoutInflater.from(context), this, true)
     }

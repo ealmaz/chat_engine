@@ -18,9 +18,9 @@ import kg.nurtelecom.chat_engine.model.MessageAdapterItem
 
 abstract class BaseChatFragment : Fragment(), View.OnClickListener {
 
-    protected val vb: ChatEngineFragmentBaseChatBinding by lazy {
-        ChatEngineFragmentBaseChatBinding.inflate(layoutInflater)
-    }
+    private var _vb: ChatEngineFragmentBaseChatBinding? = null
+    protected val vb: ChatEngineFragmentBaseChatBinding
+    get() = _vb!!
 
     private val synchronizedAdapterItems: MutableList<MessageAdapterItem> = mutableListOf()
     @Synchronized get
@@ -34,6 +34,7 @@ abstract class BaseChatFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+        _vb = ChatEngineFragmentBaseChatBinding.inflate(layoutInflater)
         return vb.root
     }
 
@@ -86,4 +87,9 @@ abstract class BaseChatFragment : Fragment(), View.OnClickListener {
 
     abstract fun onButtonClick(buttonId: String)
     abstract fun onInputFieldSendButtonClick(inputFieldText: String?)
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _vb = null
+    }
 }

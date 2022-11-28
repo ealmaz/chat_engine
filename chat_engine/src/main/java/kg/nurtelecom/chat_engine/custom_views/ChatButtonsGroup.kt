@@ -29,6 +29,8 @@ class ChatButtonsGroup @JvmOverloads constructor(
         }
     }
 
+    private var buttonsContainer: LinearLayout? = null
+
     private var onSelectedItemChanged: ((selectedId: List<String>) -> Unit)? = null
 
     private var chooseType: ChooseType = ChooseType.MULTIPLE
@@ -92,19 +94,30 @@ class ChatButtonsGroup @JvmOverloads constructor(
 
 
     fun renderButtons() {
-        vb.llRoot.removeAllViews()
-        buttons.forEach {
-            val button = getButton().apply {
-                setOnCheckedChangeListener(this@ChatButtonsGroup)
-                tag = it.id
-                id = it.hashCode()
-                text = it.value
+        buttonsContainer?.let { vb.flRoot.removeView(it) }
+        prepareContainer().let { container ->
+            buttons.forEach {
+                val button = getButton().apply {
+                    setOnCheckedChangeListener(this@ChatButtonsGroup)
+                    tag = it.id
+                    id = it.hashCode()
+                    text = it.value
+                }
+                button.isChecked = it.isSelected
+                container.addView(button)
             }
-            button.isChecked = it.isSelected
-            vb.llRoot.addView(button)
+            val result = validateCheckedStatesAndGetResult()
+            onSelectedItemChanged?.invoke(result)
+            vb.flRoot.addView(container)
         }
-        val result = validateCheckedStatesAndGetResult()
-        onSelectedItemChanged?.invoke(result)
+    }
+
+    private fun prepareContainer(): LinearLayout {
+        return buttonsContainer ?: LinearLayout(context).apply {
+            orientation = VERTICAL
+            layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT)
+            buttonsContainer = this
+        }
     }
 
     private fun getButton(): CompoundButton {
@@ -143,7 +156,7 @@ class ChatButtonsGroup @JvmOverloads constructor(
     private fun validateCheckedStatesAndGetResult(): List<String> {
         val selectedIds = mutableListOf<String>()
         buttons.forEach {
-            vb.llRoot.findViewWithTag<CompoundButton>(it.id)?.apply {
+            buttonsContainer?.findViewWithTag<CompoundButton>(it.id)?.apply {
                 if (isChecked != it.isSelected) isChecked = it.isSelected
                 if (isChecked) selectedIds.add(it.id)
             }
