@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_root">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_image_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="@dimen/padding_16dp"
+        app:cardBackgroundColor="@color/gray_1_alpha_50"
+        app:cardElevation="@dimen/elevation_0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"/>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer"
+            android:layout_width="296dp"
+            android:layout_height="@dimen/view_150dp"
+            android:background="@drawable/chat_engine_bg_image_message_shimmer"
+            app:shimmer_auto_start="true"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <ProgressBar
+        android:id="@+id/pb_progress"
+        android:progressDrawable="@drawable/chat_engine_circular_loop_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/white_1"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/cv_image_container"
+        app:layout_constraintBottom_toBottomOf="@id/cv_image_container"
+        app:layout_constraintStart_toStartOf="@id/cv_image_container"
+        app:layout_constraintEnd_toEndOf="@id/cv_image_container"/>
+
+
+    <ImageView
+        android:id="@+id/iv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:paddingEnd="@dimen/padding_16dp"
+        app:layout_constraintTop_toTopOf="@id/cv_image_container"
+        app:layout_constraintBottom_toTopOf="@id/cv_image_container"
+        app:layout_constraintEnd_toEndOf="@id/cv_image_container"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

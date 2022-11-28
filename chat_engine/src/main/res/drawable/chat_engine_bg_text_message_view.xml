@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item app:state_is_start_single="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#F4F7FF" />
+            <corners
+                android:topLeftRadius="18dp"
+                android:topRightRadius="18dp"
+                android:bottomLeftRadius="18dp"
+                android:bottomRightRadius="18dp" />
+        </shape>
+    </item>
+
+    <item app:state_is_start_bottom="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#F4F7FF" />
+            <corners
+                android:topLeftRadius="@dimen/padding_4dp"
+                android:topRightRadius="18dp"
+                android:bottomLeftRadius="18dp"
+                android:bottomRightRadius="18dp" />
+        </shape>
+    </item>
+
+    <item app:state_is_start_middle="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#F4F7FF" />
+            <corners
+                android:topLeftRadius="@dimen/padding_4dp"
+                android:topRightRadius="18dp"
+                android:bottomLeftRadius="@dimen/padding_4dp"
+                android:bottomRightRadius="18dp" />
+        </shape>
+    </item>
+
+    <item app:state_is_start_top="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#F4F7FF" />
+            <corners
+                android:topLeftRadius="18dp"
+                android:topRightRadius="18dp"
+                android:bottomLeftRadius="@dimen/padding_4dp"
+                android:bottomRightRadius="18dp" />
+        </shape>
+    </item>
+
+    <item app:state_is_end_single="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/gray_4" />
+            <corners
+                android:topLeftRadius="18dp"
+                android:topRightRadius="18dp"
+                android:bottomLeftRadius="18dp"
+                android:bottomRightRadius="18dp" />
+        </shape>
+    </item>
+
+    <item app:state_is_end_top="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/gray_4" />
+            <corners
+                android:topLeftRadius="18dp"
+                android:topRightRadius="18dp"
+                android:bottomLeftRadius="18dp"
+                android:bottomRightRadius="@dimen/padding_4dp" />
+        </shape>
+    </item>
+
+    <item app:state_is_end_middle="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/gray_4" />
+            <corners
+                android:topLeftRadius="18dp"
+                android:topRightRadius="@dimen/padding_4dp"
+                android:bottomLeftRadius="18dp"
+                android:bottomRightRadius="@dimen/padding_4dp" />
+        </shape>
+    </item>
+
+    <item app:state_is_end_bottom="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/gray_4" />
+            <corners
+                android:topLeftRadius="18dp"
+                android:topRightRadius="@dimen/padding_4dp"
+                android:bottomLeftRadius="18dp"
+                android:bottomRightRadius="18dp" />
+        </shape>
+    </item>
+
+</selector>

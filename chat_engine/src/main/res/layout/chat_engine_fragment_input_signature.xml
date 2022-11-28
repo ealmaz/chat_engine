@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white_1">
+
+    <com.design.chili.view.navigation_components.ChiliToolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/tb"/>
+
+    <kg.nurtelecom.chat_engine.custom_views.InputSignatureView
+        android:id="@+id/signatureInput"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        app:hint="Ваша подпись для договора."
+        app:description="Оставьте свою подпись пальцем на выделенном поле экрана и нажмите “Продолжить”. Постарайтесь оставить поспись приближенную к подписи в вашем паспорте."
+        app:layout_constraintVertical_weight="5"
+        app:layout_constraintTop_toBottomOf="@id/tb"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.design.chili.view.buttons.LoaderButton
+        android:id="@+id/btn_continue"
+        android:text="Continue"
+        android:enabled="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="@dimen/padding_16dp"
+        android:layout_marginBottom="@dimen/padding_8dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

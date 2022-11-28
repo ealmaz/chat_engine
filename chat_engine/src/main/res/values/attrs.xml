@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="chat_engine_DefaultThemeStyle">
+        <attr name="baseMessageViewDefaultStyle" format="reference"/>
+        <attr name="ChatInputFieldViewDefaultStyle" format="reference"/>
+        <attr name="ChatButtonsGroupDefaultStyle" format="reference"/>
+        <attr name="TouchAndDrawViewDefaultStyle" format="reference"/>
+        <attr name="InputSignatureViewDefaultStyle" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="chat_engine_BaseMessageView">
+        <attr name="message" format="string"/>
+        <attr name="android:src"/>
+        <attr name="imageUrl" format="string"/>
+        <attr name="imageHeight" format="dimension"/>
+        <attr name="imageWidth" format="dimension"/>
+        <attr name="android:scaleType"/>
+        <attr name="messageStatus" format="enum">
+            <enum name="done" value="0"/>
+            <enum name="loading" value="1"/>
+            <enum name="error" value="2"/>
+        </attr>
+        <attr name="messageType" format="enum">
+            <enum name="response" value="0"/>
+            <enum name="request" value="1"/>
+        </attr>
+        <attr name="messageRoundedCorners" format="enum">
+            <enum name="all" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="middle" value="2"/>
+            <enum name="bottom" value="3"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="chat_engine_TextMessageBubbleBackgroundStates">
+        <attr name="state_is_start_top" format="boolean"/>
+        <attr name="state_is_start_middle" format="boolean"/>
+        <attr name="state_is_start_bottom" format="boolean"/>
+        <attr name="state_is_start_single" format="boolean"/>
+
+        <attr name="state_is_end_top" format="boolean"/>
+        <attr name="state_is_end_middle" format="boolean"/>
+        <attr name="state_is_end_bottom" format="boolean"/>
+        <attr name="state_is_end_single" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="chat_engine_ChatInputFieldView">
+        <attr name="android:text"/>
+        <attr name="android:hint"/>
+        <attr name="android:inputType"/>
+        <attr name="mask"/>
+        <attr name="android:enabled"/>
+    </declare-styleable>
+
+    <declare-styleable name="chat_engine_ChatButtonsGroup">
+        <attr name="chooseType" format="enum">
+            <enum name="MULTIPLE" value="0"/>
+            <enum name="SINGLE" value="1"/>
+        </attr>
+        <attr name="buttonsType" format="enum">
+            <enum name="CHEK_BOX" value="0"/>
+            <enum name="TOGGLE" value="1"/>
+            <enum name="RADIO_BUTTON" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="chat_engine_InputSignatureView">
+        <attr name="hint" format="string"/>
+        <attr name="description"/>
+        <attr name="hintTextAppearance"/>
+        <attr name="descriptionTextAppearance" format="reference"/>
+    </declare-styleable>
+
+</resources>
