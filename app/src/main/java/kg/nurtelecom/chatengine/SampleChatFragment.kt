@@ -1,8 +1,10 @@
 package kg.nurtelecom.chatengine
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.activity.result.ActivityResultCallback
 import androidx.fragment.app.Fragment
+import com.design.chili.view.navigation_components.ChiliToolbar
 import kg.nurtelecom.chat_engine.base.chat.BaseChatFragment
 import kg.nurtelecom.chat_engine.base.chat.adapter.ItemTyping
 import kg.nurtelecom.chat_engine.model.*
@@ -13,6 +15,13 @@ import java.util.*
 
 class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
     SampleFlowResultReceiver {
+    override fun setupToolbar(chiliToolbar: ChiliToolbar) {
+        chiliToolbar.initToolbar(
+            ChiliToolbar.Configuration(requireActivity(), "", true, kg.nurtelecom.chat_engine.R.drawable.chat_engine_ic_close, isNavigateUpButtonEnabled = true)
+        )
+        chiliToolbar.setupDividerVisibility(false)
+        chiliToolbar.setToolbarBackgroundColor(Color.TRANSPARENT)
+    }
 
     override fun setupViews() {
         super.setupViews()

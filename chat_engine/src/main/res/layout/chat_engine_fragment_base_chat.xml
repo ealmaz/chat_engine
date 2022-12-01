@@ -6,6 +6,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <com.design.chili.view.navigation_components.ChiliToolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_messages"
         android:layout_width="match_parent"
@@ -17,8 +22,6 @@
 
     <kg.nurtelecom.chat_engine.custom_views.ChatInputFieldView
         android:id="@+id/input"
-        android:inputType="number"
-        app:mask="XXXX"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
