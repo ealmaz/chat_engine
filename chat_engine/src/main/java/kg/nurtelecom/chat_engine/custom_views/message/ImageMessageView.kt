@@ -59,8 +59,8 @@ class ImageMessageView @JvmOverloads constructor(
 
     override fun setupMessageStatus(status: MessageStatus) {
         when (messageType) {
-            MessageType.RESPONSE -> setupMessageStatusForResponse(status)
-            MessageType.REQUEST -> setupMessageStatusForRequest(status)
+            MessageType.USER -> setupMessageStatusForResponse(status)
+            MessageType.SYSTEM -> setupMessageStatusForRequest(status)
             else -> return
         }
     }

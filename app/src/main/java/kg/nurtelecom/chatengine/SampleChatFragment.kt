@@ -58,7 +58,7 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
     }
 
     override fun onGetSignature(path: String) {
-        addAdapterItems(Message("${Date()}", path, MessageContentType.IMAGE_FILE_PATH, MessageType.RESPONSE), *MessagesMocker.buttons)
+        addAdapterItems(Message("${Date()}", path, MessageContentType.IMAGE_FILE_PATH, MessageType.USER), *MessagesMocker.buttons)
     }
 
     override fun onGetFilledInputForm(formResponse: FormResponse) {
@@ -70,17 +70,17 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
             }
 
         }
-        addAdapterItems(Message("${Date()}", messageContent.toString(), MessageContentType.TEXT, MessageType.RESPONSE), *MessagesMocker.buttons)
+        addAdapterItems(Message("${Date()}", messageContent.toString(), MessageContentType.TEXT, MessageType.USER), *MessagesMocker.buttons)
     }
 
     override fun onGetPhotoPath(path: String) {
-        addAdapterItems(Message("${Date()}", path, MessageContentType.IMAGE_FILE_PATH, MessageType.RESPONSE), *MessagesMocker.buttons)
+        addAdapterItems(Message("${Date()}", path, MessageContentType.IMAGE_FILE_PATH, MessageType.USER), *MessagesMocker.buttons)
     }
 
 
     override fun onInputFieldSendButtonClick(inputFieldText: String?) {
         vb.input.setText("")
-        addAdapterItems(Message("${Date()}", inputFieldText ?: "", MessageContentType.TEXT, MessageType.RESPONSE), *MessagesMocker.buttons)
+        addAdapterItems(Message("${Date()}", inputFieldText ?: "", MessageContentType.TEXT, MessageType.USER), *MessagesMocker.buttons)
     }
 
     companion object {

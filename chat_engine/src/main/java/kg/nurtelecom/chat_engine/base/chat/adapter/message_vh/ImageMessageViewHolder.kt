@@ -2,7 +2,6 @@ package kg.nurtelecom.chat_engine.base.chat.adapter.message_vh
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.chat_engine.custom_views.message.ImageMessageView
 import kg.nurtelecom.chat_engine.databinding.ChatEngineItemImageMessageBinding
@@ -13,7 +12,7 @@ class ImageMessageViewHolder(private val vb: ChatEngineItemImageMessageBinding) 
 
     fun onBind(message: Message) = with (vb.imageMessage) {
         loadImage(message)
-        setupMessageType(message.type)
+        setupMessageType(message.messageType)
         setupMessageStatus(message.status)
     }
 

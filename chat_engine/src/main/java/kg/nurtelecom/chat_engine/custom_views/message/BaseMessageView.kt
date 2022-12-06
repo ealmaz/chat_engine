@@ -80,8 +80,8 @@ abstract class BaseMessageView<VB: ViewBinding> @JvmOverloads constructor(
 
     private fun setMessageType(intType: Int) {
         val type = when (intType) {
-            MessageType.RESPONSE.ordinal -> MessageType.RESPONSE
-            MessageType.REQUEST.ordinal -> MessageType.REQUEST
+            MessageType.USER.ordinal -> MessageType.USER
+            MessageType.SYSTEM.ordinal -> MessageType.SYSTEM
             else -> return
         }
         setupMessageType(type)
@@ -90,8 +90,8 @@ abstract class BaseMessageView<VB: ViewBinding> @JvmOverloads constructor(
     open fun setupMessageType(type: MessageType) {
         messageType = type
         when (type) {
-            MessageType.RESPONSE -> setupAsResponseMessage()
-            MessageType.REQUEST -> setupAsRequestMessage()
+            MessageType.USER -> setupAsResponseMessage()
+            MessageType.SYSTEM -> setupAsRequestMessage()
         }
     }
 

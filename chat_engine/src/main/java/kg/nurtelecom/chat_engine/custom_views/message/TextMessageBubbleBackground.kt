@@ -18,8 +18,8 @@ class TextMessageBubbleBackground : LinearLayout {
     override fun onCreateDrawableState(extraSpace: Int): IntArray {
         val drawableState = super.onCreateDrawableState(extraSpace + 1)
         return when (messageType) {
-            MessageType.REQUEST -> mergeDrawableForRequest(drawableState)
-            MessageType.RESPONSE -> mergeDrawableForResponse(drawableState)
+            MessageType.SYSTEM -> mergeDrawableForRequest(drawableState)
+            MessageType.USER -> mergeDrawableForResponse(drawableState)
             else -> drawableState
         }
     }

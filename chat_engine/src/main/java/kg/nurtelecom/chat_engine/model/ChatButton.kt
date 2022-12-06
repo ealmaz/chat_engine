@@ -2,7 +2,7 @@ package kg.nurtelecom.chat_engine.model
 
 data class ChatButton(
     val buttonId: String,
-    val title: String,
+    val text: String,
     val style: ButtonStyle
 ) : MessageAdapterItem  {
 

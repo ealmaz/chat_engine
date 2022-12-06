@@ -19,7 +19,7 @@ class TextMessageViewHolder(private val vb: ChatEngineItemTextMessageBinding) : 
             MessageContentType.TEXT_HTML -> setMessageHtml(message.content)
             else -> {}
         }
-        setupMessageType(message.type)
+        setupMessageType(message.messageType)
         setupMessageStatus(message.status)
     }
 
@@ -31,7 +31,7 @@ class TextMessageViewHolder(private val vb: ChatEngineItemTextMessageBinding) : 
                 hasNext -> MessageRoundedCorners.TOP
                 else ->  MessageRoundedCorners.ALL
             }
-            vb.textMessage.setupMessageRoundedCorners(cornerType, it.type)
+            vb.textMessage.setupMessageRoundedCorners(cornerType, it.messageType)
         }
     }
 

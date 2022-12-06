@@ -10,7 +10,7 @@ class AccentChatButtonVH(private val vb: ChatEngineItemAccentChatButtonBinding):
 
     fun onBind(chatButton: ChatButton) = with(vb.btn) {
         tag = chatButton.buttonId
-        text = chatButton.title
+        text = chatButton.text
     }
 
     companion object {

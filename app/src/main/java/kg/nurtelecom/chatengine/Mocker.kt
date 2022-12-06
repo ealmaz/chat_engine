@@ -49,9 +49,9 @@ object MessagesMocker {
         lastRequestId =  (lastRequestId + 1) % messagesText.size
         return when(messageContentType.random()) {
             MessageContentType.TEXT -> {
-                Message("${Date().time * key.random()}", messagesText[lastRequestId], MessageContentType.TEXT, MessageType.REQUEST, states.random())
+                Message("${Date().time * key.random()}", messagesText[lastRequestId], MessageContentType.TEXT, MessageType.SYSTEM, states.random())
             }
-            else -> Message("${Date().time * key.random()}", images.random(), MessageContentType.IMAGE_URL, MessageType.REQUEST, states.random())
+            else -> Message("${Date().time * key.random()}", images.random(), MessageContentType.IMAGE_URL, MessageType.SYSTEM, states.random())
         }
 
     }
@@ -60,9 +60,9 @@ object MessagesMocker {
         lastResponseId = (lastResponseId + 1) % messagesText.size
         return when(messageContentType.random()) {
             MessageContentType.TEXT -> {
-                Message("${Date().time * key.random()}", messagesText[lastResponseId], MessageContentType.TEXT, MessageType.RESPONSE, states.random())
+                Message("${Date().time * key.random()}", messagesText[lastResponseId], MessageContentType.TEXT, MessageType.USER, states.random())
             }
-            else -> Message("${Date().time * key.random()}", images.random(), MessageContentType.IMAGE_URL, MessageType.RESPONSE, states.random())
+            else -> Message("${Date().time * key.random()}", images.random(), MessageContentType.IMAGE_URL, MessageType.USER, states.random())
         }
     }
 

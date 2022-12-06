@@ -2,10 +2,8 @@ package kg.nurtelecom.chat_engine.custom_views.message
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
-import android.text.Html
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -88,8 +86,8 @@ class TextMessageView @JvmOverloads constructor(
     private fun isMessageLoading(isLoading: Boolean) {
         if (isLoading) {
             when (messageType) {
-                MessageType.RESPONSE -> vb.ivLeftIcon.isVisible = true
-                MessageType.REQUEST -> vb.ivRightIcon.isVisible = true
+                MessageType.USER -> vb.ivLeftIcon.isVisible = true
+                MessageType.SYSTEM -> vb.ivRightIcon.isVisible = true
                 else -> {}
             }
         } else {

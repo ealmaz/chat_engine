@@ -45,10 +45,10 @@ class MessagesAdapter(private val onButtonClick: (tag: String) -> Unit) : ListAd
         return when {
             item is ItemAnchor -> MessageAdapterViewTypes.BOTTOM_ANCHOR_HOLDER.ordinal
             item is ItemTyping -> MessageAdapterViewTypes.TYPING.ordinal
-            item is Message && item.type == MessageType.REQUEST && (item.contentType == MessageContentType.TEXT || item.contentType == MessageContentType.TEXT_HTML) -> MessageAdapterViewTypes.REQUEST_TEXT.ordinal
-            item is Message && item.type == MessageType.REQUEST && (item.contentType == MessageContentType.IMAGE_URL || item.contentType == MessageContentType.IMAGE_FILE_PATH) -> MessageAdapterViewTypes.REQUEST_IMAGE.ordinal
-            item is Message && item.type == MessageType.RESPONSE && (item.contentType == MessageContentType.TEXT || item.contentType == MessageContentType.TEXT_HTML) -> MessageAdapterViewTypes.RESPONSE_TEXT.ordinal
-            item is Message && item.type == MessageType.RESPONSE && (item.contentType == MessageContentType.IMAGE_URL || item.contentType == MessageContentType.IMAGE_FILE_PATH) -> MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal
+            item is Message && item.messageType == MessageType.SYSTEM && (item.contentType == MessageContentType.TEXT || item.contentType == MessageContentType.TEXT_HTML) -> MessageAdapterViewTypes.REQUEST_TEXT.ordinal
+            item is Message && item.messageType == MessageType.SYSTEM && (item.contentType == MessageContentType.IMAGE_URL || item.contentType == MessageContentType.IMAGE_FILE_PATH) -> MessageAdapterViewTypes.REQUEST_IMAGE.ordinal
+            item is Message && item.messageType == MessageType.USER && (item.contentType == MessageContentType.TEXT || item.contentType == MessageContentType.TEXT_HTML) -> MessageAdapterViewTypes.RESPONSE_TEXT.ordinal
+            item is Message && item.messageType == MessageType.USER && (item.contentType == MessageContentType.IMAGE_URL || item.contentType == MessageContentType.IMAGE_FILE_PATH) -> MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal
             item is ChatButton && item.style == ButtonStyle.ACCENT -> MessageAdapterViewTypes.ACCENT_BUTTON.ordinal
             item is ChatButton && item.style == ButtonStyle.SECONDARY -> MessageAdapterViewTypes.SECONDARY_BUTTON.ordinal
             else -> throw IllegalArgumentException("Unknown view type for ${item}")
