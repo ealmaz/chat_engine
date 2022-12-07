@@ -11,13 +11,11 @@ data class ChatButton(
     }
 
     override fun areItemsTheSame(other: Any): Boolean {
-        return if (other is ChatButton) other.buttonId == this.buttonId
-        else false
+        return false
     }
 
     override fun areContentTheSame(other: Any): Boolean {
-        return if (other is ChatButton) other == this
-        else false
+        return false
     }
 }
 
