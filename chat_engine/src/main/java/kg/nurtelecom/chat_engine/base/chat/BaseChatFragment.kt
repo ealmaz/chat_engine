@@ -70,10 +70,9 @@ abstract class BaseChatFragment : Fragment(), View.OnClickListener {
         if (removePrevItem && newList.size >= 1) newList.removeLast()
         newList.addAll(items.toList())
         newList.add(ItemAnchor)
-        newList.distinctBy { it.getItemId() }
         synchronizedAdapterItems.apply {
             clear()
-            addAll(newList)
+            addAll(newList.distinctBy { it.getItemId() })
             messageAdapter.submitList(this.toList()) {
                 vb.rvMessages.scrollToPosition(lastIndex)
             }
