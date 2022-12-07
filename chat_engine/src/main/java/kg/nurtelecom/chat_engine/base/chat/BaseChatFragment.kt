@@ -70,6 +70,7 @@ abstract class BaseChatFragment : Fragment(), View.OnClickListener {
         if (removePrevItem && newList.size >= 1) newList.removeLast()
         newList.addAll(items.toList())
         newList.add(ItemAnchor)
+        newList.distinct()
         synchronizedAdapterItems.apply {
             clear()
             addAll(newList)
