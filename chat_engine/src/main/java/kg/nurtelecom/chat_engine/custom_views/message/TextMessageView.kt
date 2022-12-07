@@ -7,6 +7,7 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
@@ -81,6 +82,10 @@ class TextMessageView @JvmOverloads constructor(
 
     fun setMessageHtml(html: String) {
         vb.tvMessage.text = html.parseAsHtml()
+    }
+
+    fun getMessageTextView(): TextView {
+        return vb.tvMessage
     }
 
     private fun isMessageLoading(isLoading: Boolean) {

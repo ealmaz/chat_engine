@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.chat_engine.custom_views.message.MessageRoundedCorners
 import kg.nurtelecom.chat_engine.databinding.ChatEngineItemTextMessageBinding
+import kg.nurtelecom.chat_engine.extensions.handleUrlClicks
 import kg.nurtelecom.chat_engine.model.Message
 import kg.nurtelecom.chat_engine.model.MessageContentType
 
-class TextMessageViewHolder(private val vb: ChatEngineItemTextMessageBinding) : RecyclerView.ViewHolder(vb.root) {
+class TextMessageViewHolder(private val vb: ChatEngineItemTextMessageBinding, private val onLinkClick: (String) -> Unit) : RecyclerView.ViewHolder(vb.root) {
 
     private var message: Message? = null
 
@@ -16,7 +17,10 @@ class TextMessageViewHolder(private val vb: ChatEngineItemTextMessageBinding) : 
         this@TextMessageViewHolder.message = message
         when(message.contentType) {
             MessageContentType.TEXT -> setMessage(message.content)
-            MessageContentType.TEXT_HTML -> setMessageHtml(message.content)
+            MessageContentType.TEXT_HTML -> {
+                setMessageHtml(message.content)
+                getMessageTextView().handleUrlClicks(onLinkClick)
+            }
             else -> {}
         }
         setupMessageType(message.messageType)
@@ -36,9 +40,9 @@ class TextMessageViewHolder(private val vb: ChatEngineItemTextMessageBinding) : 
     }
 
     companion object {
-        fun create(parent: ViewGroup): TextMessageViewHolder {
+        fun create(parent: ViewGroup, onLinkClick: (String) -> Unit): TextMessageViewHolder {
             val vb  = ChatEngineItemTextMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return TextMessageViewHolder(vb)
+            return TextMessageViewHolder(vb, onLinkClick)
         }
     }
 }

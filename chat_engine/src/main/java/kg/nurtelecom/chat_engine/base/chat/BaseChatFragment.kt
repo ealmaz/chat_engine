@@ -27,7 +27,7 @@ abstract class BaseChatFragment : Fragment(), View.OnClickListener {
     @Synchronized get
 
     private val messageAdapter: MessagesAdapter by lazy {
-        MessagesAdapter { onButtonClick(it) }
+        MessagesAdapter ({ onButtonClick(it) }, { onLinkClick(it) })
     }
 
     override fun onCreateView(
@@ -91,6 +91,7 @@ abstract class BaseChatFragment : Fragment(), View.OnClickListener {
 
     abstract fun onButtonClick(buttonId: String)
     abstract fun onInputFieldSendButtonClick(inputFieldText: String?)
+    abstract fun onLinkClick(url: String)
 
     override fun onDestroyView() {
         super.onDestroyView()

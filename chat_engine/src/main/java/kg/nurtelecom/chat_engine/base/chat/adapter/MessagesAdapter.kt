@@ -14,14 +14,14 @@ import kg.nurtelecom.chat_engine.base.chat.adapter.message_vh.TextMessageViewHol
 import kg.nurtelecom.chat_engine.model.*
 import java.lang.IllegalArgumentException
 
-class MessagesAdapter(private val onButtonClick: (tag: String) -> Unit) : ListAdapter<MessageAdapterItem, RecyclerView.ViewHolder>(AsyncDifferConfig.Builder(MessageItemDiffUtilCallback()).build()) {
+class MessagesAdapter(private val onButtonClick: (tag: String) -> Unit, private val onLinkClick: (String) -> Unit) : ListAdapter<MessageAdapterItem, RecyclerView.ViewHolder>(AsyncDifferConfig.Builder(MessageItemDiffUtilCallback()).build()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
             MessageAdapterViewTypes.REQUEST_IMAGE.ordinal -> ImageMessageViewHolder.create(parent)
             MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal -> ImageMessageViewHolder.create(parent)
-            MessageAdapterViewTypes.REQUEST_TEXT.ordinal -> TextMessageViewHolder.create(parent)
-            MessageAdapterViewTypes.RESPONSE_TEXT.ordinal -> TextMessageViewHolder.create(parent)
+            MessageAdapterViewTypes.REQUEST_TEXT.ordinal -> TextMessageViewHolder.create(parent, onLinkClick)
+            MessageAdapterViewTypes.RESPONSE_TEXT.ordinal -> TextMessageViewHolder.create(parent, onLinkClick)
             MessageAdapterViewTypes.BOTTOM_ANCHOR_HOLDER.ordinal -> BottomAnchorViewHolder(parent.context)
             MessageAdapterViewTypes.TYPING.ordinal -> TypingViewHolder.create(parent)
             MessageAdapterViewTypes.ACCENT_BUTTON.ordinal -> AccentChatButtonVH.create(parent, onButtonClick)

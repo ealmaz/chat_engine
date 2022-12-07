@@ -29,6 +29,8 @@
             android:paddingVertical="@dimen/padding_8dp"
             android:layout_gravity="center"
             android:textSize="@dimen/text_16sp"
+            android:clickable="true"
+            android:focusable="true"
             tools:text="message"/>
 
     </kg.nurtelecom.chat_engine.custom_views.message.TextMessageBubbleBackground>

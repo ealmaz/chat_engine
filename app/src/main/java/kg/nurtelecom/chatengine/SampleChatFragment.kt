@@ -2,6 +2,7 @@ package kg.nurtelecom.chatengine
 
 import android.content.Intent
 import android.graphics.Color
+import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
 import androidx.fragment.app.Fragment
 import com.design.chili.view.navigation_components.ChiliToolbar
@@ -81,6 +82,10 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
     override fun onInputFieldSendButtonClick(inputFieldText: String?) {
         vb.input.setText("")
         addAdapterItems(Message("${Date()}", inputFieldText ?: "", MessageContentType.TEXT, MessageType.USER), *MessagesMocker.buttons)
+    }
+
+    override fun onLinkClick(url: String) {
+        Toast.makeText(requireContext(), url, Toast.LENGTH_SHORT).show()
     }
 
     companion object {
