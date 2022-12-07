@@ -71,6 +71,10 @@ enum class MessageAdapterViewTypes {
 
 object ItemTyping : MessageAdapterItem {
 
+    override fun getItemId(): String {
+        return "ItemTyping"
+    }
+
     override fun areItemsTheSame(other: Any): Boolean {
         return other == this
     }
@@ -81,6 +85,9 @@ object ItemTyping : MessageAdapterItem {
 }
 
 object ItemAnchor : MessageAdapterItem {
+    override fun getItemId(): String {
+        return "ItemAnchor"
+    }
 
     override fun areItemsTheSame(other: Any): Boolean {
         return other == this

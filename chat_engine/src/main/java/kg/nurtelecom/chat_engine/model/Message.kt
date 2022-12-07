@@ -8,6 +8,10 @@ data class Message(
     val status: MessageStatus = MessageStatus.DONE
 ): MessageAdapterItem {
 
+    override fun getItemId(): String {
+        return id
+    }
+
     override fun areItemsTheSame(other: Any): Boolean {
         return if (other is Message) other.id == this.id
         else false

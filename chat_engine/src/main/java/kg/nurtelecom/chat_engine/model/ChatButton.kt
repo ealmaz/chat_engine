@@ -6,6 +6,10 @@ data class ChatButton(
     val style: ButtonStyle
 ) : MessageAdapterItem  {
 
+    override fun getItemId(): String {
+        return buttonId
+    }
+
     override fun areItemsTheSame(other: Any): Boolean {
         return if (other is ChatButton) other.buttonId == this.buttonId
         else false
