@@ -23,7 +23,10 @@ import kg.nurtelecom.chat_engine.extensions.closeCurrentFragment
 import kg.nurtelecom.chat_engine.extensions.hideKeyboard
 import kg.nurtelecom.chat_engine.model.*
 
-class InputFormFragment : Fragment() {
+open class InputFormFragment : Fragment() {
+
+    open val unsupportedTitle = "Неподдерживаемое поле"
+    open val buttonText = "Далее"
 
     private var _vb: ChatEngineFragmentInputFormBinding? = null
     private val vb: ChatEngineFragmentInputFormBinding
@@ -58,7 +61,10 @@ class InputFormFragment : Fragment() {
 
     private fun setupViews() = with(vb) {
         tb.initToolbar(toolbarConfig)
-        btnDone.setOnClickListener { setFragmentResultAndClose() }
+        btnDone.apply {
+            setOnClickListener { setFragmentResultAndClose() }
+            text = buttonText
+        }
     }
 
     private fun setupInputForm() {
@@ -70,15 +76,27 @@ class InputFormFragment : Fragment() {
             val view = when (it.formItem) {
                 is InputField -> createInputField(it.formItem)
                 is GroupButtonFormItem -> createButtonGroup(it.formItem)
-                else -> createUnsupportedItem()
+                else -> createUnsupportedItem(it)
             }
             container.addView(view)
         }
         vb.formContainer.addView(container)
     }
 
-    private fun createUnsupportedItem(): MaskedInputView {
-        return MaskedInputView(requireContext())
+    protected open fun createUnsupportedItem(formItem: FormItem): View {
+        return MaskedInputView(requireContext()).apply {
+            disableEdition()
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+                setMargins(
+                    0,
+                    resources.getDimensionPixelSize(com.design.chili.R.dimen.padding_4dp),
+                    0,
+                    resources.getDimensionPixelSize(com.design.chili.R.dimen.padding_4dp)
+                )
+            }
+            setGravity(Gravity.START)
+            setHint(unsupportedTitle)
+        }
     }
 
     private fun createInputField(inputField: InputField): MaskedInputView {

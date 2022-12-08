@@ -176,6 +176,10 @@ fun getInputForm() = InputForm(
                 ButtonType.TOGGLE,
                 listOf(Validation(ValidationType.REQUIRED, "true"))
             )
+        ),
+        FormItem(
+            FormItemType.DROP_DOWN_FORM_ITEM,
+            ""
         )
     )
 )
