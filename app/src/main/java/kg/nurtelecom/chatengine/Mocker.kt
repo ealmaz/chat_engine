@@ -77,7 +77,6 @@ object MessagesMocker {
 fun getInputForm() = InputForm(
     "ADDRESS",
     "Адрес по прописке",
-    ChatButton("ADD_RESPONSE", "Add RESPONSE", ButtonStyle.SECONDARY),
     listOf(
         FormItem(
             FormItemType.INPUT_FIELD,
@@ -87,7 +86,7 @@ fun getInputForm() = InputForm(
                 "Region",
                 null,
                 null,
-                "^(?!\\s*\$).+"
+                listOf(Validation(ValidationType.REGEX, "^(?!\\\\s*\\\$).+"))
             )
         ),
         FormItem(
@@ -98,7 +97,7 @@ fun getInputForm() = InputForm(
                 "City",
                 null,
                 null,
-                "^(?!\\s*\$).+"
+                listOf(Validation(ValidationType.REGEX, "^(?!\\\\s*\\\$).+"))
             )
         ),
         FormItem(
@@ -109,7 +108,7 @@ fun getInputForm() = InputForm(
                 "Street",
                 null,
                 null,
-                "^(?!\\s*\$).+"
+                listOf(Validation(ValidationType.REGEX, "^(?!\\\\s*\\\$).+"))
             )
         ),
         FormItem(
@@ -128,13 +127,13 @@ fun getInputForm() = InputForm(
             GroupButtonFormItem(
                 "SELECTOR_RADIO",
                 listOf(
-                    Option("GREEN1", "Green1", true),
+                    Option("GREEN1", "Green1", false),
                     Option("RED1", "Red1", false),
                     Option("YELLOW1", "Yellow1", false),
                 ),
                 ChooseType.SINGLE,
                 ButtonType.RADIO_BUTTON,
-                true
+                listOf(Validation(ValidationType.REQUIRED, "true"))
             )
         ),
         FormItem(
@@ -144,10 +143,24 @@ fun getInputForm() = InputForm(
                 listOf(
                     Option("ADDRESS_EQUALS_TRUE", "Адрес места жительства совпадает \n" +
                             "с адресом прописки. ", false),
+                    Option("ADDRESS_EQUALS_TRUE2", "Адрес места жительства совпадает \n" +
+                            "с адресом прописки2. ", false),
+                ),
+                ChooseType.MULTIPLE,
+                ButtonType.CHEK_BOX,
+                null
+            )
+        ),
+        FormItem(
+            FormItemType.GROUP_BUTTON_FORM_ITEM,
+            GroupButtonFormItem(
+                "AGREEMENT",
+                listOf(
+                    Option("AGREEMENT", "Согласен с ...", false),
                 ),
                 ChooseType.SINGLE,
                 ButtonType.CHEK_BOX,
-                false
+                listOf(Validation(ValidationType.REQUIRED, "true"))
             )
         ),
         FormItem(
@@ -159,9 +172,9 @@ fun getInputForm() = InputForm(
                     Option("RED2", "Red2", false),
                     Option("YELLOW2", "Yellow2", false),
                 ),
-                ChooseType.SINGLE,
+                ChooseType.MULTIPLE,
                 ButtonType.TOGGLE,
-                true
+                listOf(Validation(ValidationType.REQUIRED, "true"))
             )
         )
     )

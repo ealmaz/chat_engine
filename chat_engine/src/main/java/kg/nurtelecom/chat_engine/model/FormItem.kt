@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class FormItem(
     val formItemType: FormItemType,
-    val forItem: Any
+    val formItem: Any
 ): Serializable
 
 enum class FormItemType {

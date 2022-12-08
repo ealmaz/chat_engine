@@ -7,7 +7,7 @@ data class GroupButtonFormItem(
     val options: List<Option>,
     val chooseType: ChooseType,
     val buttonType: ButtonType,
-    val isRequiredItem: Boolean
+    val validations: List<Validation>?
 ): Serializable
 
 enum class ChooseType {

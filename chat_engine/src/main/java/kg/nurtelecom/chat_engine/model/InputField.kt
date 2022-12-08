@@ -6,7 +6,7 @@ data class InputField(
     val hint: String?,
     val inputType: InputFieldInputType?,
     val mask: String?,
-    val regex: String?
+    val validations: List<Validation>?
 )
 
 enum class InputFieldInputType {
