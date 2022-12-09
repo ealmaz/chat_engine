@@ -5,7 +5,7 @@ data class DropDownFieldInfo(
     val childDropDownIds: List<String>,
     val chooseType: ChooseType,
     val label: String,
-    val validations: List<Validation>,
+    val validations: List<Validation>?,
     val isNeedToFetchOptions: Boolean,
     val options: List<Option>
 )

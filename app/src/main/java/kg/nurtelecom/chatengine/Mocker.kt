@@ -78,108 +78,126 @@ fun getInputForm() = InputForm(
     "ADDRESS",
     "Адрес по прописке",
     listOf(
-        FormItem(
-            FormItemType.INPUT_FIELD,
-            InputField(
-                "INPUT_REGION",
-                null,
-                "Region",
-                null,
-                null,
-                listOf(Validation(ValidationType.REGEX, "^(?!\\\\s*\\\$).+"))
-            )
-        ),
-        FormItem(
-            FormItemType.INPUT_FIELD,
-            InputField(
-                "INPUT_CITY",
-                null,
-                "City",
-                null,
-                null,
-                listOf(Validation(ValidationType.REGEX, "^(?!\\\\s*\\\$).+"))
-            )
-        ),
-        FormItem(
-            FormItemType.INPUT_FIELD,
-            InputField(
-                "INPUT_STREET",
-                null,
-                "Street",
-                null,
-                null,
-                listOf(Validation(ValidationType.REGEX, "^(?!\\\\s*\\\$).+"))
-            )
-        ),
-        FormItem(
-            FormItemType.INPUT_FIELD,
-            InputField(
-                "INPUT_PHONE",
-                null,
-                null,
-                InputFieldInputType.NUMBER,
-                "+996 XXX XXX XXX",
-                null
-            )
-        ),
-        FormItem(
-            FormItemType.GROUP_BUTTON_FORM_ITEM,
-            GroupButtonFormItem(
-                "SELECTOR_RADIO",
-                listOf(
-                    Option("GREEN1", "Green1", false),
-                    Option("RED1", "Red1", false),
-                    Option("YELLOW1", "Yellow1", false),
-                ),
-                ChooseType.SINGLE,
-                ButtonType.RADIO_BUTTON,
-                listOf(Validation(ValidationType.REQUIRED, "true"))
-            )
-        ),
-        FormItem(
-            FormItemType.GROUP_BUTTON_FORM_ITEM,
-            GroupButtonFormItem(
-                "ADDRESS_EQUALS",
-                listOf(
-                    Option("ADDRESS_EQUALS_TRUE", "Адрес места жительства совпадает \n" +
-                            "с адресом прописки. ", false),
-                    Option("ADDRESS_EQUALS_TRUE2", "Адрес места жительства совпадает \n" +
-                            "с адресом прописки2. ", false),
-                ),
-                ChooseType.MULTIPLE,
-                ButtonType.CHEK_BOX,
-                null
-            )
-        ),
-        FormItem(
-            FormItemType.GROUP_BUTTON_FORM_ITEM,
-            GroupButtonFormItem(
-                "AGREEMENT",
-                listOf(
-                    Option("AGREEMENT", "Согласен с ...", false),
-                ),
-                ChooseType.SINGLE,
-                ButtonType.CHEK_BOX,
-                listOf(Validation(ValidationType.REQUIRED, "true"))
-            )
-        ),
-        FormItem(
-            FormItemType.GROUP_BUTTON_FORM_ITEM,
-            GroupButtonFormItem(
-                "SELECT_COLOR",
-                listOf(
-                    Option("GREEN2", "Green2", true),
-                    Option("RED2", "Red2", false),
-                    Option("YELLOW2", "Yellow2", false),
-                ),
-                ChooseType.MULTIPLE,
-                ButtonType.TOGGLE,
-                listOf(Validation(ValidationType.REQUIRED, "true"))
-            )
-        ),
+//        FormItem(
+//            FormItemType.INPUT_FIELD,
+//            InputField(
+//                "INPUT_REGION",
+//                null,
+//                "Region",
+//                null,
+//                null,
+//                listOf(Validation(ValidationType.REGEX, "^(?!\\\\s*\\\$).+"))
+//            )
+//        ),
+//        FormItem(
+//            FormItemType.INPUT_FIELD,
+//            InputField(
+//                "INPUT_CITY",
+//                null,
+//                "City",
+//                null,
+//                null,
+//                listOf(Validation(ValidationType.REGEX, "^(?!\\\\s*\\\$).+"))
+//            )
+//        ),
+//        FormItem(
+//            FormItemType.INPUT_FIELD,
+//            InputField(
+//                "INPUT_STREET",
+//                null,
+//                "Street",
+//                null,
+//                null,
+//                listOf(Validation(ValidationType.REGEX, "^(?!\\\\s*\\\$).+"))
+//            )
+//        ),
+//        FormItem(
+//            FormItemType.INPUT_FIELD,
+//            InputField(
+//                "INPUT_PHONE",
+//                null,
+//                null,
+//                InputFieldInputType.NUMBER,
+//                "+996 XXX XXX XXX",
+//                null
+//            )
+//        ),
+//        FormItem(
+//            FormItemType.GROUP_BUTTON_FORM_ITEM,
+//            GroupButtonFormItem(
+//                "SELECTOR_RADIO",
+//                listOf(
+//                    Option("GREEN1", "Green1", false),
+//                    Option("RED1", "Red1", false),
+//                    Option("YELLOW1", "Yellow1", false),
+//                ),
+//                ChooseType.SINGLE,
+//                ButtonType.RADIO_BUTTON,
+//                listOf(Validation(ValidationType.REQUIRED, "true"))
+//            )
+//        ),
+//        FormItem(
+//            FormItemType.GROUP_BUTTON_FORM_ITEM,
+//            GroupButtonFormItem(
+//                "ADDRESS_EQUALS",
+//                listOf(
+//                    Option("ADDRESS_EQUALS_TRUE", "Адрес места жительства совпадает \n" +
+//                            "с адресом прописки. ", false),
+//                    Option("ADDRESS_EQUALS_TRUE2", "Адрес места жительства совпадает \n" +
+//                            "с адресом прописки2. ", false),
+//                ),
+//                ChooseType.MULTIPLE,
+//                ButtonType.CHEK_BOX,
+//                null
+//            )
+//        ),
+//        FormItem(
+//            FormItemType.GROUP_BUTTON_FORM_ITEM,
+//            GroupButtonFormItem(
+//                "AGREEMENT",
+//                listOf(
+//                    Option("AGREEMENT", "Согласен с ...", false),
+//                ),
+//                ChooseType.SINGLE,
+//                ButtonType.CHEK_BOX,
+//                listOf(Validation(ValidationType.REQUIRED, "true"))
+//            )
+//        ),
+//        FormItem(
+//            FormItemType.GROUP_BUTTON_FORM_ITEM,
+//            GroupButtonFormItem(
+//                "SELECT_COLOR",
+//                listOf(
+//                    Option("GREEN2", "Green2", true),
+//                    Option("RED2", "Red2", false),
+//                    Option("YELLOW2", "Yellow2", false),
+//                ),
+//                ChooseType.MULTIPLE,
+//                ButtonType.TOGGLE,
+//                listOf(Validation(ValidationType.REQUIRED, "true"))
+//            )
+//        ),
         FormItem(
             FormItemType.DROP_DOWN_FORM_ITEM,
-            ""
+            DropDownFieldInfo(
+                "drop_down_1",
+                listOf(),
+                ChooseType.MULTIPLE,
+                "Single Selection",
+                listOf(Validation(ValidationType.REQUIRED, "true")),
+                false,
+                listOf(
+                    Option("item1", "1 item 1", false),
+                    Option("item2", "1 item 2", false),
+                    Option("item3", "2 item 3", false),
+                    Option("item4", "2 item 4", false),
+                    Option("item5", "3 item 5", false),
+                    Option("item6", "4 item 6", false),
+                    Option("item7", "5 item 7", false),
+                    Option("item8", "5 item 8", false),
+                    Option("item9", "5 item 9", false),
+                )
+            )
         )
     )
 )

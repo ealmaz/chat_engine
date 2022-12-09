@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -20,6 +21,7 @@ import com.design.chili.view.modals.bottom_sheet.serach_bottom_sheet.SearchSelec
 import com.design.chili.view.navigation_components.ChiliToolbar
 import kg.nurtelecom.chat_engine.R
 import kg.nurtelecom.chat_engine.custom_views.ChatButtonsGroup
+import kg.nurtelecom.chat_engine.custom_views.DropDownInputField
 import kg.nurtelecom.chat_engine.databinding.ChatEngineFragmentInputFormBinding
 import kg.nurtelecom.chat_engine.extensions.closeCurrentFragment
 import kg.nurtelecom.chat_engine.extensions.hideKeyboard
@@ -155,9 +157,9 @@ open class InputFormFragment : Fragment() {
         }
     }
 
-    private fun createDropDownField(dropDownList: DropDownFieldInfo): MaskedInputView {
+    private fun createDropDownField(dropDownList: DropDownFieldInfo): View {
         result[dropDownList.formItemId] = null
-        return MaskedInputView(requireContext()).apply {
+        return DropDownInputField(requireContext()).apply {
             tag = dropDownList.formItemId
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
                 setMargins(
@@ -167,20 +169,30 @@ open class InputFormFragment : Fragment() {
                     resources.getDimensionPixelSize(com.design.chili.R.dimen.padding_4dp)
                 )
             }
-            setGravity(Gravity.START)
-            setHint((dropDownList.label ?: ""))
-            disableEdition()
             setOnClickListener {
                 val options = mutableListOf<Option>()
                 dropDownList.options.forEach {
                     options.add(Option(it.id, it.value, it.isSelected))
                 }
-                val bs = SearchSelectorBottomSheet(requireContext(), options, true)
+                val bs = SearchSelectorBottomSheet(requireContext(), options, dropDownList.chooseType == ChooseType.SINGLE)
                 bs.setOnDismissListener {
-                    result[dropDownList.formItemId] = options.map { it.id }
+                    dropDownList.options.forEach { dropDownOption ->
+                        options.find { dropDownOption.id == it.id }?.let {
+                            dropDownOption.isSelected = it.isSelected
+                            if (it.isSelected) setText(it.value)
+                        }
+                    }
+                    val selectedOptions = options.mapNotNull { if (it.isSelected) it.id else null }
+                    if (validateFormItem(dropDownList.validations, selectedOptions)) {
+                        result[dropDownList.formItemId] = selectedOptions
+                    } else {
+                        result[dropDownList.formItemId] = null
+                    }
+                    toggleButton()
                 }
                 bs.show()
             }
+            setHint((dropDownList.label ?: ""))
         }
     }
 
