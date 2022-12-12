@@ -107,7 +107,7 @@ fun getInputForm() = InputForm(
                 listOf(),
                 ChooseType.SINGLE,
                 "Single Selection",
-                listOf(Validation(ValidationType.REQUIRED, "true")),
+                null,
                 null
             )
         ),

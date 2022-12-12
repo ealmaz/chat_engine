@@ -102,19 +102,19 @@ open class InputFormFragment : Fragment() {
 
 
     private fun createButtonGroup(groupInfo: GroupButtonFormItem): ChatButtonsGroup {
-        result[groupInfo.formItemId] = null
+        result[groupInfo.fieldId] = null
         return GroupButtonsCreator.create(requireContext(), groupInfo) { values, isValid ->
-            result[groupInfo.formItemId] = if (isValid) values else null
+            result[groupInfo.fieldId] = if (isValid) values else null
             toggleButton()
         }
 
     }
 
     private fun createDropDownField(dropDownList: DropDownFieldInfo): View {
-        result[dropDownList.formItemId] = null
+        result[dropDownList.fieldId] = null
         return DropDownFieldCreator.create(requireContext(), dropDownList) { values, isValid ->
-            result[dropDownList.formItemId] = if (isValid) values else null
-            onDropDownListItemSelectionChanged(dropDownList.formItemId, values)
+            result[dropDownList.fieldId] = if (isValid) values else null
+            onDropDownListItemSelectionChanged(dropDownList.fieldId, values)
             toggleButton()
         }
     }

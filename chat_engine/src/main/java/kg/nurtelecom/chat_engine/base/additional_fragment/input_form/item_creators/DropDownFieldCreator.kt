@@ -10,7 +10,7 @@ object DropDownFieldCreator : ItemCreator() {
 
     fun create(context: Context, dropDownFieldInfo: DropDownFieldInfo, onSelectionChanged: (selected: List<String>, isValid: Boolean) -> Unit): DropDownInputField {
         return DropDownInputField(context).apply {
-            tag = dropDownFieldInfo.formItemId
+            tag = dropDownFieldInfo.fieldId
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
                 setMargins(
                     0,

@@ -8,7 +8,7 @@ object GroupButtonsCreator : ItemCreator() {
 
     fun create(context: Context, groupInfo: GroupButtonFormItem, onSelectedChanged: (selected: List<String>, isValid: Boolean) -> Unit): ChatButtonsGroup {
         return ChatButtonsGroup(context).apply {
-            tag = groupInfo.formItemId
+            tag = groupInfo.fieldId
             setSelectedItemChangedListener {
                 val isValid = validateItem(groupInfo.validations, it)
                 onSelectedChanged(it, isValid)

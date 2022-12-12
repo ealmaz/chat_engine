@@ -37,6 +37,7 @@ class DropDownInputField @JvmOverloads constructor(context: Context, attributeSe
             bs.setOnDismissListener { onBottomSheetDismiss() }
             bs.show()
         }
+        onBottomSheetDismiss()
     }
 
     fun setHint(hint: String) {
