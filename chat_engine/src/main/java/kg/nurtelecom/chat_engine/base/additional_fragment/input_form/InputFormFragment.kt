@@ -151,7 +151,18 @@ open class InputFormFragment : Fragment() {
         _vb = null
     }
 
-    open fun onDropDownListItemSelectionChanged(dropDownId: String, selectedItemId: List<String>) {}
+    open fun onDropDownListItemSelectionChanged(dropDownId: String, selectedItemId: List<String>) {
+        setOptionsForDropDownField("drop_down_2", listOf(
+            Option("1", "value1", true),
+            Option("2", "value2", true),
+            Option("3", "value3", true),
+            Option("4", "value4", true),
+        ))
+    }
+
+    fun setOptionsForDropDownField(fieldId: String, options: List<Option>) {
+        vb.root.findViewWithTag<DropDownInputField>(fieldId)?.options = options
+    }
 
     companion object {
 
