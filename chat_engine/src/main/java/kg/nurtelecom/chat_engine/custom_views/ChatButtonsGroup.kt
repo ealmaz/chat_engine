@@ -34,7 +34,7 @@ class ChatButtonsGroup @JvmOverloads constructor(
     private var onSelectedItemChanged: ((selectedId: List<String>) -> Unit)? = null
 
     private var chooseType: ChooseType = ChooseType.MULTIPLE
-    private var buttonType: ButtonType = ButtonType.CHEK_BOX
+    private var buttonType: ButtonType = ButtonType.CHECK_BOX
 
     private var lastCheckedId: String? = null
 
@@ -50,7 +50,7 @@ class ChatButtonsGroup @JvmOverloads constructor(
 
     private fun obtainAttributes(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int, defStyle: Int) {
         context.obtainStyledAttributes(attributeSet, R.styleable.chat_engine_ChatButtonsGroup, defStyleAttr, defStyle).run {
-            getInt(R.styleable.chat_engine_ChatButtonsGroup_buttonsType, ButtonType.CHEK_BOX.ordinal).let {
+            getInt(R.styleable.chat_engine_ChatButtonsGroup_buttonsType, ButtonType.CHECK_BOX.ordinal).let {
                 setButtonTypeInt(it)
             }
             getInt(R.styleable.chat_engine_ChatButtonsGroup_chooseType, ChooseType.MULTIPLE.ordinal).let {
@@ -62,9 +62,9 @@ class ChatButtonsGroup @JvmOverloads constructor(
 
     private fun setButtonTypeInt(intType: Int) {
         val buttonType = when (intType) {
-            ButtonType.CHEK_BOX.ordinal -> ButtonType.CHEK_BOX
-            ButtonType.RADIO_BUTTON.ordinal -> ButtonType.RADIO_BUTTON
+            ButtonType.CHECK_BOX.ordinal -> ButtonType.CHECK_BOX
             ButtonType.TOGGLE.ordinal -> ButtonType.TOGGLE
+            ButtonType.RADIO_BUTTON.ordinal -> ButtonType.RADIO_BUTTON
             else -> throw IllegalArgumentException() // todo
         }
         setButtonType(buttonType)
@@ -123,7 +123,7 @@ class ChatButtonsGroup @JvmOverloads constructor(
     private fun getButton(): CompoundButton {
 
         return when (buttonType) {
-            ButtonType.CHEK_BOX -> CheckBox(context).apply {
+            ButtonType.CHECK_BOX -> CheckBox(context).apply {
                 layoutParams = buttonsLayoutParams
             }
             ButtonType.RADIO_BUTTON -> RadioButton(context).apply {

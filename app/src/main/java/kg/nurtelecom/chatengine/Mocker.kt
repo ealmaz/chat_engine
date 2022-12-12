@@ -171,7 +171,7 @@ fun getInputForm() = InputForm(
                             "с адресом прописки2. ", false),
                 ),
                 ChooseType.MULTIPLE,
-                ButtonType.CHEK_BOX,
+                ButtonType.CHECK_BOX,
                 null
             )
         ),
@@ -183,7 +183,7 @@ fun getInputForm() = InputForm(
                     Option("AGREEMENT", "Согласен с ...", false),
                 ),
                 ChooseType.SINGLE,
-                ButtonType.CHEK_BOX,
+                ButtonType.CHECK_BOX,
                 listOf(Validation(ValidationType.REQUIRED, "true"))
             )
         ),

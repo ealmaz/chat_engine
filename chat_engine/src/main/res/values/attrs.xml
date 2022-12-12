@@ -59,7 +59,7 @@
             <enum name="SINGLE" value="1"/>
         </attr>
         <attr name="buttonsType" format="enum">
-            <enum name="CHEK_BOX" value="0"/>
+            <enum name="CHECK_BOX" value="0"/>
             <enum name="TOGGLE" value="1"/>
             <enum name="RADIO_BUTTON" value="2"/>
         </attr>
