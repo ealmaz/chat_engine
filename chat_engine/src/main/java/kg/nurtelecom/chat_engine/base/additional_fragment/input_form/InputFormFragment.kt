@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.commit
 import androidx.lifecycle.LifecycleOwner
 import com.design.chili.view.input.MaskedInputView
+import com.design.chili.view.modals.bottom_sheet.serach_bottom_sheet.Option
 import com.design.chili.view.navigation_components.ChiliToolbar
 import kg.nurtelecom.chat_engine.R
 import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators.DropDownFieldCreator
@@ -112,10 +113,8 @@ open class InputFormFragment : Fragment() {
     private fun createDropDownField(dropDownList: DropDownFieldInfo): View {
         result[dropDownList.formItemId] = null
         return DropDownFieldCreator.create(requireContext(), dropDownList) { values, isValid ->
-            result[dropDownList.formItemId] = if (isValid) {
-                values.firstOrNull()?.let { onDropDownListItemSelected(dropDownList.formItemId, it)}
-                values
-            } else null
+            result[dropDownList.formItemId] = if (isValid) values else null
+            onDropDownListItemSelectionChanged(dropDownList.formItemId, values)
             toggleButton()
         }
     }
@@ -152,7 +151,7 @@ open class InputFormFragment : Fragment() {
         _vb = null
     }
 
-    open fun onDropDownListItemSelected(dropDownId: String, selectedItemId: String) {}
+    open fun onDropDownListItemSelectionChanged(dropDownId: String, selectedItemId: List<String>) {}
 
     companion object {
 
@@ -166,7 +165,7 @@ open class InputFormFragment : Fragment() {
             )
             }
             fragmentManager.commit {
-                replace(containerId, fragment)
+                add(containerId, fragment)
                 addToBackStack(null)
             }
         }

@@ -5,8 +5,8 @@ import java.io.Serializable
 data class GroupButtonFormItem(
     val formItemId: String,
     val options: List<Option>? = null,
-    val chooseType: ChooseType = ChooseType.MULTIPLE,
-    val buttonType: ButtonType = ButtonType.CHECK_BOX,
+    val chooseType: ChooseType? = ChooseType.MULTIPLE,
+    val buttonType: ButtonType? = ButtonType.CHECK_BOX,
     val validations: List<Validation>? = null
 ): Serializable
 

@@ -3,9 +3,7 @@ package kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creat
 import android.content.Context
 import android.widget.LinearLayout
 import com.design.chili.view.modals.bottom_sheet.serach_bottom_sheet.Option
-import com.design.chili.view.modals.bottom_sheet.serach_bottom_sheet.SearchSelectorBottomSheet
 import kg.nurtelecom.chat_engine.custom_views.DropDownInputField
-import kg.nurtelecom.chat_engine.model.ChooseType
 import kg.nurtelecom.chat_engine.model.DropDownFieldInfo
 
 object DropDownFieldCreator : ItemCreator() {
@@ -21,38 +19,10 @@ object DropDownFieldCreator : ItemCreator() {
                     resources.getDimensionPixelSize(com.design.chili.R.dimen.padding_4dp)
                 )
             }
-            setOnClickListener {
-                val options = mutableListOf<Option>()
-                dropDownFieldInfo.options?.forEach {
-                    options.add(Option(it.id, it.value, it.isSelected))
-                }
-                val bs = createSearchBottomSheet(context, options, dropDownFieldInfo.chooseType == ChooseType.SINGLE)
-                bs.setOnDismissListener {
-                    setHint(dropDownFieldInfo.label ?: "")
-                    val selectedValues = mutableListOf<String>()
-                    dropDownFieldInfo.options?.forEach { dropDownOption ->
-                        options.find { dropDownOption.id == it.id }?.let {
-                            dropDownOption.isSelected = it.isSelected
-                            if (it.isSelected) selectedValues.add(it.value)
-                        }
-                    }
-                    setText(selectedValues.joinToString { it })
-                    val selectedOptions = options.mapNotNull { if (it.isSelected) it.id else null }
-                    val isValid = validateItem(dropDownFieldInfo.validations, selectedOptions)
-                    onSelectionChanged(selectedOptions, isValid)
-                }
-                bs.show()
-            }
+            setupViews(dropDownFieldInfo, onSelectionChanged)
+            dropDownFieldInfo.options?.let { options = it.map { Option(it.id, it.value, it.isSelected) } }
             setHint(dropDownFieldInfo.label ?: "")
         }
-    }
-
-    private fun createSearchBottomSheet(context: Context, options: List<Option>, isSingleSelector: Boolean): SearchSelectorBottomSheet {
-        return SearchSelectorBottomSheet.Builder()
-            .setIsHeaderVisible(true)
-            .setIsSearchAvailable(true)
-            .setIsSingleSelection(isSingleSelector)
-            .build(context, options)
     }
 
 }

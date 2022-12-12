@@ -10,13 +10,4 @@
         android:layout_gravity="end"
         style="@style/chat_engine_ChatSecondaryButtonStyle"/>
 
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:indeterminateTint="@color/black_5"
-        android:progressDrawable="@drawable/chat_engine_circular_loop_progress_bar"
-        android:layout_marginHorizontal="@dimen/padding_16dp"/>
-
 </FrameLayout>

@@ -13,8 +13,8 @@ object GroupButtonsCreator : ItemCreator() {
                 val isValid = validateItem(groupInfo.validations, it)
                 onSelectedChanged(it, isValid)
             }
-            setButtonType(groupInfo.buttonType)
-            setChooseType(groupInfo.chooseType)
+            groupInfo.buttonType?.let { setButtonType(it) }
+            groupInfo.chooseType?.let { setChooseType(it) }
             groupInfo.options?.let { setAllButtons(it) }
             renderButtons()
         }

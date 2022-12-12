@@ -100,6 +100,20 @@ fun getInputForm() = InputForm(
                 )
             )
         ),
+
+        FormItem(
+            FormItemType.DROP_DOWN_FORM_ITEM,
+            DropDownFieldInfo(
+                "drop_down_2",
+                listOf(),
+                ChooseType.SINGLE,
+                "Single Selection",
+                listOf(Validation(ValidationType.REQUIRED, "true")),
+                false,
+                null
+            )
+        ),
+
         FormItem(
             FormItemType.INPUT_FIELD,
             InputField(

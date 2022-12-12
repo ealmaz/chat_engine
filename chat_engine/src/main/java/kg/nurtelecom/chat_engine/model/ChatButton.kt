@@ -4,7 +4,6 @@ data class ChatButton(
     val buttonId: String,
     val text: String? = null,
     val style: ButtonStyle? = null,
-    var isLoading: Boolean = false
 ) : MessageAdapterItem  {
 
     override fun getItemId(): String {

@@ -13,12 +13,6 @@ class AccentChatButtonVH(private val vb: ChatEngineItemAccentChatButtonBinding):
     fun onBind(chatButton: ChatButton) = with(vb.btn) {
         tag = chatButton.buttonId
         text = chatButton.text
-        setupLoader(chatButton.isLoading)
-    }
-
-    private fun setupLoader(isLoading: Boolean) {
-        vb.btn.isInvisible = isLoading
-        vb.progress.isVisible = isLoading
     }
 
     companion object {
