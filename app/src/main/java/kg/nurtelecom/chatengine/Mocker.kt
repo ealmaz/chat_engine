@@ -100,17 +100,19 @@ fun getInputForm() = InputForm(
                 )
             )
         ),
-//        FormItem(
-//            FormItemType.INPUT_FIELD,
-//            InputField(
-//                "INPUT_REGION",
-//                null,
-//                "Region",
-//                null,
-//                null,
-//                listOf(Validation(ValidationType.REGEX, "^(?!\\\\s*\\\$).+"))
-//            )
-//        ),
+        FormItem(
+            FormItemType.INPUT_FIELD,
+            InputField(
+                "INPUT_REGION",
+                null,
+                "Region",
+                null,
+                null,
+                null,
+                null,
+                null,
+            )
+        ),
 //        FormItem(
 //            FormItemType.INPUT_FIELD,
 //            InputField(

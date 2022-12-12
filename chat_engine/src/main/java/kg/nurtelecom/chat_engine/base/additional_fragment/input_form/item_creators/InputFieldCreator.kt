@@ -36,7 +36,7 @@ object InputFieldCreator : ItemCreator() {
                 val isValid = validateItem(fieldInfo.validations, input) && isInputMaskFilled()
                 onFiledChanged(input, isValid)
             }
-            fieldInfo.value?.let { setText(it) }
+            setText(fieldInfo.value ?: "")
         }
     }
 }
