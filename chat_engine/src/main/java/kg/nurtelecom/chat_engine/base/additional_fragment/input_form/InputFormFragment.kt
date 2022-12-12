@@ -36,11 +36,11 @@ open class InputFormFragment : Fragment() {
     private val vb: ChatEngineFragmentInputFormBinding
         get() = _vb!!
 
-    private val inputForm: InputForm? by lazy {
+    protected val inputForm: InputForm? by lazy {
         arguments?.getSerializable(INPUT_FORM_ARGUMENT) as? InputForm
     }
 
-    private val result = HashMap<String, List<String>?>()
+    protected val result = HashMap<String, List<String>?>()
 
     private val toolbarConfig: ChiliToolbar.Configuration by lazy {
         ChiliToolbar.Configuration(
@@ -134,7 +134,7 @@ open class InputFormFragment : Fragment() {
         return FormResponse(resultValues)
     }
 
-    private fun toggleButton() {
+    protected fun toggleButton() {
         vb.btnDone.isEnabled = isFormFilled()
     }
 
