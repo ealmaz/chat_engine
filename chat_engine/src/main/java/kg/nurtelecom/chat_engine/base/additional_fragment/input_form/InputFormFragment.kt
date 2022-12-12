@@ -1,14 +1,11 @@
-package kg.nurtelecom.chat_engine.base.additional_fragment
+package kg.nurtelecom.chat_engine.base.additional_fragment.input_form
 
 import android.os.Bundle
-import android.text.InputType
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -16,10 +13,12 @@ import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.commit
 import androidx.lifecycle.LifecycleOwner
 import com.design.chili.view.input.MaskedInputView
-import com.design.chili.view.modals.bottom_sheet.serach_bottom_sheet.Option
-import com.design.chili.view.modals.bottom_sheet.serach_bottom_sheet.SearchSelectorBottomSheet
 import com.design.chili.view.navigation_components.ChiliToolbar
 import kg.nurtelecom.chat_engine.R
+import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators.DropDownFieldCreator
+import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators.GroupButtonsCreator
+import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators.InputFieldCreator
+import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators.UnsupportedItemCreator
 import kg.nurtelecom.chat_engine.custom_views.ChatButtonsGroup
 import kg.nurtelecom.chat_engine.custom_views.DropDownInputField
 import kg.nurtelecom.chat_engine.databinding.ChatEngineFragmentInputFormBinding
@@ -89,127 +88,36 @@ open class InputFormFragment : Fragment() {
     }
 
     protected open fun createUnsupportedItem(formItem: FormItem): View {
-        return MaskedInputView(requireContext()).apply {
-            disableEdition()
-            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-                setMargins(
-                    0,
-                    resources.getDimensionPixelSize(com.design.chili.R.dimen.padding_4dp),
-                    0,
-                    resources.getDimensionPixelSize(com.design.chili.R.dimen.padding_4dp)
-                )
-            }
-            setGravity(Gravity.START)
-            setHint(unsupportedTitle)
-        }
+        return UnsupportedItemCreator.create(requireContext(), unsupportedTitle)
     }
 
     private fun createInputField(inputField: InputField): MaskedInputView {
         result[inputField.fieldId] = null
-        return MaskedInputView(requireContext()).apply {
-            tag = inputField.fieldId
-            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-                setMargins(
-                    0,
-                    resources.getDimensionPixelSize(com.design.chili.R.dimen.padding_4dp),
-                    0,
-                    resources.getDimensionPixelSize(com.design.chili.R.dimen.padding_4dp)
-                )
-            }
-            setGravity(Gravity.START)
-            setHint((inputField.hint ?: ""))
-            setupNewMask(inputField.mask ?: "*")
-            when (inputField.inputType) {
-                InputFieldInputType.NUMBER -> setInputType(InputType.TYPE_CLASS_NUMBER)
-                else -> setInputType(InputType.TYPE_CLASS_TEXT)
-            }
-            setupClearTextButton()
-            setSimpleTextChangedListener {
-                val input = listOf(getInputText())
-                if (validateFormItem(inputField.validations, input) && isInputMaskFilled()) {
-                    result[this.tag.toString()] = input
-                } else {
-                    result[this.tag.toString()] = null
-                }
-                toggleButton()
-            }
-            setText(inputField.value ?: "")
+        return InputFieldCreator.create(requireContext(), inputField) { values, isValid ->
+            result[inputField.fieldId] = if (isValid) values else null
+            toggleButton()
         }
     }
 
 
     private fun createButtonGroup(groupInfo: GroupButtonFormItem): ChatButtonsGroup {
         result[groupInfo.formItemId] = null
-        return ChatButtonsGroup(requireContext()).apply {
-            tag = groupInfo.formItemId
-            setSelectedItemChangedListener {
-                if (validateFormItem(groupInfo.validations, it)) {
-                    result[this.tag.toString()] = it
-                } else {
-                    result[this.tag.toString()] = null
-                }
-                toggleButton()
-            }
-            setButtonType(groupInfo.buttonType)
-            setChooseType(groupInfo.chooseType)
-            setAllButtons(groupInfo.options)
-            renderButtons()
+        return GroupButtonsCreator.create(requireContext(), groupInfo) { values, isValid ->
+            result[groupInfo.formItemId] = if (isValid) values else null
+            toggleButton()
         }
+
     }
 
     private fun createDropDownField(dropDownList: DropDownFieldInfo): View {
         result[dropDownList.formItemId] = null
-        return DropDownInputField(requireContext()).apply {
-            tag = dropDownList.formItemId
-            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-                setMargins(
-                    0,
-                    resources.getDimensionPixelSize(com.design.chili.R.dimen.padding_4dp),
-                    0,
-                    resources.getDimensionPixelSize(com.design.chili.R.dimen.padding_4dp)
-                )
-            }
-            setOnClickListener {
-                val options = mutableListOf<Option>()
-                dropDownList.options.forEach {
-                    options.add(Option(it.id, it.value, it.isSelected))
-                }
-                val bs = SearchSelectorBottomSheet(requireContext(), options, dropDownList.chooseType == ChooseType.SINGLE)
-                bs.setOnDismissListener {
-                    dropDownList.options.forEach { dropDownOption ->
-                        options.find { dropDownOption.id == it.id }?.let {
-                            dropDownOption.isSelected = it.isSelected
-                            if (it.isSelected) setText(it.value)
-                        }
-                    }
-                    val selectedOptions = options.mapNotNull { if (it.isSelected) it.id else null }
-                    if (validateFormItem(dropDownList.validations, selectedOptions)) {
-                        result[dropDownList.formItemId] = selectedOptions
-                    } else {
-                        result[dropDownList.formItemId] = null
-                    }
-                    toggleButton()
-                }
-                bs.show()
-            }
-            setHint((dropDownList.label ?: ""))
+        return DropDownFieldCreator.create(requireContext(), dropDownList) { values, isValid ->
+            result[dropDownList.formItemId] = if (isValid) {
+                values.firstOrNull()?.let { onDropDownListItemSelected(dropDownList.formItemId, it)}
+                values
+            } else null
+            toggleButton()
         }
-    }
-
-    private fun validateFormItem(validations: List<Validation>?, value: List<String>): Boolean {
-        validations?.forEach {
-            when (it.type) {
-                ValidationType.REQUIRED -> {
-                    if (it.value == "true" && (value.isEmpty() || value.firstOrNull().isNullOrBlank())) return false
-                }
-                ValidationType.REGEX -> {
-                    if (it.value != null && (!(value.firstOrNull() ?: "").matches(it.value.toRegex()))) {
-                        return false
-                    }
-                }
-            }
-        }
-        return true
     }
 
     private fun setFragmentResultAndClose() {
@@ -243,6 +151,8 @@ open class InputFormFragment : Fragment() {
         requireActivity().hideKeyboard()
         _vb = null
     }
+
+    open fun onDropDownListItemSelected(dropDownId: String, selectedItemId: String) {}
 
     companion object {
 

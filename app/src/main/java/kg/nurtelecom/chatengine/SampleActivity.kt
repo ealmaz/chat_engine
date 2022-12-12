@@ -3,7 +3,7 @@ package kg.nurtelecom.chatengine
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentResultListener
-import kg.nurtelecom.chat_engine.base.additional_fragment.InputFormFragment
+import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.InputFormFragment
 import kg.nurtelecom.chat_engine.base.additional_fragment.InputSignatureFragment
 import kg.nurtelecom.chat_engine.model.FormResponse
 import kg.nurtelecom.chat_engine.model.InputForm

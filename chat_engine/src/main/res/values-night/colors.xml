@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="chat_engine_drop_down_item_text_color">@color/gray_3</color>
+</resources>
