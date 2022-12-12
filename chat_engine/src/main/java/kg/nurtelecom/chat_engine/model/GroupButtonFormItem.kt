@@ -3,11 +3,12 @@ package kg.nurtelecom.chat_engine.model
 import java.io.Serializable
 
 data class GroupButtonFormItem(
-    val formItemId: String,
+    val fieldId: String,
     val options: List<Option>? = null,
     val chooseType: ChooseType? = ChooseType.MULTIPLE,
     val buttonType: ButtonType? = ButtonType.CHECK_BOX,
-    val validations: List<Validation>? = null
+    val validations: List<Validation>? = null,
+    val label: String? = null
 ): Serializable
 
 enum class ChooseType {

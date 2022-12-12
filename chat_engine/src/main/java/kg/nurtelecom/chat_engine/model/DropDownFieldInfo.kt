@@ -6,6 +6,5 @@ data class DropDownFieldInfo(
     val chooseType: ChooseType? = ChooseType.SINGLE,
     val label: String? = null,
     val validations: List<Validation>? = null,
-    val isNeedToFetchOptions: Boolean? = null,
     val options: List<Option>? = null
 )
