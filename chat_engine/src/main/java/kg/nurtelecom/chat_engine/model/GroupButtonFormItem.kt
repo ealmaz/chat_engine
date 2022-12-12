@@ -4,10 +4,10 @@ import java.io.Serializable
 
 data class GroupButtonFormItem(
     val formItemId: String,
-    val options: List<Option>,
-    val chooseType: ChooseType,
-    val buttonType: ButtonType,
-    val validations: List<Validation>?
+    val options: List<Option>? = null,
+    val chooseType: ChooseType = ChooseType.MULTIPLE,
+    val buttonType: ButtonType = ButtonType.CHEK_BOX,
+    val validations: List<Validation>? = null
 ): Serializable
 
 enum class ChooseType {

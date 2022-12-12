@@ -15,7 +15,7 @@ object GroupButtonsCreator : ItemCreator() {
             }
             setButtonType(groupInfo.buttonType)
             setChooseType(groupInfo.chooseType)
-            setAllButtons(groupInfo.options)
+            groupInfo.options?.let { setAllButtons(it) }
             renderButtons()
         }
     }

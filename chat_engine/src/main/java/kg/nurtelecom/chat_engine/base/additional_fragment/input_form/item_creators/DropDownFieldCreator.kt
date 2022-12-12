@@ -23,14 +23,14 @@ object DropDownFieldCreator : ItemCreator() {
             }
             setOnClickListener {
                 val options = mutableListOf<Option>()
-                dropDownFieldInfo.options.forEach {
+                dropDownFieldInfo.options?.forEach {
                     options.add(Option(it.id, it.value, it.isSelected))
                 }
                 val bs = createSearchBottomSheet(context, options, dropDownFieldInfo.chooseType == ChooseType.SINGLE)
                 bs.setOnDismissListener {
-                    setHint(dropDownFieldInfo.label)
+                    setHint(dropDownFieldInfo.label ?: "")
                     val selectedValues = mutableListOf<String>()
-                    dropDownFieldInfo.options.forEach { dropDownOption ->
+                    dropDownFieldInfo.options?.forEach { dropDownOption ->
                         options.find { dropDownOption.id == it.id }?.let {
                             dropDownOption.isSelected = it.isSelected
                             if (it.isSelected) selectedValues.add(it.value)
@@ -43,7 +43,7 @@ object DropDownFieldCreator : ItemCreator() {
                 }
                 bs.show()
             }
-            setHint(dropDownFieldInfo.label)
+            setHint(dropDownFieldInfo.label ?: "")
         }
     }
 
