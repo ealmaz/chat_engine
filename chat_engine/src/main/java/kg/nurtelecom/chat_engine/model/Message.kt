@@ -1,12 +1,14 @@
 package kg.nurtelecom.chat_engine.model
 
+import java.io.Serializable
+
 data class Message(
     val id: String,
     val content: String = "",
     val contentType: MessageContentType,
     val messageType: MessageType,
     val status: MessageStatus = MessageStatus.DONE
-): MessageAdapterItem {
+): MessageAdapterItem, Serializable {
 
     override fun getItemId(): String {
         return id
