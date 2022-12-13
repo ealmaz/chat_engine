@@ -116,6 +116,9 @@ open class InputFormFragment : Fragment() {
 
     private fun createDropDownField(dropDownList: DropDownFieldInfo): View {
         result[dropDownList.fieldId] = null
+        if (dropDownList.isNeedToFetchOptions == true) {
+            needToFetchOptionsFor(dropDownList.fieldId, dropDownList.parentFieldId)
+        }
         return DropDownFieldCreator.create(requireContext(), dropDownList) { values, isValid ->
             result[dropDownList.fieldId] = if (isValid) values else null
             onDropDownListItemSelectionChanged(dropDownList.fieldId, values)
@@ -156,6 +159,8 @@ open class InputFormFragment : Fragment() {
     }
 
     open fun onDropDownListItemSelectionChanged(dropDownId: String, selectedItemId: List<String>) {}
+
+    open fun needToFetchOptionsFor(formId: String, parentIds: List<String>?) {}
 
     fun setOptionsForDropDownField(fieldId: String, newOptions: List<Option>) {
         vb.root.findViewWithTag<DropDownInputField>(fieldId)?.options = newOptions
