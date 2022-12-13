@@ -160,7 +160,7 @@ open class InputFormFragment : Fragment() {
 
     open fun onDropDownListItemSelectionChanged(dropDownId: String, selectedItemId: List<String>) {}
 
-    open fun needToFetchOptionsFor(formId: String, parentIds: List<String>?) {}
+    open fun needToFetchOptionsFor(formId: String, parentId: String?) {}
 
     fun setOptionsForDropDownField(fieldId: String, newOptions: List<Option>) {
         vb.root.findViewWithTag<DropDownInputField>(fieldId)?.options = newOptions

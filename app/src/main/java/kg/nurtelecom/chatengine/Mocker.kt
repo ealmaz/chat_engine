@@ -82,7 +82,7 @@ fun getInputForm() = InputForm(
             FormItemType.DROP_DOWN_FORM_ITEM,
             DropDownFieldInfo(
                 "drop_down_1",
-                listOf(),
+                null,
                 ChooseType.SINGLE,
                 "Single Selection",
                 listOf(Validation(ValidationType.REQUIRED, "true")),
@@ -105,7 +105,7 @@ fun getInputForm() = InputForm(
             FormItemType.DROP_DOWN_FORM_ITEM,
             DropDownFieldInfo(
                 "drop_down_2",
-                listOf(),
+                null,
                 ChooseType.SINGLE,
                 "Single Selection",
                 null,

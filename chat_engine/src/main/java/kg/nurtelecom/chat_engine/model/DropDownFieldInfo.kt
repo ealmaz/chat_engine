@@ -2,7 +2,7 @@ package kg.nurtelecom.chat_engine.model
 
 data class DropDownFieldInfo(
     val fieldId: String,
-    val parentFieldId: List<String>? = null,
+    val parentFieldId: String? = null,
     val chooseType: ChooseType? = ChooseType.SINGLE,
     val label: String? = null,
     val validations: List<Validation>? = null,
