@@ -6,6 +6,7 @@ data class ChatButton(
     val buttonId: String,
     val text: String? = null,
     val style: ButtonStyle? = null,
+    val properties: ButtonProperties? = null,
 ) : MessageAdapterItem, Serializable {
 
     override fun getItemId(): String {
@@ -22,4 +23,10 @@ data class ChatButton(
         else false
     }
 }
+
+data class ButtonProperties(
+    val identifier: String? = null,
+    val enableAt: String? = null,
+    val formIdToOpen: String? = null,
+)
 
