@@ -86,6 +86,7 @@ fun getInputForm() = InputForm(
                 ChooseType.SINGLE,
                 "Single Selection",
                 listOf(Validation(ValidationType.REQUIRED, "true")),
+                null,
                 listOf(
                     Option("item1", "1 item 1", false),
                     Option("item2", "1 item 2", false),
@@ -117,9 +118,23 @@ fun getInputForm() = InputForm(
             InputField(
                 "INPUT_REGION",
                 null,
-                "Region",
+                null,
+                "PLACEHOLDER",
+                "Label",
                 null,
                 null,
+                null,
+            )
+        ),
+
+        FormItem(
+            FormItemType.INPUT_FIELD,
+            InputField(
+                "INPUT_REGION2",
+                null,
+                "HINT",
+                null,
+                "Label2",
                 null,
                 null,
                 null,

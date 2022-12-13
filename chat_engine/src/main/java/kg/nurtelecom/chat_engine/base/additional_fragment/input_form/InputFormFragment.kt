@@ -29,8 +29,8 @@ import kg.nurtelecom.chat_engine.model.*
 
 open class InputFormFragment : Fragment() {
 
-    open val unsupportedTitle = "Неподдерживаемое поле"
-    open val buttonText = "Далее"
+    open val unsupportedTitleRes = R.string.unsupported_field
+    open val buttonTextRes = R.string.next
 
     private var _vb: ChatEngineFragmentInputFormBinding? = null
     private val vb: ChatEngineFragmentInputFormBinding
@@ -71,7 +71,7 @@ open class InputFormFragment : Fragment() {
         tb.initToolbar(toolbarConfig)
         btnDone.apply {
             setOnClickListener { setFragmentResultAndClose() }
-            text = buttonText
+            setText(buttonTextRes)
         }
     }
 
@@ -93,7 +93,7 @@ open class InputFormFragment : Fragment() {
     }
 
     protected open fun createUnsupportedItem(formItem: FormItem): View {
-        return UnsupportedItemCreator.create(requireContext(), unsupportedTitle)
+        return UnsupportedItemCreator.create(requireContext(), unsupportedTitleRes)
     }
 
     private fun createInputField(inputField: InputField): MaskedInputView {

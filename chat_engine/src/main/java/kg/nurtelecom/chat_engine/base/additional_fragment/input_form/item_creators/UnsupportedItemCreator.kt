@@ -7,7 +7,7 @@ import com.design.chili.view.input.BaseInputView
 
 object UnsupportedItemCreator {
 
-    fun create(context: Context, unsupportedTitle: String): BaseInputView {
+    fun create(context: Context, unsupportedTitleRes: Int): BaseInputView {
         return BaseInputView(context).apply {
             disableEdition()
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
@@ -19,7 +19,7 @@ object UnsupportedItemCreator {
                 )
             }
             setGravity(Gravity.START)
-            setHint(unsupportedTitle)
+            setHint(resources.getString(unsupportedTitleRes))
         }
     }
 }

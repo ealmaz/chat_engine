@@ -22,7 +22,7 @@ object InputFieldCreator : ItemCreator() {
                 )
             }
             setGravity(Gravity.START)
-            fieldInfo.label?.let { setupLabelBehavior(it) }
+            fieldInfo.label?.let { setupLabelBehavior(it, fieldInfo.hint) }
             fieldInfo.hint?.let { setMessage(it) }
             fieldInfo.placeholder?.let { setHint(it) }
             fieldInfo.mask?.let { setupNewMask(it) }
@@ -41,10 +41,11 @@ object InputFieldCreator : ItemCreator() {
     }
 }
 
-fun MaskedInputView.setupLabelBehavior(label: String) {
+fun MaskedInputView.setupLabelBehavior(label: String, message: String?) {
     setHint(label)
-    setOnFocusChangeListener { v, hasFocus ->
-        if (hasFocus) setMessage(label)
-        else hideMessage()
-    }
+    setFocusChangeListener({
+        setMessage(if (message.isNullOrBlank()) label else message)
+    }, {
+        if (message.isNullOrBlank()) hideMessage() else setMessage(message)
+    })
 }
