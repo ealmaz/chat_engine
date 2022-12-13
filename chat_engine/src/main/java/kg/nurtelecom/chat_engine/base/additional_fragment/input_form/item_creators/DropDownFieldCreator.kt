@@ -20,7 +20,7 @@ object DropDownFieldCreator : ItemCreator() {
                 )
             }
             setupViews(dropDownFieldInfo, onSelectionChanged)
-            dropDownFieldInfo.options?.let { options = it.map { Option(it.id, it.value, it.isSelected) } }
+            dropDownFieldInfo.options?.let { options = it.map { Option(it.id, it.label, it.isSelected) } }
             setHint(dropDownFieldInfo.label ?: "")
         }
     }

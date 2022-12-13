@@ -101,7 +101,7 @@ class ChatButtonsGroup @JvmOverloads constructor(
                     setOnCheckedChangeListener(this@ChatButtonsGroup)
                     tag = it.id
                     id = it.hashCode()
-                    text = it.value
+                    text = it.label
                 }
                 button.isChecked = it.isSelected
                 container.addView(button)
