@@ -37,7 +37,11 @@ open class InputFormFragment : Fragment() {
         get() = _vb!!
 
     protected val inputForm: InputForm? by lazy {
-        arguments?.getSerializable(INPUT_FORM_ARGUMENT) as? InputForm
+       parseInputFormArgument()
+    }
+
+    protected open fun parseInputFormArgument(): InputForm? {
+        return arguments?.getSerializable(INPUT_FORM_ARGUMENT) as? InputForm
     }
 
     protected val result = HashMap<String, List<String>?>()
@@ -151,17 +155,10 @@ open class InputFormFragment : Fragment() {
         _vb = null
     }
 
-    open fun onDropDownListItemSelectionChanged(dropDownId: String, selectedItemId: List<String>) {
-        setOptionsForDropDownField("drop_down_2", listOf(
-            Option("1", "value1", true),
-            Option("2", "value2", true),
-            Option("3", "value3", true),
-            Option("4", "value4", true),
-        ))
-    }
+    open fun onDropDownListItemSelectionChanged(dropDownId: String, selectedItemId: List<String>) {}
 
-    fun setOptionsForDropDownField(fieldId: String, options: List<Option>) {
-        vb.root.findViewWithTag<DropDownInputField>(fieldId)?.options = options
+    fun setOptionsForDropDownField(fieldId: String, newOptions: List<Option>) {
+        vb.root.findViewWithTag<DropDownInputField>(fieldId)?.options = newOptions
     }
 
     companion object {

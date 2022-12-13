@@ -18,6 +18,10 @@ class DropDownInputField @JvmOverloads constructor(context: Context, attributeSe
     private val views: DropDownInputFiledData
 
     var options: List<Option> = listOf()
+        set(value) {
+            field = value
+            onBottomSheetDismiss()
+        }
 
     private var onSelectionChanged: ((values: List<String>, Boolean) -> Unit)? = null
 
