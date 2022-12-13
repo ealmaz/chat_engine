@@ -3,7 +3,7 @@ package kg.nurtelecom.chat_engine.model
 import java.io.Serializable
 
 data class FormItem(
-    val formItemType: FormItemType,
+    val formItemType: FormItemType? = null,
     val formItem: Any? = null
 ): Serializable
 

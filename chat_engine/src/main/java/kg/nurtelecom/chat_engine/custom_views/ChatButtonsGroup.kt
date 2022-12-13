@@ -103,7 +103,7 @@ class ChatButtonsGroup @JvmOverloads constructor(
                     id = it.hashCode()
                     text = it.label
                 }
-                button.isChecked = it.isSelected
+                button.isChecked = it.isSelected ?: false
                 container.addView(button)
             }
             val result = validateCheckedStatesAndGetResult()
@@ -157,7 +157,7 @@ class ChatButtonsGroup @JvmOverloads constructor(
         val selectedIds = mutableListOf<String>()
         buttons.forEach {
             buttonsContainer?.findViewWithTag<CompoundButton>(it.id)?.apply {
-                if (isChecked != it.isSelected) isChecked = it.isSelected
+                if (isChecked != it.isSelected) isChecked = it.isSelected ?: false
                 if (isChecked) selectedIds.add(it.id)
             }
         }
