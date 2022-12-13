@@ -5,14 +5,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <kg.nurtelecom.chat_engine.custom_views.TouchAndDrawView
-        android:id="@+id/drawing_canvas"
+    <FrameLayout
+        android:id="@+id/fl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/white_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/divider"/>
+        app:layout_constraintBottom_toTopOf="@id/divider">
+
+        <kg.nurtelecom.chat_engine.custom_views.TouchAndDrawView
+            android:id="@+id/drawing_canvas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/tv_hint"

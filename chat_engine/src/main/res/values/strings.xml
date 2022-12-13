@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="unsupported_field">Неподдерживаемое поле</string>
-    <string name="next">Далее</string>
+    <string name="unsupported_field" translatable="false">Неподдерживаемое поле</string>
+    <string name="next">Продолжить</string>
+    <string name="sign">Оставить подпись</string>
 </resources>

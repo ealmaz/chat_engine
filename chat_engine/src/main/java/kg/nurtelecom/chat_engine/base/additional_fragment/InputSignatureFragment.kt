@@ -32,7 +32,7 @@ class InputSignatureFragment : Fragment(), TouchAndDrawViewCallback {
     private val toolbarConfig: ChiliToolbar.Configuration by lazy {
         ChiliToolbar.Configuration(
             hostActivity = requireActivity(),
-            title = "Оставить подпись", //todo: use resource
+            title = resources.getString(R.string.sign),
             centeredTitle = true,
             navigationIconRes = R.drawable.chat_engine_ic_close,
             onNavigateUpClick = { closeCurrentFragment() },

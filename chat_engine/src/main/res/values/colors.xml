@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="chat_engine_drop_down_item_text_color">@color/black_5</color>
+    <color name="chat_engine_chat_background">@color/white_1</color>
+    <color name="chat_engine_input_form_background">@color/white_1</color>
+    <color name="chat_engine_system_message_background">@color/gray_5</color>
+    <color name="chat_engine_user_message_background">@color/gray_4</color>
+    <color name="chat_engine_input_field_background">@color/white_1</color>
+    <color name="chat_engine_input_field_borders_color">@color/gray_4</color>
+    <color name="chat_engine_input_field_container_background">@color/gray_5</color>
 </resources>

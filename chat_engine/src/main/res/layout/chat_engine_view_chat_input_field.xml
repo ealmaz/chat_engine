@@ -3,7 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/gray_5">
+    android:background="@color/chat_engine_input_field_container_background">
 
     <com.design.chili.view.input.SelectionEditText
         android:id="@+id/et_input"
