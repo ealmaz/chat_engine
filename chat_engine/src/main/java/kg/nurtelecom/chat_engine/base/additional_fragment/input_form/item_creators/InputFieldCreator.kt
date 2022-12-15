@@ -26,6 +26,7 @@ object InputFieldCreator : ItemCreator() {
             fieldInfo.hint?.let { setMessage(it) }
             fieldInfo.placeholder?.let { setHint(it) }
             fieldInfo.mask?.let { setupNewMask(it) }
+            fieldInfo.maskSymbols?.let { setupNewMaskSymbols(it.map { it.first() }) }
             when (fieldInfo.inputType) {
                 InputFieldInputType.NUMBER -> setInputType(InputType.TYPE_CLASS_NUMBER)
                 else -> setInputType(InputType.TYPE_CLASS_TEXT)

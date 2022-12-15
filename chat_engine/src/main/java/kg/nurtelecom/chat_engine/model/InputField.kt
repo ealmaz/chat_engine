@@ -10,6 +10,7 @@ data class InputField(
     val label: String? = null,
     val inputType: InputFieldInputType? = null,
     val mask: String? = null,
+    val maskSymbols: List<String>? = null,
     val validations: List<Validation>? = null
 ): Serializable
 
