@@ -79,6 +79,17 @@ abstract class BaseChatFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    protected fun updateItemProperty(id: String, updatedItem: MessageAdapterItem) {
+        val newList = synchronizedAdapterItems.map { if (it.getItemId() == id) updatedItem else it }
+        synchronizedAdapterItems.apply {
+            clear()
+            addAll(newList.distinctBy { it.getItemId() })
+            messageAdapter.submitList(this.toList()) {
+                vb.rvMessages.scrollToPosition(lastIndex)
+            }
+        }
+    }
+
     protected fun setInputFieldVisibility(isVisible: Boolean) {
         vb.input.isVisible = isVisible
     }

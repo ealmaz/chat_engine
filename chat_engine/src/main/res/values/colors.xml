@@ -8,4 +8,7 @@
     <color name="chat_engine_input_field_background">@color/white_1</color>
     <color name="chat_engine_input_field_borders_color">@color/gray_4</color>
     <color name="chat_engine_input_field_container_background">@color/gray_5</color>
+
+    <color name="chat_engine_primary_button_tint">@color/magenta_1</color>
+    <color name="chat_engine_secondary_button_tint">@color/black_5</color>
 </resources>

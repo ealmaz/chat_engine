@@ -1,20 +1,26 @@
 package kg.nurtelecom.chat_engine.base.chat.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.view.ViewStub
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import kg.nurtelecom.chat_engine.R
 import kg.nurtelecom.chat_engine.base.chat.adapter.chat_button_vh.AccentChatButtonVH
 import kg.nurtelecom.chat_engine.base.chat.adapter.chat_button_vh.SecondaryChatButtonVH
 import kg.nurtelecom.chat_engine.base.chat.adapter.message_vh.ImageMessageViewHolder
 import kg.nurtelecom.chat_engine.base.chat.adapter.message_vh.TextMessageViewHolder
+import kg.nurtelecom.chat_engine.databinding.ChatEngineItemTextMessageBinding
 import kg.nurtelecom.chat_engine.model.*
-import java.lang.IllegalArgumentException
 
-class MessagesAdapter(private val onButtonClick: (tag: String) -> Unit, private val onLinkClick: (String) -> Unit) : ListAdapter<MessageAdapterItem, RecyclerView.ViewHolder>(AsyncDifferConfig.Builder(MessageItemDiffUtilCallback()).build()) {
+class MessagesAdapter(
+    private val onButtonClick: (tag: String) -> Unit,
+    private val onLinkClick: (String) -> Unit
+) : ListAdapter<MessageAdapterItem, RecyclerView.ViewHolder>(AsyncDifferConfig.Builder(MessageItemDiffUtilCallback()).build()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
@@ -26,7 +32,7 @@ class MessagesAdapter(private val onButtonClick: (tag: String) -> Unit, private 
             MessageAdapterViewTypes.TYPING.ordinal -> TypingViewHolder.create(parent)
             MessageAdapterViewTypes.ACCENT_BUTTON.ordinal -> AccentChatButtonVH.create(parent, onButtonClick)
             MessageAdapterViewTypes.SECONDARY_BUTTON.ordinal -> SecondaryChatButtonVH.create(parent, onButtonClick)
-            else -> throw IllegalArgumentException() // todo empty viewHolder
+            else -> UnsupportedViewHolder.create(parent)
         }
     }
 
@@ -45,18 +51,62 @@ class MessagesAdapter(private val onButtonClick: (tag: String) -> Unit, private 
         return when {
             item is ItemAnchor -> MessageAdapterViewTypes.BOTTOM_ANCHOR_HOLDER.ordinal
             item is ItemTyping -> MessageAdapterViewTypes.TYPING.ordinal
-            item is Message && item.messageType == MessageType.SYSTEM && (item.contentType == MessageContentType.TEXT || item.contentType == MessageContentType.TEXT_HTML) -> MessageAdapterViewTypes.REQUEST_TEXT.ordinal
-            item is Message && item.messageType == MessageType.SYSTEM && (item.contentType == MessageContentType.IMAGE_URL || item.contentType == MessageContentType.IMAGE_FILE_PATH) -> MessageAdapterViewTypes.REQUEST_IMAGE.ordinal
-            item is Message && item.messageType == MessageType.USER && (item.contentType == MessageContentType.TEXT || item.contentType == MessageContentType.TEXT_HTML) -> MessageAdapterViewTypes.RESPONSE_TEXT.ordinal
-            item is Message && item.messageType == MessageType.USER && (item.contentType == MessageContentType.IMAGE_URL || item.contentType == MessageContentType.IMAGE_FILE_PATH) -> MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal
-            item is ChatButton && item.style == ButtonStyle.ACCENT -> MessageAdapterViewTypes.ACCENT_BUTTON.ordinal
-            item is ChatButton && item.style == ButtonStyle.SECONDARY -> MessageAdapterViewTypes.SECONDARY_BUTTON.ordinal
-            else -> throw IllegalArgumentException("Unknown view type for ${item}")
+            isRequestTextMessage(item) -> MessageAdapterViewTypes.REQUEST_TEXT.ordinal
+            isRequestImageMessage(item) -> MessageAdapterViewTypes.REQUEST_IMAGE.ordinal
+            isResponseTextMessage(item) -> MessageAdapterViewTypes.RESPONSE_TEXT.ordinal
+            isResponseImageMessage(item) -> MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal
+            isAccentButton(item) -> MessageAdapterViewTypes.ACCENT_BUTTON.ordinal
+            isSecondaryButton(item) -> MessageAdapterViewTypes.SECONDARY_BUTTON.ordinal
+            else -> MessageAdapterViewTypes.UNSUPPORTED_MESSAGE_TYPE.ordinal
         }
+    }
+
+    private fun isRequestTextMessage(item: MessageAdapterItem): Boolean {
+        return item is Message
+                && item.messageType == MessageType.SYSTEM
+                && (item.contentType == MessageContentType.TEXT
+                || item.contentType == MessageContentType.TEXT_HTML)
+    }
+
+    private fun isRequestImageMessage(item: MessageAdapterItem): Boolean {
+        return item is Message
+                && item.messageType == MessageType.SYSTEM
+                && (item.contentType == MessageContentType.IMAGE_URL
+                || item.contentType == MessageContentType.IMAGE_FILE_PATH)
+    }
+
+    private fun isResponseTextMessage(item: MessageAdapterItem): Boolean {
+        return item is Message
+                && item.messageType == MessageType.USER
+                && (item.contentType == MessageContentType.TEXT
+                || item.contentType == MessageContentType.TEXT_HTML)
+    }
+
+    private fun isResponseImageMessage(item: MessageAdapterItem): Boolean {
+        return item is Message
+                && item.messageType == MessageType.USER
+                && (item.contentType == MessageContentType.IMAGE_URL
+                || item.contentType == MessageContentType.IMAGE_FILE_PATH)
+    }
+
+    private fun isAccentButton(item: MessageAdapterItem): Boolean {
+        return item is ChatButton && item.style == ButtonStyle.ACCENT
+    }
+
+    private fun isSecondaryButton(item: MessageAdapterItem): Boolean {
+        return item is ChatButton && item.style == ButtonStyle.SECONDARY
     }
 }
 
-class BottomAnchorViewHolder(context: Context) : RecyclerView.ViewHolder(ViewStub(context))
+class MessageItemDiffUtilCallback : DiffUtil.ItemCallback<MessageAdapterItem>() {
+    override fun areItemsTheSame(oldItem: MessageAdapterItem, newItem: MessageAdapterItem): Boolean {
+        return oldItem.areItemsTheSame(newItem)
+    }
+
+    override fun areContentsTheSame(oldItem: MessageAdapterItem, newItem: MessageAdapterItem): Boolean {
+        return oldItem.areContentTheSame(newItem)
+    }
+}
 
 enum class MessageAdapterViewTypes {
     BOTTOM_ANCHOR_HOLDER,
@@ -66,7 +116,20 @@ enum class MessageAdapterViewTypes {
     REQUEST_IMAGE,
     TYPING,
     ACCENT_BUTTON,
-    SECONDARY_BUTTON
+    SECONDARY_BUTTON,
+    UNSUPPORTED_MESSAGE_TYPE
+}
+
+class BottomAnchorViewHolder(context: Context) : RecyclerView.ViewHolder(ViewStub(context))
+
+class UnsupportedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    companion object {
+        fun create(parent: ViewGroup): UnsupportedViewHolder {
+            val vb  = ChatEngineItemTextMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            vb.textMessage.setMessage(R.string.unsupported_type)
+            return UnsupportedViewHolder(vb.root)
+        }
+    }
 }
 
 object ItemTyping : MessageAdapterItem {
@@ -98,12 +161,16 @@ object ItemAnchor : MessageAdapterItem {
     }
 }
 
-class MessageItemDiffUtilCallback : DiffUtil.ItemCallback<MessageAdapterItem>() {
-    override fun areItemsTheSame(oldItem: MessageAdapterItem, newItem: MessageAdapterItem): Boolean {
-        return oldItem.areItemsTheSame(newItem)
+object UnsupportedMessageItem : MessageAdapterItem {
+    override fun getItemId(): String {
+        return "Unsupported_message"
     }
 
-    override fun areContentsTheSame(oldItem: MessageAdapterItem, newItem: MessageAdapterItem): Boolean {
-        return oldItem.areContentTheSame(newItem)
+    override fun areItemsTheSame(other: Any): Boolean {
+        return other == this
+    }
+
+    override fun areContentTheSame(other: Any): Boolean {
+        return other == this
     }
 }

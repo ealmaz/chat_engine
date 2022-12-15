@@ -67,6 +67,7 @@ object MessagesMocker {
     }
 
     val buttons = arrayOf(
+        ChatButton("LOADER", "Loader", ButtonStyle.SECONDARY, properties = ButtonProperties(enableAt = (Date().time + 90000))),
         ChatButton("INPUT_SIGNATURE", "Input signature", ButtonStyle.SECONDARY),
         ChatButton("INPUT_FORM", "Input form", ButtonStyle.SECONDARY),
         ChatButton("ADD_RESPONSE", "Add response", ButtonStyle.SECONDARY),

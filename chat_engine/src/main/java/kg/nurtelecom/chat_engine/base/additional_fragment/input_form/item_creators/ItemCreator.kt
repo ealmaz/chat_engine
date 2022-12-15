@@ -9,10 +9,14 @@ open class ItemCreator {
         validations?.forEach {
             when (it.type) {
                 ValidationType.REQUIRED -> {
-                    return !(it.value == "true" && (values.isEmpty() || values.firstOrNull().isNullOrBlank()))
+                    if (it.value == "true" && (values.isEmpty() || values.firstOrNull().isNullOrBlank())) {
+                        return false
+                    }
                 }
                 ValidationType.REGEX -> {
-                    return !(it.value != null && (!(values.firstOrNull() ?: "").matches(it.value.toRegex())))
+                    if (it.value != null && (!(values.firstOrNull() ?: "").matches(it.value.toRegex()))) {
+                        return false
+                    }
                 }
             }
         }
