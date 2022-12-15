@@ -74,11 +74,11 @@ class ChatInputFieldView @JvmOverloads constructor(
         vb.etInput.setHint(hintResId)
     }
 
-    fun setupMask(mask: String) {
+    fun setupMask(mask: String, maskSymbols: List<Char>? = null) {
         val maskTextWatcher = MaskedTextWatcher.Builder()
             .setInputMask(mask)
-            .build(vb.etInput)
-        vb.etInput.addTextChangedListener(maskTextWatcher)
+        maskSymbols?.let { maskTextWatcher.setInputMaskSymbols(it) }
+        vb.etInput.addTextChangedListener(maskTextWatcher.build(vb.etInput))
     }
 
     fun setupInputType(inputType: Int) {
