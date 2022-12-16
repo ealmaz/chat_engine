@@ -4,6 +4,7 @@
     <color name="chat_engine_chat_background">@color/black_1</color>
     <color name="chat_engine_input_form_background">@color/black_1</color>
     <color name="chat_engine_system_message_background">@color/black_3</color>
+    <color name="chat_engine_system_new_message_background">@color/red_1</color>
     <color name="chat_engine_user_message_background">@color/black_5</color>
     <color name="chat_engine_input_field_background">@color/black_2</color>
     <color name="chat_engine_input_field_borders_color">@color/black_4</color>

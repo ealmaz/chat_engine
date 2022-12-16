@@ -34,6 +34,9 @@
     </declare-styleable>
 
     <declare-styleable name="chat_engine_TextMessageBubbleBackgroundStates">
+        <attr name="state_is_start_bottom_new" format="boolean"/>
+        <attr name="state_is_start_single_new" format="boolean"/>
+
         <attr name="state_is_start_top" format="boolean"/>
         <attr name="state_is_start_middle" format="boolean"/>
         <attr name="state_is_start_bottom" format="boolean"/>
