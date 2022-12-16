@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import kg.nurtelecom.chat_engine.R
@@ -81,7 +82,7 @@ class TextMessageView @JvmOverloads constructor(
     }
 
     fun setMessageHtml(html: String) {
-        vb.tvMessage.text = html.parseAsHtml()
+        vb.tvMessage.text = html.parseAsHtml(HtmlCompat.FROM_HTML_MODE_COMPACT)
     }
 
     fun getMessageTextView(): TextView {
