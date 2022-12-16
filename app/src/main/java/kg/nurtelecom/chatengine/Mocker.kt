@@ -141,6 +141,19 @@ fun getInputForm() = InputForm(
                 null,
             )
         ),
+        FormItem(
+            FormItemType.DATE_PICKER_FORM_ITEM,
+            DatePickerFieldInfo(
+                "date_picker",
+                null,
+                Date().time,
+                null,
+                "Label text",
+                "PlaceHolderText",
+                "Helper text",
+                listOf(Validation(ValidationType.REQUIRED, "true"))
+            )
+        ),
 //        FormItem(
 //            FormItemType.INPUT_FIELD,
 //            InputField(

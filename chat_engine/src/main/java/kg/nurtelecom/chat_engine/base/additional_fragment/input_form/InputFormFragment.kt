@@ -14,23 +14,26 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.LifecycleOwner
 import com.design.chili.view.input.MaskedInputView
 import com.design.chili.view.modals.bottom_sheet.serach_bottom_sheet.Option
+import com.design.chili.view.modals.picker.DatePickerDialog
 import com.design.chili.view.navigation_components.ChiliToolbar
 import kg.nurtelecom.chat_engine.R
-import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators.DropDownFieldCreator
-import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators.GroupButtonsCreator
-import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators.InputFieldCreator
-import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators.UnsupportedItemCreator
+import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators.*
 import kg.nurtelecom.chat_engine.custom_views.ChatButtonsGroup
+import kg.nurtelecom.chat_engine.custom_views.DatePickerInputField
 import kg.nurtelecom.chat_engine.custom_views.DropDownInputField
 import kg.nurtelecom.chat_engine.databinding.ChatEngineFragmentInputFormBinding
 import kg.nurtelecom.chat_engine.extensions.closeCurrentFragment
 import kg.nurtelecom.chat_engine.extensions.hideKeyboard
 import kg.nurtelecom.chat_engine.model.*
+import java.util.*
+import kotlin.collections.HashMap
 
-open class InputFormFragment : Fragment() {
+open class InputFormFragment : Fragment(), FragmentResultListener {
 
     open val unsupportedTitleRes = R.string.unsupported_field
     open val buttonTextRes = R.string.next
+
+    private var currentOpenedDatePickerId: String? = null
 
     private var _vb: ChatEngineFragmentInputFormBinding? = null
     private val vb: ChatEngineFragmentInputFormBinding
@@ -63,6 +66,7 @@ open class InputFormFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        childFragmentManager.setFragmentResultListener(DatePickerDialog.PICKER_DIALOG_RESULT, this, this)
         setupViews()
         setupInputForm()
     }
@@ -85,6 +89,7 @@ open class InputFormFragment : Fragment() {
                 is InputField -> createInputField(it.formItem)
                 is GroupButtonFormItem -> createButtonGroup(it.formItem)
                 is DropDownFieldInfo -> createDropDownField(it.formItem)
+                is DatePickerFieldInfo -> createDatePickerField(it.formItem)
                 else -> createUnsupportedItem(it)
             }
             container.addView(view)
@@ -126,6 +131,24 @@ open class InputFormFragment : Fragment() {
         }
     }
 
+    private fun createDatePickerField(datePickerFieldInfo: DatePickerFieldInfo): View {
+        result[datePickerFieldInfo.fieldId] = null
+        return DatePickerFieldCreator.create(requireContext(), datePickerFieldInfo) { values, isValid ->
+            result[datePickerFieldInfo.fieldId] = if (isValid) values else null
+            toggleButton()
+        }.apply {
+            setOnClickListener {
+                currentOpenedDatePickerId = datePickerFieldInfo.fieldId
+                DatePickerDialog.create(
+                    getString(R.string.next),
+                    datePickerFieldInfo.label ?: "",
+                    startLimitDate = datePickerFieldInfo.startDateLimit?.let { Calendar.getInstance().apply { timeInMillis = it } },
+                    endLimitDate = datePickerFieldInfo.endDateLimit?.let { Calendar.getInstance().apply { timeInMillis = it } }
+                ).show(childFragmentManager, null)
+            }
+        }
+    }
+
     private fun setFragmentResultAndClose() {
         requireActivity().supportFragmentManager.setFragmentResult(INPUT_FORM_RESULT, bundleOf(
             INPUT_FORM_RESULT to collectResult()
@@ -164,6 +187,17 @@ open class InputFormFragment : Fragment() {
 
     fun setOptionsForDropDownField(fieldId: String, newOptions: List<Option>) {
         vb.root.findViewWithTag<DropDownInputField>(fieldId)?.options = newOptions
+    }
+
+    override fun onFragmentResult(requestKey: String, result: Bundle) {
+        when (requestKey) {
+            DatePickerDialog.PICKER_DIALOG_RESULT -> {
+                val calendar = result.getSerializable(DatePickerDialog.ARG_SELECTED_DATE) as Calendar
+                currentOpenedDatePickerId?.let {
+                    vb.formContainer.findViewWithTag<DatePickerInputField>(it).setDate(calendar.timeInMillis)
+                }
+            }
+        }
     }
 
     companion object {

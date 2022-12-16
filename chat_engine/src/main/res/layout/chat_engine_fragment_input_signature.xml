@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:background="@color/chat_engine_input_form_background"
         android:id="@+id/tb"/>
 
     <kg.nurtelecom.chat_engine.custom_views.InputSignatureView

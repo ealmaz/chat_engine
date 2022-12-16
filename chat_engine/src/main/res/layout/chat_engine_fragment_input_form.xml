@@ -11,6 +11,7 @@
         android:minHeight="?actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:background="@color/chat_engine_input_form_background"
         app:isDividerVisible="false"
         android:id="@+id/tb"/>
 
