@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -89,7 +90,7 @@ class ImageMessageView @JvmOverloads constructor(
     private fun resetPreviousStatuses() = with(vb) {
         cvImageContainer.foreground = null
         pbProgress.isVisible = false
-        ivStatus.isVisible = false
+        ivStatus.isInvisible = true
     }
 
     private fun setupStatusIcon(@DrawableRes iconRes: Int) {
