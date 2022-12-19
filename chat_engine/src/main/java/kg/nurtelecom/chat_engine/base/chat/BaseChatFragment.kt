@@ -26,8 +26,10 @@ abstract class BaseChatFragment : Fragment(), View.OnClickListener {
     private val synchronizedAdapterItems: MutableList<MessageAdapterItem> = mutableListOf()
     @Synchronized get
 
-    private val messageAdapter: MessagesAdapter by lazy {
-        MessagesAdapter ({ onButtonClick(it) }, { onLinkClick(it) })
+    private val messageAdapter: MessagesAdapter by lazy { createMessagesAdapter() }
+
+    open fun createMessagesAdapter(): MessagesAdapter {
+        return MessagesAdapter ({ onButtonClick(it) }, { onLinkClick(it) })
     }
 
     override fun onCreateView(

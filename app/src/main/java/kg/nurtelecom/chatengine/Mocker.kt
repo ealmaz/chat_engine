@@ -69,6 +69,35 @@ object MessagesMocker {
         }
     }
 
+    fun requestTable(): TableMessage {
+        return TableMessage("${Date().time * key.random()}", MessageType.SYSTEM, listOf(
+            TableRow(TableOrientation.HORIZONTAL, listOf(
+                TableItem(null,
+                    "https://iconutopia.com/wp-content/uploads/2016/06/space-dog-laika1.png",
+                    "10 ГБ"
+                ),
+                TableItem(null,
+                    "https://iconutopia.com/wp-content/uploads/2016/06/space-dog-laika1.png",
+                    "2 мин."
+                ),
+                TableItem(null,
+                    "https://iconutopia.com/wp-content/uploads/2016/06/space-dog-laika1.png",
+                    "Безлимит"
+                )
+            )),
+            TableRow(TableOrientation.VERTICAL, listOf(
+                TableItem("120 c",
+                    null,
+                    "Видео"
+                ),
+                TableItem("150 c",
+                    null,
+                    "Соцсети"
+                )
+            ))
+        ))
+    }
+
     val buttons = arrayOf(
         ChatButton("LOADER", "Loader", ButtonStyle.SECONDARY, properties = ButtonProperties(enableAt = (Date().time + 90000))),
         ChatButton("INPUT_SIGNATURE", "Input signature", ButtonStyle.SECONDARY),

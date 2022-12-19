@@ -13,11 +13,12 @@ import kg.nurtelecom.chat_engine.R
 import kg.nurtelecom.chat_engine.base.chat.adapter.chat_button_vh.AccentChatButtonVH
 import kg.nurtelecom.chat_engine.base.chat.adapter.chat_button_vh.SecondaryChatButtonVH
 import kg.nurtelecom.chat_engine.base.chat.adapter.message_vh.ImageMessageViewHolder
+import kg.nurtelecom.chat_engine.base.chat.adapter.message_vh.TableMessageViewHolder
 import kg.nurtelecom.chat_engine.base.chat.adapter.message_vh.TextMessageViewHolder
 import kg.nurtelecom.chat_engine.databinding.ChatEngineItemTextMessageBinding
 import kg.nurtelecom.chat_engine.model.*
 
-class MessagesAdapter(
+open class MessagesAdapter(
     private val onButtonClick: (tag: String) -> Unit,
     private val onLinkClick: (String) -> Unit
 ) : ListAdapter<MessageAdapterItem, RecyclerView.ViewHolder>(AsyncDifferConfig.Builder(MessageItemDiffUtilCallback()).build()) {
@@ -32,6 +33,8 @@ class MessagesAdapter(
             MessageAdapterViewTypes.TYPING.ordinal -> TypingViewHolder.create(parent)
             MessageAdapterViewTypes.ACCENT_BUTTON.ordinal -> AccentChatButtonVH.create(parent, onButtonClick)
             MessageAdapterViewTypes.SECONDARY_BUTTON.ordinal -> SecondaryChatButtonVH.create(parent, onButtonClick)
+            MessageAdapterViewTypes.RESPONSE_TABLE.ordinal -> TableMessageViewHolder.create(parent)
+            MessageAdapterViewTypes.REQUEST_TABLE.ordinal -> TableMessageViewHolder.create(parent)
             else -> UnsupportedViewHolder.create(parent)
         }
     }
@@ -43,6 +46,7 @@ class MessagesAdapter(
             is TypingViewHolder -> holder.onBind()
             is AccentChatButtonVH -> holder.onBind(currentList[position] as ChatButton)
             is SecondaryChatButtonVH -> holder.onBind(currentList[position] as ChatButton)
+            is TableMessageViewHolder -> holder.onBind(currentList[position] as TableMessage)
         }
     }
 
@@ -57,6 +61,8 @@ class MessagesAdapter(
             isResponseImageMessage(item) -> MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal
             isAccentButton(item) -> MessageAdapterViewTypes.ACCENT_BUTTON.ordinal
             isSecondaryButton(item) -> MessageAdapterViewTypes.SECONDARY_BUTTON.ordinal
+            isRequestTableMessage(item) -> MessageAdapterViewTypes.REQUEST_TABLE.ordinal
+            isResponseTableMessage(item) -> MessageAdapterViewTypes.RESPONSE_TABLE.ordinal
             else -> MessageAdapterViewTypes.UNSUPPORTED_MESSAGE_TYPE.ordinal
         }
     }
@@ -89,6 +95,16 @@ class MessagesAdapter(
                 || item.contentType == MessageContentType.IMAGE_FILE_PATH)
     }
 
+    private fun isResponseTableMessage(item: MessageAdapterItem): Boolean {
+        return item is TableMessage
+                && item.messageType == MessageType.USER
+    }
+
+    private fun isRequestTableMessage(item: MessageAdapterItem): Boolean {
+        return item is TableMessage
+                && item.messageType == MessageType.SYSTEM
+    }
+
     private fun isAccentButton(item: MessageAdapterItem): Boolean {
         return item is ChatButton && item.style == ButtonStyle.ACCENT
     }
@@ -112,8 +128,10 @@ enum class MessageAdapterViewTypes {
     BOTTOM_ANCHOR_HOLDER,
     RESPONSE_TEXT,
     RESPONSE_IMAGE,
+    RESPONSE_TABLE,
     REQUEST_TEXT,
     REQUEST_IMAGE,
+    REQUEST_TABLE,
     TYPING,
     ACCENT_BUTTON,
     SECONDARY_BUTTON,

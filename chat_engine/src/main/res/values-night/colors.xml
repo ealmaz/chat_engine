@@ -9,6 +9,7 @@
     <color name="chat_engine_input_field_background">@color/black_2</color>
     <color name="chat_engine_input_field_borders_color">@color/black_4</color>
     <color name="chat_engine_input_field_container_background">@color/black_3</color>
+    <color name="chat_engine_table_message_stroke_color">@color/black_2</color>
 
     <color name="chat_engine_primary_button_tint">@color/magenta_1</color>
     <color name="chat_engine_secondary_button_tint">@color/gray_3</color>
