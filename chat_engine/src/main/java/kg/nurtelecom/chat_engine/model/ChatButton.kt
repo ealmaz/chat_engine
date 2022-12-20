@@ -29,5 +29,6 @@ data class ButtonProperties(
     val identifier: String? = null,
     val enableAt: Long? = null,
     val formIdToOpen: String? = null,
+    val webViewIdToOpen: String? = null,
 )
 
