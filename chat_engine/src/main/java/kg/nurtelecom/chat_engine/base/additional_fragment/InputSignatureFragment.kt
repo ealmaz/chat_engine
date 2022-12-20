@@ -114,7 +114,7 @@ class InputSignatureFragment : Fragment(), TouchAndDrawViewCallback {
                 fragmentResultListener
             )
             fragmentManager.commit {
-                replace(containerId, InputSignatureFragment())
+                add(containerId, InputSignatureFragment())
                 addToBackStack(null)
             }
         }

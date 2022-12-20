@@ -11,7 +11,7 @@ object MessagesMocker {
     var lastResponseId = -1
 
     val states = listOf(MessageStatus.DONE)
-    val messageContentType = listOf(MessageContentType.TEXT,MessageContentType.TEXT, MessageContentType.TEXT_HTML)
+    val messageContentType = listOf( MessageContentType.TEXT_HTML)
 
     val images = listOf<String>(
         "https://habrastorage.org/r/w1560/webt/i2/gy/g-/i2gyg--ncl86i1kb6yst8xx5iri.png",
@@ -52,7 +52,7 @@ object MessagesMocker {
                 Message("${Date().time * key.random()}", messagesText[lastRequestId], MessageContentType.TEXT, MessageType.SYSTEM, states.random())
             }
             MessageContentType.TEXT_HTML -> {
-                Message("${Date().time * key.random()}", "<p>Способы получения SIM-карты:</p><ul><li>       eSim приложения за 5 минут.</li><li> В O!Store.</li><li> С доставкой по адресу</li></ul>", MessageContentType.TEXT_HTML, MessageType.SYSTEM, MessageStatus.DONE)
+                Message("${Date().time * key.random()}", "<p><h1>Чтобы получить eSIM в приложении:</h1><br>1. Подготовьте паспорт и пройдите персонификацию;<br>2. Оплатите удобным способом.</p><p><b>Чтобы получить eSIM в приложении:</b><br>1. Подготовьте паспорт и пройдите персонификацию;<br>2. Оплатите удобным способом.</p>", MessageContentType.TEXT_HTML, MessageType.SYSTEM, MessageStatus.DONE)
             }
             else -> Message("${Date().time * key.random()}", images.random(), MessageContentType.IMAGE_URL, MessageType.SYSTEM, states.random())
         }
