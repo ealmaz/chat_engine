@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.load.model.GlideUrl
 import kg.nurtelecom.chat_engine.R
 import kg.nurtelecom.chat_engine.base.chat.adapter.chat_button_vh.AccentChatButtonVH
 import kg.nurtelecom.chat_engine.base.chat.adapter.chat_button_vh.SecondaryChatButtonVH
@@ -20,13 +21,14 @@ import kg.nurtelecom.chat_engine.model.*
 
 open class MessagesAdapter(
     private val onButtonClick: (tag: String) -> Unit,
-    private val onLinkClick: (String) -> Unit
+    private val onLinkClick: (String) -> Unit,
+    private val glideUrlCreator: ((url: String) -> GlideUrl?)? = null
 ) : ListAdapter<MessageAdapterItem, RecyclerView.ViewHolder>(AsyncDifferConfig.Builder(MessageItemDiffUtilCallback()).build()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
-            MessageAdapterViewTypes.REQUEST_IMAGE.ordinal -> ImageMessageViewHolder.create(parent)
-            MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal -> ImageMessageViewHolder.create(parent)
+            MessageAdapterViewTypes.REQUEST_IMAGE.ordinal -> ImageMessageViewHolder.create(parent, glideUrlCreator)
+            MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal -> ImageMessageViewHolder.create(parent, glideUrlCreator)
             MessageAdapterViewTypes.REQUEST_TEXT.ordinal -> TextMessageViewHolder.create(parent, onLinkClick)
             MessageAdapterViewTypes.RESPONSE_TEXT.ordinal -> TextMessageViewHolder.create(parent, onLinkClick)
             MessageAdapterViewTypes.BOTTOM_ANCHOR_HOLDER.ordinal -> BottomAnchorViewHolder(parent.context)

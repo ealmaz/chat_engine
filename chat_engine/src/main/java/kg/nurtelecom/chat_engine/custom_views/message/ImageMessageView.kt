@@ -14,6 +14,7 @@ import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kg.nurtelecom.chat_engine.R
@@ -28,8 +29,6 @@ class ImageMessageView @JvmOverloads constructor(
     defStyleAttr: Int = R.attr.baseMessageViewDefaultStyle,
     defStyle: Int = R.style.chat_engine_BaseMessageViewStyle
 ): BaseMessageView<ChatEngineViewImageMessageBinding>(context, attrs, defStyleAttr, defStyle) {
-
-    //todo: Подумать нужно ли выносить glide в переменную
 
     override fun inflateView(): ChatEngineViewImageMessageBinding {
         return ChatEngineViewImageMessageBinding.inflate(LayoutInflater.from(context), this, true)
@@ -123,6 +122,16 @@ class ImageMessageView @JvmOverloads constructor(
         startImageShimmer()
         Glide.with(context)
             .load(url)
+            .override(Target.SIZE_ORIGINAL)
+            .listener(imageListenerForShimmer)
+            .into(vb.ivImage)
+    }
+
+    fun loadImageFromUrl(glideUrl: GlideUrl) {
+        if (vb.ivImage.tag == glideUrl.toString()) return
+        startImageShimmer()
+        Glide.with(context)
+            .load(glideUrl)
             .override(Target.SIZE_ORIGINAL)
             .listener(imageListenerForShimmer)
             .into(vb.ivImage)
