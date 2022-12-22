@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="unsupported_field" translatable="false">Неподдерживаемое поле</string>
-    <string name="unsupported_type">Неподдерживаемый тип</string>
+    <string name="unsupported_type" translatable="false">Неподдерживаемый тип</string>
     <string name="next">Продолжить</string>
     <string name="sign">Оставить подпись</string>
     <string name="retry_after">Повторить через %s</string>

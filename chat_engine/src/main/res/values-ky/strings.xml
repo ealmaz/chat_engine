@@ -2,4 +2,5 @@
 <resources>
     <string name="next">Улантуу</string>
     <string name="sign">Кол тамга калтыруу</string>
+    <string name="retry_after">%s кийин кайталоо</string>
 </resources>
