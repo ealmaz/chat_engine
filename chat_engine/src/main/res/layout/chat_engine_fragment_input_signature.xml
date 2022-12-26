@@ -17,8 +17,8 @@
         android:id="@+id/signatureInput"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        app:hint="Ваша подпись для договора."
-        app:description="Оставьте свою подпись пальцем на выделенном поле экрана и нажмите “Продолжить”. Постарайтесь оставить поспись приближенную к подписи в вашем паспорте."
+        app:hint="@string/input_signature_title"
+        app:description="@string/input_signature_description"
         app:layout_constraintVertical_weight="5"
         app:layout_constraintTop_toBottomOf="@id/tb"
         app:layout_constraintStart_toStartOf="parent" />
