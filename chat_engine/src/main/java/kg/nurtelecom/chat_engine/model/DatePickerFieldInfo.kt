@@ -1,5 +1,7 @@
 package kg.nurtelecom.chat_engine.model
 
+import java.io.Serializable
+
 data class DatePickerFieldInfo(
     val fieldId: String,
     val value: Long? = null,
@@ -9,4 +11,4 @@ data class DatePickerFieldInfo(
     val placeHolder: String? = null,
     val hint: String? = null,
     val validations: List<Validation>? = null
-    )
+): Serializable
