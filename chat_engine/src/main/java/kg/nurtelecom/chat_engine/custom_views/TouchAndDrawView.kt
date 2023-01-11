@@ -41,7 +41,7 @@ class TouchAndDrawView @JvmOverloads constructor(
             MotionEvent.ACTION_DOWN -> {
                 drawingShapes.add(mutableListOf(DrawingPoint(event.x, event.y)))
             }
-            else -> drawingShapes.last().add(DrawingPoint(event.x, event.y))
+            else -> drawingShapes.lastOrNull()?.add(DrawingPoint(event.x, event.y))
         }
         invalidate()
         return true
