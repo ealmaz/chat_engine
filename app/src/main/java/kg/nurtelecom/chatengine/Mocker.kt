@@ -11,7 +11,7 @@ object MessagesMocker {
     var lastResponseId = -1
 
     val states = listOf(MessageStatus.DONE)
-    val messageContentType = listOf( MessageContentType.TEXT_HTML)
+    val messageContentType = listOf(MessageContentType.TEXT_HTML, MessageContentType.TEXT, MessageContentType.IMAGE_URL)
 
     val images = listOf<String>(
         "https://habrastorage.org/r/w1560/webt/i2/gy/g-/i2gyg--ncl86i1kb6yst8xx5iri.png",
