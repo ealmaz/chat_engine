@@ -53,7 +53,7 @@ open class InputFormFragment : Fragment(), FragmentResultListener {
         ChiliToolbar.Configuration(
             hostActivity = requireActivity(),
             title = inputForm?.title,
-            centeredTitle = true,
+            centeredTitle = false,
             navigationIconRes = R.drawable.chat_engine_ic_close,
             onNavigateUpClick = { closeCurrentFragment() },
             isNavigateUpButtonEnabled = true)

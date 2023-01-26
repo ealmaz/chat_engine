@@ -33,7 +33,7 @@ class InputSignatureFragment : Fragment(), TouchAndDrawViewCallback {
         ChiliToolbar.Configuration(
             hostActivity = requireActivity(),
             title = resources.getString(R.string.sign),
-            centeredTitle = true,
+            centeredTitle = false,
             navigationIconRes = R.drawable.chat_engine_ic_close,
             onNavigateUpClick = { closeCurrentFragment() },
             isNavigateUpButtonEnabled = true)
