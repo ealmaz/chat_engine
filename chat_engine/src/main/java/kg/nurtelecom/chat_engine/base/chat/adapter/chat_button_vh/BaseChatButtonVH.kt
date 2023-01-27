@@ -15,6 +15,8 @@ import java.util.concurrent.TimeUnit
 
 abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    var additionalButtonProperties: ButtonProperties? = null
+
     private var countDownTimer : CountDownTimer? = null
 
     abstract val btn: Button
@@ -24,6 +26,7 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
         setupTimer(chatButton.properties, chatButton.text)
         tag = chatButton.buttonId
         text = chatButton.text
+        additionalButtonProperties = chatButton.properties
         setupLoader(chatButton.isLoading)
     }
 

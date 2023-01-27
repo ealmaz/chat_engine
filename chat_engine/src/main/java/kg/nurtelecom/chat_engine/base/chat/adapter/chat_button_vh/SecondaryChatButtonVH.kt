@@ -4,11 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
-import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.chat_engine.databinding.ChatEngineItemSecondaryChatButtonBinding
-import kg.nurtelecom.chat_engine.model.ChatButton
+import kg.nurtelecom.chat_engine.model.ButtonProperties
 
 class SecondaryChatButtonVH(private val vb: ChatEngineItemSecondaryChatButtonBinding): BaseChatButtonVH(vb.root) {
 
@@ -16,10 +13,11 @@ class SecondaryChatButtonVH(private val vb: ChatEngineItemSecondaryChatButtonBin
     override val progress: ProgressBar = vb.progress
 
     companion object {
-        fun create(parent: ViewGroup, onClick: (tag: String) -> Unit): SecondaryChatButtonVH {
+        fun create(parent: ViewGroup, onClick: (tag: String, buttonProperties: ButtonProperties?) -> Unit): SecondaryChatButtonVH {
             val view = ChatEngineItemSecondaryChatButtonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            view.btn.setOnClickListener { onClick.invoke(it.tag.toString()) }
-            return SecondaryChatButtonVH(view)
+            return SecondaryChatButtonVH(view).apply {
+                vb.btn.setOnClickListener { onClick.invoke(it.tag.toString(), additionalButtonProperties) }
+            }
         }
     }
 }

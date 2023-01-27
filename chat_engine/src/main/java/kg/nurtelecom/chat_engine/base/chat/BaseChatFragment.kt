@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,10 +13,11 @@ import kg.nurtelecom.chat_engine.base.chat.adapter.BubbleMessagesDecor
 import kg.nurtelecom.chat_engine.base.chat.adapter.ItemAnchor
 import kg.nurtelecom.chat_engine.base.chat.adapter.MessagesAdapter
 import kg.nurtelecom.chat_engine.databinding.ChatEngineFragmentBaseChatBinding
+import kg.nurtelecom.chat_engine.model.ButtonProperties
 import kg.nurtelecom.chat_engine.model.ChatButton
 import kg.nurtelecom.chat_engine.model.MessageAdapterItem
 
-abstract class BaseChatFragment : Fragment(), View.OnClickListener {
+abstract class BaseChatFragment : Fragment() {
 
     private var _vb: ChatEngineFragmentBaseChatBinding? = null
     protected val vb: ChatEngineFragmentBaseChatBinding
@@ -29,7 +29,7 @@ abstract class BaseChatFragment : Fragment(), View.OnClickListener {
     private val messageAdapter: MessagesAdapter by lazy { createMessagesAdapter() }
 
     open fun createMessagesAdapter(): MessagesAdapter {
-        return MessagesAdapter ({ onButtonClick(it) }, { onLinkClick(it) })
+        return MessagesAdapter (::onButtonClick, { onLinkClick(it) })
     }
 
     override fun onCreateView(
@@ -96,15 +96,20 @@ abstract class BaseChatFragment : Fragment(), View.OnClickListener {
         vb.input.isVisible = isVisible
     }
 
-    override fun onClick(v: View?) {
-        when (v) {
-            is Button -> onButtonClick(v.tag.toString())
+    open fun onButtonClick(buttonId: String, additionalProperties: ButtonProperties?) {
+        when {
+            additionalProperties?.formIdToOpen != null -> {
+                onOpenForm(additionalProperties.formIdToOpen)
+            }
+            additionalProperties?.webViewIdToOpen != null -> {
+                onOpenWebView(additionalProperties.webViewIdToOpen)
+            }
         }
     }
-
-    abstract fun onButtonClick(buttonId: String)
     abstract fun onInputFieldSendButtonClick(inputFieldText: String?)
     abstract fun onLinkClick(url: String)
+    abstract fun onOpenForm(inputFormId: String)
+    abstract fun onOpenWebView(webViewId: String)
 
     override fun onDestroyView() {
         super.onDestroyView()

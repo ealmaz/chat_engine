@@ -4,11 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
-import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.chat_engine.databinding.ChatEngineItemAccentChatButtonBinding
-import kg.nurtelecom.chat_engine.model.ChatButton
+import kg.nurtelecom.chat_engine.model.ButtonProperties
 
 class AccentChatButtonVH(private val vb: ChatEngineItemAccentChatButtonBinding): BaseChatButtonVH(vb.root) {
 
@@ -16,10 +13,11 @@ class AccentChatButtonVH(private val vb: ChatEngineItemAccentChatButtonBinding):
     override val progress: ProgressBar = vb.progress
 
     companion object {
-        fun create(parent: ViewGroup, onClick: (tag: String) -> Unit): AccentChatButtonVH {
+        fun create(parent: ViewGroup, onClick: (tag: String, buttonProperties: ButtonProperties?) -> Unit): AccentChatButtonVH {
             val view = ChatEngineItemAccentChatButtonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            view.btn.setOnClickListener { onClick.invoke(it.tag.toString()) }
-            return AccentChatButtonVH(view)
+            return AccentChatButtonVH(view).apply {
+                vb.btn.setOnClickListener { onClick.invoke(it.tag.toString(), additionalButtonProperties) }
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ import kg.nurtelecom.chat_engine.databinding.ChatEngineItemTextMessageBinding
 import kg.nurtelecom.chat_engine.model.*
 
 open class MessagesAdapter(
-    private val onButtonClick: (tag: String) -> Unit,
+    private val onButtonClick: (tag: String, buttonProperties: ButtonProperties?) -> Unit,
     private val onLinkClick: (String) -> Unit,
     private val glideUrlCreator: ((url: String) -> GlideUrl?)? = null
 ) : ListAdapter<MessageAdapterItem, RecyclerView.ViewHolder>(AsyncDifferConfig.Builder(MessageItemDiffUtilCallback()).build()) {
