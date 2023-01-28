@@ -149,14 +149,14 @@ open class InputFormFragment : Fragment(), FragmentResultListener {
         }
     }
 
-    private fun setFragmentResultAndClose() {
+    protected open fun setFragmentResultAndClose() {
         requireActivity().supportFragmentManager.setFragmentResult(INPUT_FORM_RESULT, bundleOf(
             INPUT_FORM_RESULT to collectResult()
         ))
         requireActivity().closeCurrentFragment()
     }
 
-    private fun collectResult(): FormResponse {
+    protected open fun collectResult(): FormResponse {
         val resultValues = mutableListOf<EnteredValue>()
         result.forEach {
             resultValues.add(EnteredValue(it.key, it.value))
@@ -168,7 +168,7 @@ open class InputFormFragment : Fragment(), FragmentResultListener {
         vb.btnDone.isEnabled = isFormFilled()
     }
 
-    private fun isFormFilled(): Boolean {
+    protected fun isFormFilled(): Boolean {
         result.forEach {
             if (it.value == null) return false
         }
