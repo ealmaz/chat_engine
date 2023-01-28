@@ -96,14 +96,17 @@ abstract class BaseChatFragment : Fragment() {
         vb.input.isVisible = isVisible
     }
 
-    open fun onButtonClick(buttonId: String, additionalProperties: ButtonProperties?) {
-        when {
+    open fun onButtonClick(buttonId: String, additionalProperties: ButtonProperties?): Boolean {
+        return when {
             additionalProperties?.formIdToOpen != null -> {
                 onOpenForm(additionalProperties.formIdToOpen)
+                true
             }
             additionalProperties?.webViewIdToOpen != null -> {
                 onOpenWebView(additionalProperties.webViewIdToOpen)
+                true
             }
+            else -> false
         }
     }
     abstract fun onInputFieldSendButtonClick(inputFieldText: String?)

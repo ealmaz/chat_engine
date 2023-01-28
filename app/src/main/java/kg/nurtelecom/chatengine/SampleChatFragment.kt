@@ -38,8 +38,8 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
             }
             "ADD_RESPONSE" -> addAdapterItems(MessagesMocker.requestResponse(), *MessagesMocker.buttons)
             "ADD_REQUEST" -> addMessageDelay(MessagesMocker.requestRequest())
-            "INPUT_FORM" -> openForm()
             "INPUT_SIGNATURE" -> openSignatureFragment()
+            else -> super.onButtonClick(buttonId, additionalProperties)
         }
     }
 

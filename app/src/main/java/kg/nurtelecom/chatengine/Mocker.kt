@@ -65,6 +65,9 @@ object MessagesMocker {
             MessageContentType.TEXT -> {
                 Message("${Date().time * key.random()}", messagesText[lastResponseId], MessageContentType.TEXT, MessageType.USER, states.random())
             }
+            MessageContentType.TEXT_HTML -> {
+                Message("${Date().time * key.random()}", "<p><h1>Чтобы получить eSIM в приложении:</h1><br>1. Подготовьте паспорт и пройдите персонификацию;<br>2. Оплатите удобным способом.</p><p><b>Чтобы получить eSIM в приложении:</b><br>1. Подготовьте паспорт и пройдите персонификацию;<br>2. Оплатите удобным способом.</p>", MessageContentType.TEXT_HTML, MessageType.USER, MessageStatus.DONE)
+            }
             else -> Message("${Date().time * key.random()}", images.random(), MessageContentType.IMAGE_URL, MessageType.USER, states.random())
         }
     }
@@ -101,7 +104,8 @@ object MessagesMocker {
     val buttons = arrayOf(
         ChatButton("LOADER", "Loader", ButtonStyle.SECONDARY, properties = ButtonProperties(enableAt = (Date().time + 90000))),
         ChatButton("INPUT_SIGNATURE", "Input signature", ButtonStyle.SECONDARY),
-        ChatButton("INPUT_FORM", "Input form", ButtonStyle.SECONDARY),
+        ChatButton("INPUT_FORM", "Input form", ButtonStyle.SECONDARY, ButtonProperties(formIdToOpen = "some _form")),
+        ChatButton("WEB_VIEW", "WebView", ButtonStyle.SECONDARY, ButtonProperties(webViewIdToOpen = "some _webView")),
         ChatButton("ADD_RESPONSE", "Add response", ButtonStyle.SECONDARY),
         ChatButton("ADD_REQUEST", "Add request", ButtonStyle.ACCENT),
     )
