@@ -31,7 +31,7 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
         addAdapterItems(*MessagesMocker.buttons, removePrevItem = false, removePrevButtons = true)
     }
 
-    override fun onButtonClick(buttonId: String, additionalProperties: ButtonProperties?) {
+    override fun onButtonClick(buttonId: String, additionalProperties: ButtonProperties?): Boolean {
         when (buttonId) {
             "LOADER" -> MessagesMocker.buttons.find { it.buttonId == buttonId }?.copy(isLoading = true)?.let {
                 updateItemProperty(buttonId, it)
@@ -41,6 +41,7 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
             "INPUT_SIGNATURE" -> openSignatureFragment()
             else -> super.onButtonClick(buttonId, additionalProperties)
         }
+        return true
     }
 
     fun addMessageDelay(message: Message) {
