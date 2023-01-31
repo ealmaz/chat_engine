@@ -30,5 +30,7 @@ data class ButtonProperties(
     val enableAt: Long? = null,
     val formIdToOpen: String? = null,
     val webViewIdToOpen: String? = null,
+    val creditAmount: Double? = null,
+    val passportId: Long? = null
 ): Serializable
 
