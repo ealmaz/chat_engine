@@ -29,6 +29,10 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
         super.setupViews()
         setInputFieldVisibility(true)
         addAdapterItems(*MessagesMocker.buttons, removePrevItem = false, removePrevButtons = true)
+        showTyping()
+        showTyping()
+        showTyping()
+        showTyping()
     }
 
     override fun onButtonClick(buttonId: String, additionalProperties: ButtonProperties?): Boolean {
@@ -82,8 +86,7 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
 
 
     override fun onInputFieldSendButtonClick(inputFieldText: String?) {
-        vb.input.setText("")
-        addAdapterItems(Message("${Date()}", inputFieldText ?: "", MessageContentType.TEXT, MessageType.USER), *MessagesMocker.buttons)
+        hideTyping()
     }
 
     override fun onLinkClick(url: String) {

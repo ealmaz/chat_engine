@@ -11,6 +11,7 @@ import com.design.chili.R
 import com.design.chili.view.navigation_components.ChiliToolbar
 import kg.nurtelecom.chat_engine.base.chat.adapter.BubbleMessagesDecor
 import kg.nurtelecom.chat_engine.base.chat.adapter.ItemAnchor
+import kg.nurtelecom.chat_engine.base.chat.adapter.ItemTyping
 import kg.nurtelecom.chat_engine.base.chat.adapter.MessagesAdapter
 import kg.nurtelecom.chat_engine.databinding.ChatEngineFragmentBaseChatBinding
 import kg.nurtelecom.chat_engine.model.ButtonProperties
@@ -86,6 +87,19 @@ abstract class BaseChatFragment : Fragment() {
         synchronizedAdapterItems.apply {
             clear()
             addAll(newList.distinctBy { it.getItemId() })
+            messageAdapter.submitList(this.toList()) {
+                vb.rvMessages.scrollToPosition(lastIndex)
+            }
+        }
+    }
+
+    protected fun showTyping() {
+        addAdapterItems(ItemTyping)
+    }
+
+    protected fun hideTyping() {
+        synchronizedAdapterItems.apply {
+            removeAll { it.getItemId() == ItemTyping.getItemId() }
             messageAdapter.submitList(this.toList()) {
                 vb.rvMessages.scrollToPosition(lastIndex)
             }
