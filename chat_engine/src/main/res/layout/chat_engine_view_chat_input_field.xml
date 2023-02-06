@@ -30,4 +30,16 @@
         android:focusable="true"
         android:background="?selectableItemBackgroundBorderless"/>
 
+    <ProgressBar
+        android:id="@+id/pb_progress"
+        android:progressDrawable="@drawable/chat_engine_circular_loop_progress_bar"
+        android:layout_width="@dimen/view_32dp"
+        android:layout_height="@dimen/view_32dp"
+        android:indeterminateTint="@color/magenta_1"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/padding_8dp"
+        android:layout_marginBottom="@dimen/padding_8dp"
+        android:layout_marginEnd="@dimen/padding_8dp"
+        android:visibility="gone"/>
+
 </LinearLayout>

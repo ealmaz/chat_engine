@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import com.design.chili.view.input.text_watchers.MaskedTextWatcher
 import kg.nurtelecom.chat_engine.R
 import kg.nurtelecom.chat_engine.databinding.ChatEngineViewChatInputFieldBinding
@@ -99,5 +100,9 @@ class ChatInputFieldView @JvmOverloads constructor(
 
     fun getInputText(): String? {
         return vb.etInput.text?.toString()
+    }
+    fun setIsLoading(isLoading: Boolean) = with(vb) {
+        pbProgress.isVisible = isLoading
+        ivSend.isVisible = !isLoading
     }
 }
