@@ -31,6 +31,7 @@
             android:textSize="@dimen/text_16sp"
             android:clickable="true"
             android:focusable="true"
+            android:textAppearance="@style/Chili.H7.Primary"
             tools:text="message"/>
 
     </kg.nurtelecom.chat_engine.custom_views.message.TextMessageBubbleBackground>
