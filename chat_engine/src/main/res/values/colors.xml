@@ -13,4 +13,6 @@
 
     <color name="chat_engine_primary_button_tint">@color/magenta_1</color>
     <color name="chat_engine_secondary_button_tint">@color/black_5</color>
+
+    <color name="black_5_gray_3">@color/black_1</color>
 </resources>
