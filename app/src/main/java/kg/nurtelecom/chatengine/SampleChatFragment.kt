@@ -51,7 +51,7 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
     fun addMessageDelay(message: Message) {
         addAdapterItems(ItemTyping)
         vb.root.postDelayed({
-            addAdapterItems(message, *MessagesMocker.buttons, removePrevItem = true)
+            addAdapterItems(message, *MessagesMocker.buttons)
         }, 1500)
 
     }
@@ -86,7 +86,7 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
 
 
     override fun onInputFieldSendButtonClick(inputFieldText: String?) {
-        hideTyping()
+        vb.input.setIsLoading(true)
     }
 
     override fun onLinkClick(url: String) {

@@ -65,15 +65,23 @@ abstract class BaseChatFragment : Fragment() {
         ))
     }
 
-    protected fun addAdapterItems(vararg items: MessageAdapterItem, removePrevItem: Boolean = false, removePrevButtons: Boolean = true) {
-        val newList = synchronizedAdapterItems.asSequence()
-            .filter { if (removePrevButtons) it !is ChatButton else true }
-            .filter { it !is ItemAnchor }
-            .toMutableList()
-        if (removePrevItem && newList.size >= 1) newList.removeLast()
-        newList.addAll(items.toList())
-        newList.add(ItemAnchor)
+    @Synchronized
+    protected fun addAdapterItems(vararg items: MessageAdapterItem, removePrevButtons: Boolean = true) {
         synchronizedAdapterItems.apply {
+            val newList = this.asSequence()
+                .filter { if (removePrevButtons) it !is ChatButton else true }
+                .filter { it !is ItemAnchor }
+                .toMutableList()
+            newList.addAll(items.toList())
+            newList.add(ItemAnchor)
+            newList.sortBy {
+                when(it) {
+                    is ItemAnchor -> 3
+                    is ChatButton -> 2
+                    is ItemTyping -> 1
+                    else -> 0
+                }
+            }
             clear()
             addAll(newList.distinctBy { it.getItemId() })
             messageAdapter.submitList(this.toList()) {
@@ -82,6 +90,7 @@ abstract class BaseChatFragment : Fragment() {
         }
     }
 
+    @Synchronized
     protected fun updateItemProperty(id: String, updatedItem: MessageAdapterItem) {
         val newList = synchronizedAdapterItems.map { if (it.getItemId() == id) updatedItem else it }
         synchronizedAdapterItems.apply {
@@ -93,8 +102,8 @@ abstract class BaseChatFragment : Fragment() {
         }
     }
 
-    protected fun showTyping() {
-        addAdapterItems(ItemTyping)
+    protected fun showTyping(removePrevButtons: Boolean = false) {
+        addAdapterItems(ItemTyping, removePrevButtons = removePrevButtons)
     }
 
     protected fun hideTyping() {

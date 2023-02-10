@@ -1,11 +1,12 @@
 package kg.nurtelecom.chatengine
 
+import android.util.Log
 import kg.nurtelecom.chat_engine.model.*
 import java.util.*
 
 object MessagesMocker {
 
-    val key = listOf<Int>(3, 3, 5, 7)
+    val key = listOf<Int>(3, 1, 5, 7, 6, 2, 12, 76, 14)
 
     var lastRequestId = -1
     var lastResponseId = -1
@@ -47,7 +48,8 @@ object MessagesMocker {
 
     fun requestRequest(): Message {
         lastRequestId =  (lastRequestId + 1) % messagesText.size
-        return when(messageContentType.random()) {
+        Log.d("CHAT_CHECKER", "Requested message for - $lastRequestId")
+        return when(MessageContentType.TEXT) {
             MessageContentType.TEXT -> {
                 Message("${Date().time * key.random()}", messagesText[lastRequestId], MessageContentType.TEXT, MessageType.SYSTEM, states.random())
             }
