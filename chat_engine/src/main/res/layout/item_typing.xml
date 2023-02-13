@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<kg.nurtelecom.chat_engine.custom_views.message.TextMessageBubbleBackground xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/chat_engine_bg_text_message_view"
-    android:paddingHorizontal="@dimen/padding_16dp"
-    android:paddingVertical="@dimen/padding_8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:id="@+id/container">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer"
+        android:layout_width="122dp"
+        android:layout_height="@dimen/view_44dp"
+        android:layout_marginBottom="@dimen/padding_16dp"
+        android:background="@drawable/chat_engine_bg_message_loader_shimmer"
+        app:shimmer_auto_start="true" />
+
     <ImageView
-        android:id="@+id/iv_loader"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/view_16dp"
-        tools:src="@tools:sample/avatars"/>
-
-</kg.nurtelecom.chat_engine.custom_views.message.TextMessageBubbleBackground>
+        android:id="@+id/iv_loader"/>
+    
+</LinearLayout>
