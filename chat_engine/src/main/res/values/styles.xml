@@ -3,11 +3,11 @@
     
     <style name="chat_engine_BaseMessageViewStyle" parent="Chili.BaseChiliViewStyle"/>
 
-    <style name="chat_engine_ChatAccentButtonTextAppearance" parent="Chili.H7.Primary">
+    <style name="chat_engine_ChatAccentButtonTextAppearance" parent="Chili.H8.Primary.Bold">
         <item name="android:textColor">@color/chat_engine_primary_button_tint</item>
     </style>
 
-    <style name="chat_engine_ChatSecondaryButtonTextAppearance" parent="Chili.H7.Primary">
+    <style name="chat_engine_ChatSecondaryButtonTextAppearance" parent="Chili.H8.Primary.Bold">
         <item name="android:textColor">@color/chat_engine_secondary_button_tint</item>
     </style>
 

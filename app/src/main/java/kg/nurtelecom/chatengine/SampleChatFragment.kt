@@ -28,7 +28,7 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
     override fun setupViews() {
         super.setupViews()
         setInputFieldVisibility(true)
-        addAdapterItems(*MessagesMocker.buttons, removePrevItem = false, removePrevButtons = true)
+        addAdapterItems(*MessagesMocker.buttons, removePrevButtons = true)
         showTyping()
         showTyping()
         showTyping()

@@ -5,7 +5,7 @@ import android.os.CountDownTimer
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
-import androidx.core.view.isVisible
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.chat_engine.R
 import kg.nurtelecom.chat_engine.model.ButtonProperties
@@ -31,8 +31,8 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
     }
 
     private fun setupLoader(isLoading: Boolean) {
-        progress.isVisible = isLoading
-        btn.isVisible = !isLoading
+        progress.isInvisible = !isLoading
+        btn.isInvisible = isLoading
     }
 
     private fun setupTimer(btnProperties: ButtonProperties?, btnText: String?) {
