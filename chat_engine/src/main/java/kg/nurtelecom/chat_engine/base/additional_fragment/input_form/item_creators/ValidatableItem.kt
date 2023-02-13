@@ -3,7 +3,7 @@ package kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creat
 import kg.nurtelecom.chat_engine.model.Validation
 import kg.nurtelecom.chat_engine.model.ValidationType
 
-open class ItemCreator {
+open class ValidatableItem {
 
     fun validateItem(validations: List<Validation>?, values: List<String>): Boolean {
         validations?.forEach {

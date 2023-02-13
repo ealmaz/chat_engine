@@ -6,7 +6,7 @@ import com.design.chili.view.modals.bottom_sheet.serach_bottom_sheet.Option
 import kg.nurtelecom.chat_engine.custom_views.DropDownInputField
 import kg.nurtelecom.chat_engine.model.DropDownFieldInfo
 
-object DropDownFieldCreator : ItemCreator() {
+object DropDownFieldCreator : ValidatableItem() {
 
     fun create(context: Context, dropDownFieldInfo: DropDownFieldInfo, onSelectionChanged: (selected: List<String>, isValid: Boolean) -> Unit): DropDownInputField {
         return DropDownInputField(context).apply {

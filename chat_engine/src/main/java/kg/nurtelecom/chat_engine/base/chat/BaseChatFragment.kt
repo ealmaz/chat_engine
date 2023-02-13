@@ -1,6 +1,7 @@
 package kg.nurtelecom.chat_engine.base.chat
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +15,7 @@ import kg.nurtelecom.chat_engine.base.chat.adapter.ItemAnchor
 import kg.nurtelecom.chat_engine.base.chat.adapter.ItemTyping
 import kg.nurtelecom.chat_engine.base.chat.adapter.MessagesAdapter
 import kg.nurtelecom.chat_engine.databinding.ChatEngineFragmentBaseChatBinding
-import kg.nurtelecom.chat_engine.model.ButtonProperties
-import kg.nurtelecom.chat_engine.model.ChatButton
-import kg.nurtelecom.chat_engine.model.MessageAdapterItem
+import kg.nurtelecom.chat_engine.model.*
 
 abstract class BaseChatFragment : Fragment() {
 
@@ -116,6 +115,23 @@ abstract class BaseChatFragment : Fragment() {
 
     protected fun setInputFieldVisibility(isVisible: Boolean) {
         vb.input.isVisible = isVisible
+    }
+
+    protected open fun setupInputField(field: InputField?) {
+        if (field == null) {
+            setInputFieldVisibility(false)
+        } else {
+            setInputFieldVisibility(true)
+            vb.input.apply {
+                tag = field.fieldId
+                setHint(field.hint ?: "")
+                setupMask(field.mask, field.maskSymbols?.map { it.first() })
+                setInputType(field.inputType)
+                setValidation(field.validations)
+                setText(field.value ?: "")
+                setIsLoading(false)
+            }
+        }
     }
 
     open fun onButtonClick(buttonId: String, additionalProperties: ButtonProperties?): Boolean {

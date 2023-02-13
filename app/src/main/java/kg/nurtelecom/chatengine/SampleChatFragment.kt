@@ -82,7 +82,8 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
 
 
     override fun onInputFieldSendButtonClick(inputFieldText: String?) {
-        vb.input.setIsLoading(true)
+        if (vb.input.isInputValid()) vb.input.setIsLoading(true)
+        else Toast.makeText(requireContext(), "Invalid field", Toast.LENGTH_SHORT).show()
     }
 
     override fun onLinkClick(url: String) {

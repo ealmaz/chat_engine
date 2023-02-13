@@ -10,7 +10,10 @@ import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import com.design.chili.view.input.text_watchers.MaskedTextWatcher
 import kg.nurtelecom.chat_engine.R
+import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators.ValidatableItem
 import kg.nurtelecom.chat_engine.databinding.ChatEngineViewChatInputFieldBinding
+import kg.nurtelecom.chat_engine.model.InputFieldInputType
+import kg.nurtelecom.chat_engine.model.Validation
 
 class ChatInputFieldView @JvmOverloads constructor(
     context: Context,
@@ -22,6 +25,10 @@ class ChatInputFieldView @JvmOverloads constructor(
     private val vb: ChatEngineViewChatInputFieldBinding by lazy {
         ChatEngineViewChatInputFieldBinding.inflate(LayoutInflater.from(context), this, true)
     }
+
+    private var validations: List<Validation>? = null
+    private val validator: ValidatableItem = ValidatableItem()
+    private var maskTextWatcher: MaskedTextWatcher? = null
 
     init {
         obtainAttributes(context, attributeSet, defStyleAttr, defStyleRes)
@@ -75,11 +82,17 @@ class ChatInputFieldView @JvmOverloads constructor(
         vb.etInput.setHint(hintResId)
     }
 
-    fun setupMask(mask: String, maskSymbols: List<Char>? = null) {
-        val maskTextWatcher = MaskedTextWatcher.Builder()
+    fun setupMask(mask: String?, maskSymbols: List<Char>? = null) {
+        if (mask == null) {
+            vb.etInput.removeTextChangedListener(maskTextWatcher)
+            maskTextWatcher = null
+            return
+        }
+        val maskTextWatcherBuilder = MaskedTextWatcher.Builder()
             .setInputMask(mask)
-        maskSymbols?.let { maskTextWatcher.setInputMaskSymbols(it) }
-        vb.etInput.addTextChangedListener(maskTextWatcher.build(vb.etInput))
+        maskSymbols?.let { maskTextWatcherBuilder.setInputMaskSymbols(it) }
+        maskTextWatcher = maskTextWatcherBuilder.build(vb.etInput)
+        vb.etInput.addTextChangedListener(maskTextWatcher)
     }
 
     fun setupInputType(inputType: Int) {
@@ -104,5 +117,23 @@ class ChatInputFieldView @JvmOverloads constructor(
     fun setIsLoading(isLoading: Boolean) = with(vb) {
         pbProgress.isVisible = isLoading
         ivSend.isVisible = !isLoading
+    }
+
+    fun setInputType(type: InputFieldInputType?) {
+        vb.etInput.inputType = when (type) {
+            InputFieldInputType.NUMBER -> InputType.TYPE_CLASS_NUMBER
+            else -> InputType.TYPE_CLASS_TEXT
+        }
+    }
+
+    fun setValidation(list: List<Validation>?) {
+        this.validations = list
+    }
+
+    fun isInputValid(): Boolean {
+        val inputText = getInputText() ?: ""
+        maskTextWatcher?.representation?.let { if (inputText.contains(it)) return false }
+        validations?.let { return validator.validateItem(validations, listOf(inputText))}
+        return true
     }
 }

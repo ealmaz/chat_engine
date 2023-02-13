@@ -4,7 +4,7 @@ import android.content.Context
 import kg.nurtelecom.chat_engine.custom_views.ChatButtonsGroup
 import kg.nurtelecom.chat_engine.model.GroupButtonFormItem
 
-object GroupButtonsCreator : ItemCreator() {
+object GroupButtonsCreator : ValidatableItem() {
 
     fun create(context: Context, groupInfo: GroupButtonFormItem, onSelectedChanged: (selected: List<String>, isValid: Boolean) -> Unit): ChatButtonsGroup {
         return ChatButtonsGroup(context).apply {

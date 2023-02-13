@@ -8,7 +8,7 @@ import com.design.chili.view.input.MaskedInputView
 import kg.nurtelecom.chat_engine.model.InputField
 import kg.nurtelecom.chat_engine.model.InputFieldInputType
 
-object InputFieldCreator : ItemCreator() {
+object InputFieldCreator : ValidatableItem() {
 
     fun create(context: Context, fieldInfo: InputField, onFiledChanged: (result: List<String>, isValid: Boolean) -> Unit): MaskedInputView {
         return MaskedInputView(context).apply {

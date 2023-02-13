@@ -5,7 +5,7 @@ import android.widget.LinearLayout
 import kg.nurtelecom.chat_engine.custom_views.DatePickerInputField
 import kg.nurtelecom.chat_engine.model.DatePickerFieldInfo
 
-object DatePickerFieldCreator : ItemCreator() {
+object DatePickerFieldCreator : ValidatableItem() {
 
     fun create(
         context: Context,
