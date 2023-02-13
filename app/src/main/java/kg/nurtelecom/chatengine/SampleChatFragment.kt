@@ -27,12 +27,7 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
 
     override fun setupViews() {
         super.setupViews()
-        setInputFieldVisibility(true)
         addAdapterItems(*MessagesMocker.buttons, removePrevButtons = true)
-        showTyping()
-        showTyping()
-        showTyping()
-        showTyping()
     }
 
     override fun onButtonClick(buttonId: String, additionalProperties: ButtonProperties?): Boolean {
@@ -49,10 +44,11 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
     }
 
     fun addMessageDelay(message: Message) {
-        addAdapterItems(ItemTyping)
+        showTyping(true)
         vb.root.postDelayed({
             addAdapterItems(message, *MessagesMocker.buttons)
-        }, 1500)
+            hideTyping()
+        }, 2500)
 
     }
 

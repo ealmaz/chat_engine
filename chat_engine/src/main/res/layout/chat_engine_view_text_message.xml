@@ -33,6 +33,7 @@
             android:focusable="true"
             android:textAppearance="@style/Chili.H7.Primary"
             android:textColor="@color/black_5_gray_3"
+            android:maxWidth="300dp"
             tools:text="message"/>
 
     </kg.nurtelecom.chat_engine.custom_views.message.TextMessageBubbleBackground>

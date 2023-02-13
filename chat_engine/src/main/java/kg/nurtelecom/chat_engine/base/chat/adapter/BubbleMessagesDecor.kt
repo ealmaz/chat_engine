@@ -8,9 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.chat_engine.base.chat.adapter.message_vh.TextMessageViewHolder
 
 class BubbleMessagesDecor(
-    private val defaultOffsetPx: Int,
-    private val oppositeOffsetPx: Int,
-    private val topBottomOffsetPx: Int
+    private val topInOffsetPx: Int,
+    private val topOutOffsetPx: Int,
 ) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
@@ -21,12 +20,27 @@ class BubbleMessagesDecor(
     ) {
         val adapter = parent.adapter ?: return
         val currentPosition = parent.getChildAdapterPosition(view).takeIf { it != RecyclerView.NO_POSITION } ?: return
-        when (adapter.getItemViewType(currentPosition)) {
-            MessageAdapterViewTypes.RESPONSE_TEXT.ordinal -> outRect.set(oppositeOffsetPx,  topBottomOffsetPx, defaultOffsetPx, topBottomOffsetPx)
-            MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal -> outRect.set(oppositeOffsetPx,  topBottomOffsetPx, defaultOffsetPx, topBottomOffsetPx)
-            MessageAdapterViewTypes.REQUEST_TEXT.ordinal -> outRect.set(defaultOffsetPx,  topBottomOffsetPx, oppositeOffsetPx, topBottomOffsetPx)
-            MessageAdapterViewTypes.REQUEST_IMAGE.ordinal -> outRect.set(defaultOffsetPx,  topBottomOffsetPx, oppositeOffsetPx, topBottomOffsetPx)
-            else -> outRect.set(defaultOffsetPx,  topBottomOffsetPx, defaultOffsetPx, topBottomOffsetPx)
+
+        val prevViewType = adapter.getItemViewType(currentPosition - 1)
+
+        when (val currentViewType = adapter.getItemViewType(currentPosition)) {
+            MessageAdapterViewTypes.RESPONSE_TEXT.ordinal, MessageAdapterViewTypes.REQUEST_TEXT.ordinal -> {
+                if (prevViewType == currentViewType)
+                    outRect.set(0,  topInOffsetPx, 0, 0)
+                else
+                    outRect.set(0,  topOutOffsetPx, 0, 0)
+            }
+            MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal, MessageAdapterViewTypes.REQUEST_IMAGE.ordinal -> {
+                outRect.set(0,  topOutOffsetPx, 0, 0)
+            }
+            MessageAdapterViewTypes.TYPING.ordinal -> {
+                outRect.set(0,  topOutOffsetPx, 0, 0)
+            }
+            MessageAdapterViewTypes.ACCENT_BUTTON.ordinal, MessageAdapterViewTypes.SECONDARY_BUTTON.ordinal -> {
+                outRect.set(0,  0, 0, 0)
+            }
+            MessageAdapterViewTypes.BOTTOM_ANCHOR_HOLDER.ordinal -> outRect.set(0,  0, 0, 0)
+            else -> outRect.set(0,  topOutOffsetPx, 0, 0)
         }
 
     }

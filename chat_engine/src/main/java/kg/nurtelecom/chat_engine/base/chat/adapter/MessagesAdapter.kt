@@ -53,7 +53,7 @@ open class MessagesAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        val item = currentList[position]
+        val item = currentList.getOrNull(position) ?: return RecyclerView.INVALID_TYPE
         return when {
             item is ItemAnchor -> MessageAdapterViewTypes.BOTTOM_ANCHOR_HOLDER.ordinal
             item is ItemTyping -> MessageAdapterViewTypes.TYPING.ordinal

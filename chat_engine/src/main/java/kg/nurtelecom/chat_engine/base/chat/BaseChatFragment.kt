@@ -59,9 +59,8 @@ abstract class BaseChatFragment : Fragment() {
         adapter = messageAdapter
         layoutManager = LinearLayoutManager(requireActivity()).apply { stackFromEnd = true }
         addItemDecoration(BubbleMessagesDecor(
-            0,
-            resources.getDimensionPixelSize(R.dimen.padding_44dp),
-            resources.getDimensionPixelSize(R.dimen.padding_2dp)
+            resources.getDimensionPixelSize(R.dimen.padding_2dp),
+            resources.getDimensionPixelSize(R.dimen.padding_8dp),
         ))
     }
 
