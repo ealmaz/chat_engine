@@ -20,6 +20,7 @@
         android:layout_weight="1"
         android:clipToPadding="false"
         android:paddingHorizontal="@dimen/padding_16dp"
+        android:paddingBottom="@dimen/padding_14dp"
         tools:listitem="@layout/chat_engine_item_text_message"/>
 
     <kg.nurtelecom.chat_engine.custom_views.ChatInputFieldView
