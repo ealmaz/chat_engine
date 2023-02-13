@@ -14,13 +14,13 @@
     <style name="chat_engine_ChatAccentButtonStyle" parent="Chili.ButtonStyle">
         <item name="android:textAppearance">@style/chat_engine_ChatAccentButtonTextAppearance</item>
         <item name="android:background">@drawable/chat_engine_bg_chat_accent_button</item>
-        <item name="android:foreground">@drawable/chat_engine_bg_chat_button_ripple</item>
+        <item name="android:foreground">@drawable/chat_engine_bg_chat_button_ripple_accent</item>
     </style>
 
     <style name="chat_engine_ChatSecondaryButtonStyle" parent="Chili.ButtonStyle">
         <item name="android:textAppearance">@style/chat_engine_ChatSecondaryButtonTextAppearance</item>
         <item name="android:background">@drawable/chat_engine_bg_chat_secondary_button</item>
-        <item name="android:foreground">@drawable/chat_engine_bg_chat_button_ripple</item>
+        <item name="android:foreground">@drawable/chat_engine_bg_chat_button_ripple_secondary</item>
     </style>
 
     <style name="chat_engine_ChatInputFieldViewStyle"></style>

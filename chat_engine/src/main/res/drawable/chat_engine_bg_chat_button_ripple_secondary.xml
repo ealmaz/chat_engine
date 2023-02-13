@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="#EFEFEF"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/mask" android:drawable="@drawable/chat_engine_bg_chat_button_selectable_foreground_secondary">
+    </item>
+</ripple>
