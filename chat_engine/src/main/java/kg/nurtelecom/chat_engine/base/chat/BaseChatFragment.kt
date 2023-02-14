@@ -60,6 +60,7 @@ abstract class BaseChatFragment : Fragment() {
         addItemDecoration(BubbleMessagesDecor(
             resources.getDimensionPixelSize(R.dimen.padding_2dp),
             resources.getDimensionPixelSize(R.dimen.padding_8dp),
+            resources.getDimensionPixelSize(R.dimen.padding_44dp),
         ))
     }
 
@@ -83,7 +84,7 @@ abstract class BaseChatFragment : Fragment() {
             clear()
             addAll(newList.distinctBy { it.getItemId() })
             messageAdapter.submitList(this.toList()) {
-                vb.rvMessages.scrollToPosition(lastIndex)
+                tryScrollToPosition(lastIndex)
             }
         }
     }
@@ -95,9 +96,14 @@ abstract class BaseChatFragment : Fragment() {
             clear()
             addAll(newList.distinctBy { it.getItemId() })
             messageAdapter.submitList(this.toList()) {
-                vb.rvMessages.scrollToPosition(lastIndex)
+                tryScrollToPosition(lastIndex)
             }
         }
+    }
+
+    private fun tryScrollToPosition(position: Int) {
+        try { vb.rvMessages.scrollToPosition(position) }
+        catch (ex: Throwable) {}
     }
 
     protected fun showTyping(removePrevButtons: Boolean = false) {

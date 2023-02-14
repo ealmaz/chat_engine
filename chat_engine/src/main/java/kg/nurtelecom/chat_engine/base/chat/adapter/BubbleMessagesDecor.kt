@@ -10,6 +10,7 @@ import kg.nurtelecom.chat_engine.base.chat.adapter.message_vh.TextMessageViewHol
 class BubbleMessagesDecor(
     private val topInOffsetPx: Int,
     private val topOutOffsetPx: Int,
+    private val oppositeOffset: Int
 ) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
@@ -30,8 +31,11 @@ class BubbleMessagesDecor(
                 else
                     outRect.set(0,  topOutOffsetPx, 0, 0)
             }
-            MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal, MessageAdapterViewTypes.REQUEST_IMAGE.ordinal -> {
-                outRect.set(0,  topOutOffsetPx, 0, 0)
+            MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal -> {
+                outRect.set(oppositeOffset,  topOutOffsetPx, 0, 0)
+            }
+            MessageAdapterViewTypes.REQUEST_IMAGE.ordinal -> {
+                outRect.set(0,  topOutOffsetPx, oppositeOffset, 0)
             }
             MessageAdapterViewTypes.TYPING.ordinal -> {
                 outRect.set(0,  topOutOffsetPx, 0, 0)
