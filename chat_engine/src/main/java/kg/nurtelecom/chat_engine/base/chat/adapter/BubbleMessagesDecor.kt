@@ -10,7 +10,8 @@ import kg.nurtelecom.chat_engine.base.chat.adapter.message_vh.TextMessageViewHol
 class BubbleMessagesDecor(
     private val topInOffsetPx: Int,
     private val topOutOffsetPx: Int,
-    private val oppositeOffset: Int
+    private val oppositeOffset: Int,
+    private val topDifferentTypeOffset: Int
 ) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
@@ -26,10 +27,11 @@ class BubbleMessagesDecor(
 
         when (val currentViewType = adapter.getItemViewType(currentPosition)) {
             MessageAdapterViewTypes.RESPONSE_TEXT.ordinal, MessageAdapterViewTypes.REQUEST_TEXT.ordinal -> {
-                if (prevViewType == currentViewType)
-                    outRect.set(0,  topInOffsetPx, 0, 0)
-                else
-                    outRect.set(0,  topOutOffsetPx, 0, 0)
+                when {
+                    prevViewType == currentViewType -> outRect.set(0,  topInOffsetPx, 0, 0)
+                    prevViewType == MessageAdapterViewTypes.TECHNIQUE_MESSAGE.ordinal -> outRect.set(0,  topDifferentTypeOffset, 0, 0)
+                    else -> outRect.set(0,  topOutOffsetPx, 0, 0)
+                }
             }
             MessageAdapterViewTypes.RESPONSE_IMAGE.ordinal -> {
                 outRect.set(oppositeOffset,  topOutOffsetPx, 0, 0)
@@ -44,6 +46,7 @@ class BubbleMessagesDecor(
                 outRect.set(0,  0, 0, 0)
             }
             MessageAdapterViewTypes.BOTTOM_ANCHOR_HOLDER.ordinal -> outRect.set(0,  0, 0, 0)
+            MessageAdapterViewTypes.TECHNIQUE_MESSAGE.ordinal -> outRect.set(0, topDifferentTypeOffset, 0, 0)
             else -> outRect.set(0,  topOutOffsetPx, 0, 0)
         }
 

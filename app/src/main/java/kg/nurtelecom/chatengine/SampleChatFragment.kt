@@ -27,6 +27,7 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
 
     override fun setupViews() {
         super.setupViews()
+        addAdapterItems(Message("12312323124", "12.02.2023, 13:45", MessageContentType.TEXT, MessageType.TECHNIQUE))
         addAdapterItems(*MessagesMocker.buttons, removePrevButtons = true)
     }
 

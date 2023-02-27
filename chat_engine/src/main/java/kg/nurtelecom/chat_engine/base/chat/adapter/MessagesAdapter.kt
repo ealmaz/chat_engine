@@ -15,6 +15,7 @@ import kg.nurtelecom.chat_engine.base.chat.adapter.chat_button_vh.AccentChatButt
 import kg.nurtelecom.chat_engine.base.chat.adapter.chat_button_vh.SecondaryChatButtonVH
 import kg.nurtelecom.chat_engine.base.chat.adapter.message_vh.ImageMessageViewHolder
 import kg.nurtelecom.chat_engine.base.chat.adapter.message_vh.TableMessageViewHolder
+import kg.nurtelecom.chat_engine.base.chat.adapter.message_vh.TechniqueMessageViewHolder
 import kg.nurtelecom.chat_engine.base.chat.adapter.message_vh.TextMessageViewHolder
 import kg.nurtelecom.chat_engine.databinding.ChatEngineItemTextMessageBinding
 import kg.nurtelecom.chat_engine.model.*
@@ -37,6 +38,7 @@ open class MessagesAdapter(
             MessageAdapterViewTypes.SECONDARY_BUTTON.ordinal -> SecondaryChatButtonVH.create(parent, onButtonClick)
             MessageAdapterViewTypes.RESPONSE_TABLE.ordinal -> TableMessageViewHolder.create(parent)
             MessageAdapterViewTypes.REQUEST_TABLE.ordinal -> TableMessageViewHolder.create(parent)
+            MessageAdapterViewTypes.TECHNIQUE_MESSAGE.ordinal -> TechniqueMessageViewHolder.create(parent)
             else -> UnsupportedViewHolder.create(parent)
         }
     }
@@ -49,6 +51,7 @@ open class MessagesAdapter(
             is AccentChatButtonVH -> holder.onBind(currentList[position] as ChatButton)
             is SecondaryChatButtonVH -> holder.onBind(currentList[position] as ChatButton)
             is TableMessageViewHolder -> holder.onBind(currentList[position] as TableMessage)
+            is TechniqueMessageViewHolder -> holder.onBind(currentList[position] as Message)
         }
     }
 
@@ -65,6 +68,7 @@ open class MessagesAdapter(
             isSecondaryButton(item) -> MessageAdapterViewTypes.SECONDARY_BUTTON.ordinal
             isRequestTableMessage(item) -> MessageAdapterViewTypes.REQUEST_TABLE.ordinal
             isResponseTableMessage(item) -> MessageAdapterViewTypes.RESPONSE_TABLE.ordinal
+            isTechniqueMessage(item) -> MessageAdapterViewTypes.TECHNIQUE_MESSAGE.ordinal
             else -> MessageAdapterViewTypes.UNSUPPORTED_MESSAGE_TYPE.ordinal
         }
     }
@@ -114,6 +118,10 @@ open class MessagesAdapter(
     private fun isSecondaryButton(item: MessageAdapterItem): Boolean {
         return item is ChatButton && item.style == ButtonStyle.SECONDARY
     }
+
+    private fun isTechniqueMessage(item: MessageAdapterItem): Boolean {
+        return item is Message && item.messageType == MessageType.TECHNIQUE
+    }
 }
 
 class MessageItemDiffUtilCallback : DiffUtil.ItemCallback<MessageAdapterItem>() {
@@ -134,6 +142,7 @@ enum class MessageAdapterViewTypes {
     REQUEST_TEXT,
     REQUEST_IMAGE,
     REQUEST_TABLE,
+    TECHNIQUE_MESSAGE,
     TYPING,
     ACCENT_BUTTON,
     SECONDARY_BUTTON,

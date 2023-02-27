@@ -61,6 +61,7 @@ abstract class BaseChatFragment : Fragment() {
             resources.getDimensionPixelSize(R.dimen.padding_2dp),
             resources.getDimensionPixelSize(R.dimen.padding_8dp),
             resources.getDimensionPixelSize(R.dimen.padding_44dp),
+            resources.getDimensionPixelSize(R.dimen.padding_16dp)
         ))
     }
 
