@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
+import com.design.chili.extensions.setOnSingleClickListener
 import kg.nurtelecom.chat_engine.databinding.ChatEngineItemAccentChatButtonBinding
 import kg.nurtelecom.chat_engine.model.ButtonProperties
 
@@ -16,7 +17,7 @@ class AccentChatButtonVH(private val vb: ChatEngineItemAccentChatButtonBinding):
         fun create(parent: ViewGroup, onClick: (tag: String, buttonProperties: ButtonProperties?) -> Unit): AccentChatButtonVH {
             val view = ChatEngineItemAccentChatButtonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return AccentChatButtonVH(view).apply {
-                vb.btn.setOnClickListener { onClick.invoke(it.tag.toString(), additionalButtonProperties) }
+                vb.btn.setOnSingleClickListener { onClick.invoke(vb.btn.tag.toString(), additionalButtonProperties) }
             }
         }
     }
