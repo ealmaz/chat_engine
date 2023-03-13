@@ -115,7 +115,7 @@ abstract class BaseChatFragment : Fragment() {
         synchronizedAdapterItems.apply {
             removeAll { it.getItemId() == ItemTyping.getItemId() }
             messageAdapter.submitList(this.toList()) {
-                vb.rvMessages.scrollToPosition(lastIndex)
+                tryScrollToPosition(lastIndex)
             }
         }
     }
