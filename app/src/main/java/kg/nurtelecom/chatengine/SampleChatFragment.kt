@@ -49,7 +49,7 @@ class SampleChatFragment : BaseChatFragment(), ActivityResultCallback<Intent?>,
         vb.root.postDelayed({
             addAdapterItems(message, *MessagesMocker.buttons)
             hideTyping()
-        }, 2500)
+        }, 1000)
 
     }
 

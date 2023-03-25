@@ -18,7 +18,6 @@ object MessagesMocker {
         "https://habrastorage.org/r/w1560/webt/i2/gy/g-/i2gyg--ncl86i1kb6yst8xx5iri.png",
         "https://c8.alamy.com/comp/B04JTM/golden-gate-bridge-from-fort-point-vertical-portrait-orientation-B04JTM.jpg",
         "https://previews.123rf.com/images/wajan/wajan2001/wajan200100005/140170638-eiffel-tower-in-paris-portrait-orientation.jpg",
-        "https://o.kg/upload/iblock/db7/%D0%9E%21%20lottery%20car%202022_1920x360%20site%20O%21%20ru.png",
         "https://o.kg/upload/iblock/67f/1920%D1%85336_%D0%BC2%D0%BC_%D1%80%D1%83.jpg",
         "https://o.kg/upload/iblock/79b/get_cashback_vis_1200x400_ru.jpg",
         "https://o.kg/upload/iblock/d69/identification_5_1200x400_site_ru.jpg",
@@ -28,7 +27,7 @@ object MessagesMocker {
         "https://o.kg/upload/medialibrary/37b/yandexplus-30-840x250-RU.png",
         "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
         "https://media.istockphoto.com/photos/wild-grass-in-the-mountains-at-sunset-picture-id1322277517?b=1&k=20&m=1322277517&s=170667a&w=0&h=BSN_5NMGYJY2qPwI3_vOcEXVSX_hmGBOmXebMBxTLX0=",
-        "https://images.pexels.com/users/avatars/706370/tobias-bjorkli-624.jpeg?auto=compress&fit=crop&h=256&w=256"
+        "https://images.pexels.com/users/avatars/706370/tobias-bjorkli-624.jpeg?auto=compress&fit=crop&h=256&w=256",
     )
 
     val messagesText = listOf<String>(
@@ -48,8 +47,7 @@ object MessagesMocker {
 
     fun requestRequest(): Message {
         lastRequestId =  (lastRequestId + 1) % messagesText.size
-        Log.d("CHAT_CHECKER", "Requested message for - $lastRequestId")
-        return when(MessageContentType.TEXT) {
+        return when(messageContentType.random()) {
             MessageContentType.TEXT -> {
                 Message("${Date().time * key.random()}", messagesText[lastRequestId], MessageContentType.TEXT, MessageType.SYSTEM, states.random())
             }
@@ -104,10 +102,10 @@ object MessagesMocker {
     }
 
     val buttons = arrayOf(
-        ChatButton("LOADER", "Loader", ButtonStyle.SECONDARY, properties = ButtonProperties(enableAt = (Date().time + 90000))),
-        ChatButton("INPUT_SIGNATURE", "Input signature", ButtonStyle.SECONDARY),
-        ChatButton("INPUT_FORM", "Input form", ButtonStyle.SECONDARY, ButtonProperties(formIdToOpen = "some _form")),
-        ChatButton("WEB_VIEW", "WebView", ButtonStyle.SECONDARY, ButtonProperties(webViewIdToOpen = "some _webView")),
+//        ChatButton("LOADER", "Loader", ButtonStyle.SECONDARY, properties = ButtonProperties(enableAt = (Date().time + 90000))),
+//        ChatButton("INPUT_SIGNATURE", "Input signature", ButtonStyle.SECONDARY),
+//        ChatButton("INPUT_FORM", "Input form", ButtonStyle.SECONDARY, ButtonProperties(formIdToOpen = "some _form")),
+//        ChatButton("WEB_VIEW", "WebView", ButtonStyle.SECONDARY, ButtonProperties(webViewIdToOpen = "some _webView")),
         ChatButton("ADD_RESPONSE", "Add response", ButtonStyle.SECONDARY),
         ChatButton("ADD_REQUEST", "Add request", ButtonStyle.ACCENT),
     )

@@ -13,6 +13,7 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.request.RequestListener
@@ -21,6 +22,7 @@ import kg.nurtelecom.chat_engine.R
 import kg.nurtelecom.chat_engine.databinding.ChatEngineViewImageMessageBinding
 import kg.nurtelecom.chat_engine.model.MessageStatus
 import kg.nurtelecom.chat_engine.model.MessageType
+import kg.nurtelecom.chat_engine.util.BitmapScaleTransformation
 import java.io.File
 
 class ImageMessageView @JvmOverloads constructor(
@@ -120,6 +122,8 @@ class ImageMessageView @JvmOverloads constructor(
         startImageShimmer()
         Glide.with(context)
             .load(url)
+            .transform(BitmapScaleTransformation())
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .override(Target.SIZE_ORIGINAL)
             .listener(imageListenerForShimmer)
             .into(vb.ivImage)
@@ -130,6 +134,8 @@ class ImageMessageView @JvmOverloads constructor(
         startImageShimmer()
         Glide.with(context)
             .load(glideUrl)
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .transform(BitmapScaleTransformation())
             .override(Target.SIZE_ORIGINAL)
             .listener(imageListenerForShimmer)
             .into(vb.ivImage)
@@ -140,6 +146,8 @@ class ImageMessageView @JvmOverloads constructor(
         startImageShimmer()
         Glide.with(context)
             .load(File(filePath))
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .transform(BitmapScaleTransformation())
             .override(Target.SIZE_ORIGINAL)
             .listener(imageListenerForShimmer)
             .into(vb.ivImage)
@@ -179,4 +187,5 @@ class ImageMessageView @JvmOverloads constructor(
             return false
         }
     }
+
 }
