@@ -1,5 +1,6 @@
 package kg.nurtelecom.chat_engine.base.chat.adapter
 
+import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,8 +13,15 @@ class TypingViewHolder(private val vb: ItemTypingBinding): RecyclerView.ViewHold
     fun onBind() {
         Glide.with(vb.ivLoader)
             .asGif()
-            .load(R.raw.loading)
+            .load(resolveTypingGifResource())
             .into(vb.ivLoader)
+    }
+
+    private fun resolveTypingGifResource(): Int {
+        return when (vb.root.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_YES -> R.raw.loading_night
+            else -> R.raw.loading
+        }
     }
 
     companion object {
