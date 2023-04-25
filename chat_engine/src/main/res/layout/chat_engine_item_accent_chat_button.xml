@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:animateLayoutChanges="true"
     android:paddingTop="@dimen/padding_16dp">
 
     <Button
@@ -15,6 +16,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         style="@style/chat_engine_ChatAccentButtonStyle"/>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/chat_engine_bg_accent_button_shimmer"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/btn"
+        app:layout_constraintEnd_toEndOf="@id/btn"
+        app:layout_constraintTop_toTopOf="@id/btn"
+        app:layout_constraintBottom_toBottomOf="@id/btn"/>
 
     <ProgressBar
         android:id="@+id/progress"

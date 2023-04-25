@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import com.design.chili.extensions.setOnSingleClickListener
+import com.facebook.shimmer.ShimmerFrameLayout
 import kg.nurtelecom.chat_engine.databinding.ChatEngineItemSecondaryChatButtonBinding
 import kg.nurtelecom.chat_engine.model.ButtonProperties
 
@@ -12,6 +13,7 @@ class SecondaryChatButtonVH(private val vb: ChatEngineItemSecondaryChatButtonBin
 
     override val btn: Button = vb.btn
     override val progress: ProgressBar = vb.progress
+    override val shimmer: ShimmerFrameLayout? = null
 
     companion object {
         fun create(parent: ViewGroup, onClick: (tag: String, buttonProperties: ButtonProperties?) -> Unit): SecondaryChatButtonVH {
