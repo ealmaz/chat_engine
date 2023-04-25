@@ -72,6 +72,7 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
     }
 
     private fun startShimmerAnimation() {
+        if (!btn.isVisible) return
         shimmer?.isVisible = true
         shimmer?.startShimmer()
         shimmer?.postDelayed({
