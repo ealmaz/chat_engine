@@ -20,7 +20,6 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
     var additionalButtonProperties: ButtonProperties? = null
 
     private var countDownTimer : CountDownTimer? = null
-    private var shimmerDelayTimer: CountDownTimer? = null
 
     abstract val btn: Button
     abstract val progress: ProgressBar
@@ -28,7 +27,6 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
 
     fun onBind(chatButton: ChatButton) = with(btn) {
         setupTimer(chatButton.properties, chatButton.text)
-        startShimmerDelayTimer()
         tag = chatButton.buttonId
         text = chatButton.text
         additionalButtonProperties = chatButton.properties
@@ -38,6 +36,7 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
     private fun setupLoader(isLoading: Boolean) {
         progress.isInvisible = !isLoading
         btn.isInvisible = isLoading
+        if (isLoading) stopShimmer() else startShimmer()
     }
 
     private fun setupTimer(btnProperties: ButtonProperties?, btnText: String?) {
@@ -47,13 +46,14 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
         val mills = btnProperties.enableAt - Date().time
         if (mills <= 0) return
         btn.isEnabled = false
+        stopShimmer()
         countDownTimer = createTimer(mills, {
             btn.apply { text = resources.getRetryAfterText(it) }
         }, {
             btn.apply {
                 text = btnText
                 isEnabled = true
-                startShimmerDelayTimer()
+                startShimmer()
             }
         })
         countDownTimer?.start()
@@ -63,27 +63,13 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
         return getString(R.string.retry_after, millisUntilFinished.toTimeFromMillis)
     }
 
-    private fun startShimmerDelayTimer() {
-        if (!btn.isEnabled) return
-        shimmerDelayTimer = shimmerDelayTimer ?: createTimer(SHIMMER_DELAY_MILLS, {}, {
-            startShimmerAnimation()
-        })
-        shimmerDelayTimer?.start()
-    }
-
-    private fun startShimmerAnimation() {
-        if (!btn.isVisible) return
+    protected fun startShimmer() {
+        if (!btn.isEnabled || !btn.isVisible) return
         shimmer?.isVisible = true
         shimmer?.startShimmer()
-        shimmer?.postDelayed({
-            try {
-                stopShimmer()
-                startShimmerDelayTimer()
-            } catch (ex: Throwable) {}
-        }, SHIMMER_DURATION_MILLS)
     }
 
-    private fun stopShimmer() {
+    protected fun stopShimmer() {
         shimmer?.stopShimmer()
         shimmer?.isVisible = false
     }
@@ -95,19 +81,6 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
             override fun onFinish() { onFinish() }
         }
     }
-
-    fun stopShimmerAndShimmerDelay() {
-        shimmerDelayTimer?.cancel()
-        stopShimmer()
-    }
-
-
-    companion object {
-        const val SHIMMER_DELAY_MILLS = 5000L
-        const val SHIMMER_DURATION_MILLS = 2000L
-    }
-
-
 }
 
 val Long.toTimeFromMillis: String
