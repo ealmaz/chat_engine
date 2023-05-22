@@ -136,4 +136,12 @@ class ChatInputFieldView @JvmOverloads constructor(
         validations?.let { return validator.validateItem(validations, listOf(inputText))}
         return true
     }
+
+    fun setSelection(selection: Int) {
+        vb.etInput.setSelection(selection)
+    }
+
+    fun moveSelectionToEnd() {
+        vb.etInput.moveSelectionToEnd()
+    }
 }
