@@ -18,9 +18,9 @@ object DatePickerFieldCreator : ValidatableItem() {
                 LinearLayout.LayoutParams.WRAP_CONTENT).apply {
                 setMargins(
                     0,
-                    resources.getDimensionPixelSize(com.design.chili.R.dimen.padding_4dp),
+                    resources.getDimensionPixelSize(com.design2.chili2.R.dimen.padding_4dp),
                     0,
-                    resources.getDimensionPixelSize(com.design.chili.R.dimen.padding_4dp)
+                    resources.getDimensionPixelSize(com.design2.chili2.R.dimen.padding_4dp)
                 )
             }
             setupViews(datePickerFieldInfo, onSetValue)

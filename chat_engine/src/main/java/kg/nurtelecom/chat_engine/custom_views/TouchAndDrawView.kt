@@ -29,7 +29,7 @@ class TouchAndDrawView @JvmOverloads constructor(
             isAntiAlias = true
             color = Color.BLACK
             strokeCap = Paint.Cap.ROUND
-            strokeWidth = resources.getDimensionPixelSize(com.design.chili.R.dimen.view_4dp).toFloat()
+            strokeWidth = resources.getDimensionPixelSize(com.design2.chili2.R.dimen.view_4dp).toFloat()
         }
     }
 

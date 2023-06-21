@@ -35,7 +35,7 @@ dependencies {
 
     implementation project(':chat_engine')
 
-    implementation 'com.github.ealmaz:DesignChili:0.0.0.63'
+    implementation 'com.github.ealmaz:DesignChili2:0.0.0.25'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'

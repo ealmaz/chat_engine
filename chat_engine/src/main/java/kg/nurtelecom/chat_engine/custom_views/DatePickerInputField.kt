@@ -32,7 +32,7 @@ class DatePickerInputField @JvmOverloads constructor(context: Context, attribute
     fun setHint(hint: String) {
         vb.tvLabel.apply {
             text = hint
-            setTextColor(ContextCompat.getColor(context, com.design.chili.R.color.gray_1_alpha_50))
+            setTextColor(ContextCompat.getColor(context, com.design2.chili2.R.color.gray_1_alpha_50))
         }
     }
 

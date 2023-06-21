@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.design.chili.R
-import com.design.chili.view.navigation_components.ChiliToolbar
+import com.design2.chili2.R
+import com.design2.chili2.view.navigation_components.ChiliToolbar
 import kg.nurtelecom.chat_engine.base.chat.adapter.BubbleMessagesDecor
 import kg.nurtelecom.chat_engine.base.chat.adapter.ItemAnchor
 import kg.nurtelecom.chat_engine.base.chat.adapter.ItemTyping
