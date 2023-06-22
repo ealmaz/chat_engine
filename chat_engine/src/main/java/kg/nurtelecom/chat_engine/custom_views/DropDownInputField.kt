@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
+import com.design2.chili2.view.modals.bottom_sheet.serach_bottom_sheet.Option
+import com.design2.chili2.view.modals.bottom_sheet.serach_bottom_sheet.SearchSelectorBottomSheet
 import kg.nurtelecom.chat_engine.R
 import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators.DropDownFieldCreator
 import kg.nurtelecom.chat_engine.model.ChooseType
 import kg.nurtelecom.chat_engine.model.DropDownFieldInfo
-import kg.nurtelecom.chat_engine.model.Option
 
 class DropDownInputField @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null) : LinearLayout(context, attributeSet) {
 
@@ -34,12 +35,12 @@ class DropDownInputField @JvmOverloads constructor(context: Context, attributeSe
     fun setupViews(dropDownFieldInfo: DropDownFieldInfo, onSelectionChanged: (values: List<String>, Boolean) -> Unit) {
         this.onSelectionChanged = onSelectionChanged
         this.dropDownListInfo = dropDownFieldInfo
-//        this.setOnClickListener {
-//            if (options.isEmpty()) return@setOnClickListener
-//            val bs = createSearchBottomSheet(context, dropDownFieldInfo.chooseType != ChooseType.MULTIPLE)
-//            bs.setOnDismissListener { onBottomSheetDismiss() }
-//            bs.show()
-//        }
+        this.setOnClickListener {
+            if (options.isEmpty()) return@setOnClickListener
+            val bs = createSearchBottomSheet(context, dropDownFieldInfo.chooseType != ChooseType.MULTIPLE)
+            bs.setOnDismissListener { onBottomSheetDismiss() }
+            bs.show()
+        }
         onBottomSheetDismiss()
     }
 
@@ -58,13 +59,13 @@ class DropDownInputField @JvmOverloads constructor(context: Context, attributeSe
         }
     }
 
-//    private fun createSearchBottomSheet(context: Context, isSingleSelection: Boolean): SearchSelectorBottomSheet {
-//        return SearchSelectorBottomSheet.Builder()
-//            .setIsHeaderVisible(true)
-//            .setIsSearchAvailable(true)
-//            .setIsSingleSelection(isSingleSelection)
-//            .build(context, options)
-//    }
+    private fun createSearchBottomSheet(context: Context, isSingleSelection: Boolean): SearchSelectorBottomSheet {
+        return SearchSelectorBottomSheet.Builder()
+            .setIsHeaderVisible(true)
+            .setIsSearchAvailable(true)
+            .setIsSingleSelection(isSingleSelection)
+            .build(context, options)
+    }
 
     fun clearSelected() {
         options.forEach { it.isSelected = false }
@@ -72,18 +73,18 @@ class DropDownInputField @JvmOverloads constructor(context: Context, attributeSe
     }
 
     private fun onBottomSheetDismiss() {
-//        setHint(dropDownListInfo?.label ?: "")
-//        val selectedValues = mutableListOf<String>()
-//        val selectedIds = mutableListOf<String>()
-//        options.forEach {
-//            if (it.isSelected) {
-//                selectedValues.add(it.value)
-//                selectedIds.add(it.id)
-//            }
-//        }
-//        setText(selectedValues.joinToString { it })
-//        val isValid = DropDownFieldCreator.validateItem(dropDownListInfo?.validations, selectedIds)
-//        onSelectionChanged?.invoke(selectedIds, isValid)
+        setHint(dropDownListInfo?.label ?: "")
+        val selectedValues = mutableListOf<String>()
+        val selectedIds = mutableListOf<String>()
+        options.forEach {
+            if (it.isSelected) {
+                selectedValues.add(it.value)
+                selectedIds.add(it.id)
+            }
+        }
+        setText(selectedValues.joinToString { it })
+        val isValid = DropDownFieldCreator.validateItem(dropDownListInfo?.validations, selectedIds)
+        onSelectionChanged?.invoke(selectedIds, isValid)
     }
 }
 
