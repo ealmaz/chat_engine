@@ -7,4 +7,5 @@
     <string name="retry_after">Повторить через %s</string>
     <string name="input_signature_description">Оставьте свою подпись пальцем на выделенном поле экрана и нажмите “Продолжить”. Постарайтесь оставить поспись приближенную к подписи в вашем паспорте.</string>
     <string name="input_signature_title">Ваша подпись для договора.</string>
+    <string name="signature_checkbox">Подтверждаю, что подпись оставлена мной собственноручно</string>
 </resources>

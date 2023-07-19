@@ -5,4 +5,5 @@
     <string name="retry_after">%s кийин кайталоо</string>
     <string name="input_signature_description">Экрандагы бош жерге бармагыңыз менен кол коюп,  “Улантуу” баскычын басыңыз. Кол тамгаңызды паспортуңуздагы кол тамгаңызга окшоштуруп коюуга аракет кылыңыз.</string>
     <string name="input_signature_title">Келишим үчүн Сиздин кол тамгаңыз.</string>
+    <string name="signature_checkbox">Кол тамга өз колум менен коюлганын ырастайм</string>
 </resources>
