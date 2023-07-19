@@ -88,7 +88,6 @@ class InputSignatureFragment : Fragment(), TouchAndDrawViewCallback {
     }
 
     override fun onStartDrawing() {
-        vb.btnContinue.isEnabled = true
         hasSignature = true
         if (vb.checkBox.isChecked) {
             vb.btnContinue.isEnabled = true
