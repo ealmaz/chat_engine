@@ -28,6 +28,7 @@ class InputSignatureFragment : Fragment(), TouchAndDrawViewCallback {
         get() = _vb!!
 
     private val disposable = CompositeDisposable()
+    private var hasSignature: Boolean = false
 
     private val toolbarConfig: ChiliToolbar.Configuration by lazy {
         ChiliToolbar.Configuration(
@@ -58,7 +59,7 @@ class InputSignatureFragment : Fragment(), TouchAndDrawViewCallback {
         signatureInput.setDrawingListener(this@InputSignatureFragment)
         btnContinue.setOnClickListener { saveSignature() }
         checkBox.setOnCheckedChangeListener { _, b ->
-            btnContinue.isEnabled = b
+            btnContinue.isEnabled = b && hasSignature
         }
     }
 
@@ -87,12 +88,14 @@ class InputSignatureFragment : Fragment(), TouchAndDrawViewCallback {
     }
 
     override fun onStartDrawing() {
+        hasSignature = true
         if (vb.checkBox.isChecked) {
             vb.btnContinue.isEnabled = true
         }
     }
 
     override fun onClearCanvas() {
+        hasSignature = false
         vb.btnContinue.isEnabled = false
     }
 
