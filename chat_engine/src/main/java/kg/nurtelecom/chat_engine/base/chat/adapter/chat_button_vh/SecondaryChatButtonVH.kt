@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
-import com.design.chili.extensions.setOnSingleClickListener
+import com.design2.chili2.extensions.setOnSingleClickListener
 import com.facebook.shimmer.ShimmerFrameLayout
 import kg.nurtelecom.chat_engine.databinding.ChatEngineItemSecondaryChatButtonBinding
 import kg.nurtelecom.chat_engine.model.ButtonProperties

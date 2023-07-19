@@ -20,7 +20,7 @@ class ChatButtonsGroup @JvmOverloads constructor(
     CompoundButton.OnCheckedChangeListener {
 
     private val buttonsMarginPx: Int by lazy {
-        resources.getDimensionPixelSize(com.design.chili.R.dimen.padding_16dp)
+        resources.getDimensionPixelSize(com.design2.chili2.R.dimen.padding_16dp)
     }
 
     private val buttonsLayoutParams: LayoutParams by lazy {

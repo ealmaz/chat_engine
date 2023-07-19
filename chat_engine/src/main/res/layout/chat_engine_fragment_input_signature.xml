@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/chat_engine_input_form_background">
 
-    <com.design.chili.view.navigation_components.ChiliToolbar
+    <com.design2.chili2.view.navigation_components.ChiliToolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +48,7 @@
 
     </LinearLayout>
 
-    <com.design.chili.view.buttons.LoaderButton
+    <com.design2.chili2.view.buttons.LoaderButton
         android:id="@+id/btn_continue"
         android:text="@string/next"
         android:enabled="false"
