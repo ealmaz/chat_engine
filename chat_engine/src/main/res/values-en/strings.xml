@@ -5,4 +5,5 @@
     <string name="retry_after">Repeat in %s</string>
     <string name="input_signature_description">Sign with your finger in the highlighted field and press "Continue". Make sure your signature looks as much alike that in your passport as possible.</string>
     <string name="input_signature_title">Your signature for contract here.</string>
+    <string name="signature_checkbox">I do confirm that this is my own handwritten signature</string>
 </resources>

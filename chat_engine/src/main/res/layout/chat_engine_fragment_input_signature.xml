@@ -25,6 +25,29 @@
         app:layout_constraintTop_toBottomOf="@id/tb"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/padding_16dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_continue"
+        android:layout_marginHorizontal="@dimen/padding_16dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/check_box"
+            style="@style/Chili.CheckBoxStyle"
+            android:checked="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Chili.H8.Primary"
+            android:text="@string/signature_checkbox"/>
+
+    </LinearLayout>
+
     <com.design.chili.view.buttons.LoaderButton
         android:id="@+id/btn_continue"
         android:text="@string/next"

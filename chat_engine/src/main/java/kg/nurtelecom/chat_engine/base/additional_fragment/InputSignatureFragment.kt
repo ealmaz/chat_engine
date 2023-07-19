@@ -57,6 +57,9 @@ class InputSignatureFragment : Fragment(), TouchAndDrawViewCallback {
         tb.initToolbar(toolbarConfig)
         signatureInput.setDrawingListener(this@InputSignatureFragment)
         btnContinue.setOnClickListener { saveSignature() }
+        checkBox.setOnCheckedChangeListener { _, b ->
+            btnContinue.isEnabled = b
+        }
     }
 
     private fun saveSignature()  {
@@ -84,7 +87,9 @@ class InputSignatureFragment : Fragment(), TouchAndDrawViewCallback {
     }
 
     override fun onStartDrawing() {
-        vb.btnContinue.isEnabled = true
+        if (vb.checkBox.isChecked) {
+            vb.btnContinue.isEnabled = true
+        }
     }
 
     override fun onClearCanvas() {
