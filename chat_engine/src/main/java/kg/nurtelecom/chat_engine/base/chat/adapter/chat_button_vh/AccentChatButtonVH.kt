@@ -21,7 +21,7 @@ class AccentChatButtonVH(private val vb: ChatEngineItemAccentChatButtonBinding):
             return AccentChatButtonVH(view).apply {
                 vb.btn.setOnSingleClickListener {
                     onClick.invoke(vb.btn.tag.toString(), additionalButtonProperties)
-                    stopShimmer()
+                    stopShimmerAndShimmerDelay()
                 }
             }
         }

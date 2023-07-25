@@ -38,7 +38,6 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
     private fun setupLoader(isLoading: Boolean) {
         progress.isInvisible = !isLoading
         btn.isInvisible = isLoading
-        if (isLoading) stopShimmer() else startShimmer()
     }
 
     private fun setupTimer(btnProperties: ButtonProperties?, btnText: String?) {
@@ -48,7 +47,6 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
         val mills = btnProperties.enableAt - Date().time
         if (mills <= 0) return
         btn.isEnabled = false
-        stopShimmer()
         countDownTimer = createTimer(mills, {
             btn.apply { text = resources.getRetryAfterText(it) }
         }, {
