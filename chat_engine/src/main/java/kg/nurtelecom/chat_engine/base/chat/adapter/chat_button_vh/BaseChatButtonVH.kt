@@ -20,6 +20,7 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
     var additionalButtonProperties: ButtonProperties? = null
 
     private var countDownTimer : CountDownTimer? = null
+    private var shimmerDelayTimer: CountDownTimer? = null
 
     abstract val btn: Button
     abstract val progress: ProgressBar
@@ -27,6 +28,7 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
 
     fun onBind(chatButton: ChatButton) = with(btn) {
         setupTimer(chatButton.properties, chatButton.text)
+        startShimmerDelayTimer()
         tag = chatButton.buttonId
         text = chatButton.text
         additionalButtonProperties = chatButton.properties
@@ -53,7 +55,7 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
             btn.apply {
                 text = btnText
                 isEnabled = true
-                startShimmer()
+                startShimmerDelayTimer()
             }
         })
         countDownTimer?.start()
@@ -61,6 +63,26 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
 
     fun Resources.getRetryAfterText(millisUntilFinished: Long): String {
         return getString(R.string.retry_after, millisUntilFinished.toTimeFromMillis)
+    }
+
+    private fun startShimmerDelayTimer() {
+        if (!btn.isEnabled) return
+        shimmerDelayTimer = shimmerDelayTimer ?: createTimer(SHIMMER_DELAY_MILLS, {}, {
+            startShimmerAnimation()
+        })
+        shimmerDelayTimer?.start()
+    }
+
+    private fun startShimmerAnimation() {
+        if (!btn.isVisible) return
+        shimmer?.isVisible = true
+        shimmer?.startShimmer()
+        shimmer?.postDelayed({
+            try {
+                stopShimmer()
+                startShimmerDelayTimer()
+            } catch (ex: Throwable) {}
+        }, SHIMMER_DURATION_MILLS)
     }
 
     protected fun startShimmer() {
@@ -74,6 +96,16 @@ abstract class BaseChatButtonVH(itemView: View) : RecyclerView.ViewHolder(itemVi
         shimmer?.isVisible = false
     }
 
+    fun stopShimmerAndShimmerDelay() {
+        shimmerDelayTimer?.cancel()
+        stopShimmer()
+    }
+
+
+    companion object {
+        const val SHIMMER_DELAY_MILLS = 5000L
+        const val SHIMMER_DURATION_MILLS = 2000L
+    }
 
     private fun createTimer(mills: Long, onTick: (Long) -> Unit, onFinish: () -> Unit): CountDownTimer {
         return object : CountDownTimer(mills, 1000) {
