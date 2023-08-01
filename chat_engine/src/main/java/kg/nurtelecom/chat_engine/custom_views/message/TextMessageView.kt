@@ -82,7 +82,7 @@ class TextMessageView @JvmOverloads constructor(
     }
 
     fun setMessageHtml(html: String) {
-        vb.tvMessage.text = html.parseAsHtml(HtmlCompat.FROM_HTML_MODE_COMPACT)
+        vb.tvMessage.text = html.parseAsHtml(HtmlCompat.FROM_HTML_MODE_COMPACT).trimEnd()
     }
 
     fun getMessageTextView(): TextView {
