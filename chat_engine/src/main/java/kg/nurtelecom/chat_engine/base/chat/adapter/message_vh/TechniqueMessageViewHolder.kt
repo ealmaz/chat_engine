@@ -12,7 +12,7 @@ class TechniqueMessageViewHolder(val vb: ChatEngineItemTechniqueMessageBinding) 
 
     fun onBind(message: Message) {
         val content = when (message.contentType) {
-            MessageContentType.TEXT_HTML -> message.content.parseAsHtml()
+            MessageContentType.TEXT_HTML -> message.content.parseAsHtml().trimEnd()
             else -> message.content
         }
         vb.tvHeader.text = content
