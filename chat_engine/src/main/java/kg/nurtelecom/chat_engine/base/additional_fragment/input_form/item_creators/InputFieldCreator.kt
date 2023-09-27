@@ -29,7 +29,7 @@ object InputFieldCreator : ValidatableItem() {
             fieldInfo.maskSymbols?.let { setupNewMaskSymbols(it.map { it.first() }) }
             when (fieldInfo.inputType) {
                 InputFieldInputType.NUMBER -> setInputType(InputType.TYPE_CLASS_NUMBER)
-                else -> setInputType(InputType.TYPE_CLASS_TEXT)
+                else -> setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
             }
             setupClearTextButton()
             setSimpleTextChangedListener {
