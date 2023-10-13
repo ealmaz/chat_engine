@@ -47,6 +47,6 @@ fun MaskedInputView.setupLabelBehavior(label: String, message: String?) {
     setFocusChangeListener({
         setMessage(if (message.isNullOrBlank()) label else message)
     }, {
-        if (message.isNullOrBlank()) hideMessage() else setMessage(message)
+        hideMessage()
     })
 }
