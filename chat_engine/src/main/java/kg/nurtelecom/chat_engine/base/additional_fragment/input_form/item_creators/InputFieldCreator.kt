@@ -23,7 +23,7 @@ object InputFieldCreator : ValidatableItem() {
             }
             setGravity(Gravity.START)
             fieldInfo.label?.let { setupLabelBehavior(it, fieldInfo.hint) }
-            fieldInfo.hint?.let { setMessage(it) }
+            fieldInfo.hint?.let { setupLabelBehavior(it, "") }
             fieldInfo.placeholder?.let { setHint(it) }
             fieldInfo.mask?.let { setupNewMask(it) }
             fieldInfo.maskSymbols?.let { setupNewMaskSymbols(it.map { it.first() }) }
@@ -47,6 +47,6 @@ fun MaskedInputView.setupLabelBehavior(label: String, message: String?) {
     setFocusChangeListener({
         setMessage(if (message.isNullOrBlank()) label else message)
     }, {
-        hideMessage()
+        if (message.isNullOrBlank()) hideMessage() else setMessage(message)
     })
 }
