@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.model.GlideUrl
 import kg.nurtelecom.chat_engine.custom_views.message.ImageMessageView
 import kg.nurtelecom.chat_engine.databinding.ChatEngineItemImageMessageBinding
+import kg.nurtelecom.chat_engine.extensions.getImgUrlByTheme
 import kg.nurtelecom.chat_engine.model.Message
 import kg.nurtelecom.chat_engine.model.MessageContentType
 
@@ -23,9 +24,10 @@ class ImageMessageViewHolder(
     private fun ImageMessageView.loadImage(message: Message) {
         when (message.contentType) {
             MessageContentType.IMAGE_URL -> {
-                val glideUrl = glideUrlCreator?.invoke(message.content)
+                val imageUrl = message.content.getImgUrlByTheme(vb.root.context)
+                val glideUrl = glideUrlCreator?.invoke(imageUrl)
                 if (glideUrl != null) loadImageFromUrl(glideUrl)
-                else loadImageFromUrl(message.content)
+                else loadImageFromUrl(imageUrl)
             }
             MessageContentType.IMAGE_FILE_PATH -> loadImageFormFilePath(message.content)
             else -> {}
