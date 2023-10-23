@@ -9,7 +9,7 @@ fun String.replaceByTheme(
     darkTheme: String,
 ): String {
     return when (context.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
-        Configuration.UI_MODE_NIGHT_NO -> this
+        Configuration.UI_MODE_NIGHT_NO -> this.replace(darkTheme, lightTheme)
         Configuration.UI_MODE_NIGHT_YES -> this.replace(lightTheme, darkTheme)
         else -> this
     }
@@ -17,4 +17,8 @@ fun String.replaceByTheme(
 
 fun String.getImgUrlByTheme(context: Context): String {
     return this.replaceByTheme(context, "light", "dark")
+}
+
+fun String.getUrlByTheme(context: Context): String {
+    return this.replaceByTheme(context,"theme=light","theme=dark")
 }

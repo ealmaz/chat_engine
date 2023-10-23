@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kg.nurtelecom.chat_engine.custom_views.message.MessageRoundedCorners
 import kg.nurtelecom.chat_engine.databinding.ChatEngineItemTextMessageBinding
+import kg.nurtelecom.chat_engine.extensions.getUrlByTheme
 import kg.nurtelecom.chat_engine.extensions.handleUrlClicks
 import kg.nurtelecom.chat_engine.model.Message
 import kg.nurtelecom.chat_engine.model.MessageContentType
@@ -18,7 +19,7 @@ class TextMessageViewHolder(private val vb: ChatEngineItemTextMessageBinding, pr
         when(message.contentType) {
             MessageContentType.TEXT -> setMessage(message.content)
             MessageContentType.TEXT_HTML -> {
-                setMessageHtml(message.content)
+                setMessageHtml(message.content.getUrlByTheme(vb.root.context))
                 getMessageTextView().handleUrlClicks(onLinkClick)
             }
             else -> {}
