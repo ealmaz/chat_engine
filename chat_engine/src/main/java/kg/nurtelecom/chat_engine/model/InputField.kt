@@ -15,5 +15,5 @@ data class InputField(
 ): Serializable
 
 enum class InputFieldInputType {
-    TEXT, NUMBER
+    TEXT, NUMBER, TEXT_ALL_CAPS
 }

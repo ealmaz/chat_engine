@@ -1,8 +1,10 @@
 package kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators
 
 import android.content.Context
+import android.text.InputFilter
 import android.text.InputType
 import android.view.Gravity
+import android.widget.Filter
 import android.widget.LinearLayout
 import com.design2.chili2.view.input.MaskedInputView
 import kg.nurtelecom.chat_engine.model.InputField
@@ -28,6 +30,10 @@ object InputFieldCreator : ValidatableItem() {
             fieldInfo.maskSymbols?.let { setupNewMaskSymbols(it.map { it.first() }) }
             when (fieldInfo.inputType) {
                 InputFieldInputType.NUMBER -> setInputType(InputType.TYPE_CLASS_NUMBER)
+                InputFieldInputType.TEXT_ALL_CAPS -> {
+                    setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                    clearAndSetFilters(arrayOf(InputFilter.AllCaps()))
+                }
                 else -> setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
             }
             setupClearTextButton()

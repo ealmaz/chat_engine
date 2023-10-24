@@ -104,7 +104,7 @@ object MessagesMocker {
     val buttons = arrayOf(
         ChatButton("LOADER", "Loader", ButtonStyle.ACCENT, properties = ButtonProperties(enableAt = (Date().time + 10000))),
         ChatButton("INPUT_SIGNATURE", "Input signature", ButtonStyle.SECONDARY),
-//        ChatButton("INPUT_FORM", "Input form", ButtonStyle.SECONDARY, ButtonProperties(formIdToOpen = "some _form")),
+        ChatButton("INPUT_FORM", "Input form", ButtonStyle.SECONDARY, ButtonProperties(formIdToOpen = "some _form")),
 //        ChatButton("WEB_VIEW", "WebView", ButtonStyle.SECONDARY, ButtonProperties(webViewIdToOpen = "some _webView")),
         ChatButton("ADD_RESPONSE", "Add response", ButtonStyle.SECONDARY),
         ChatButton("ADD_REQUEST", "Add request", ButtonStyle.ACCENT),
@@ -167,12 +167,12 @@ fun getInputForm() = InputForm(
         FormItem(
             FormItemType.INPUT_FIELD,
             InputField(
-                "INPUT_REGION2",
+                "INPUT_PASSPORT",
                 null,
                 "HINT",
                 null,
                 "Label2",
-                null,
+                InputFieldInputType.TEXT_ALL_CAPS,
                 null,
                 null,
             )
@@ -212,17 +212,17 @@ fun getInputForm() = InputForm(
 //                listOf(Validation(ValidationType.REGEX, "^(?!\\\\s*\\\$).+"))
 //            )
 //        ),
-//        FormItem(
-//            FormItemType.INPUT_FIELD,
-//            InputField(
-//                "INPUT_PHONE",
-//                null,
-//                null,
-//                InputFieldInputType.NUMBER,
-//                "+996 XXX XXX XXX",
-//                null
-//            )
-//        ),
+        FormItem(
+            FormItemType.INPUT_FIELD,
+            InputField(
+                "INPUT_PHONE",
+                null,
+                "ИНН",
+                inputType = InputFieldInputType.NUMBER,
+                mask = "X XX XX XXXX XXXXX",
+                maskSymbols = listOf(" ")
+            )
+        ),
         FormItem(
             FormItemType.GROUP_BUTTON_FORM_ITEM,
             GroupButtonFormItem(
