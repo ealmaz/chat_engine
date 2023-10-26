@@ -62,6 +62,7 @@ class DropDownInputField @JvmOverloads constructor(context: Context, attributeSe
     private fun createSearchBottomSheet(context: Context, isSingleSelection: Boolean): SearchSelectorBottomSheet {
         return SearchSelectorBottomSheet.Builder()
             .setIsHeaderVisible(false)
+            .setIsGroupList(false)
             .setIsSearchAvailable(true)
             .setIsSingleSelection(isSingleSelection)
             .build(context, options)
