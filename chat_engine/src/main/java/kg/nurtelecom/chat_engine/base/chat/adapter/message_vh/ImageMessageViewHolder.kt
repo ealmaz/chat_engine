@@ -9,6 +9,7 @@ import kg.nurtelecom.chat_engine.databinding.ChatEngineItemImageMessageBinding
 import kg.nurtelecom.chat_engine.extensions.getImgUrlByTheme
 import kg.nurtelecom.chat_engine.model.Message
 import kg.nurtelecom.chat_engine.model.MessageContentType
+import kg.nurtelecom.chat_engine.model.MessageType
 
 class ImageMessageViewHolder(
     private val vb: ChatEngineItemImageMessageBinding,
@@ -26,8 +27,13 @@ class ImageMessageViewHolder(
             MessageContentType.IMAGE_URL -> {
                 val imageUrl = message.content.getImgUrlByTheme(vb.root.context)
                 val glideUrl = glideUrlCreator?.invoke(imageUrl)
-                if (glideUrl != null) loadImageFromUrl(glideUrl)
-                else loadImageFromUrl(imageUrl)
+                if (glideUrl != null) {
+                    if (message.messageType == MessageType.USER) loadUserImageFromUrl(glideUrl)
+                    else loadImageFromUrl(glideUrl)
+                } else {
+                    if (message.messageType == MessageType.USER) loadUserImageFromUrl(imageUrl)
+                    else loadImageFromUrl(imageUrl)
+                }
             }
             MessageContentType.IMAGE_FILE_PATH -> loadImageFormFilePath(message.content)
             else -> {}

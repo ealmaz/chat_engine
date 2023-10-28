@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kg.nurtelecom.chat_engine.R
 import kg.nurtelecom.chat_engine.databinding.ChatEngineViewImageMessageBinding
+import kg.nurtelecom.chat_engine.extensions.dpToPx
 import kg.nurtelecom.chat_engine.model.MessageStatus
 import kg.nurtelecom.chat_engine.model.MessageType
 import kg.nurtelecom.chat_engine.util.BitmapScaleTransformation
@@ -129,6 +130,19 @@ class ImageMessageView @JvmOverloads constructor(
             .into(vb.ivImage)
     }
 
+    fun loadUserImageFromUrl(url: String) {
+        if (vb.ivImage.tag == url) return
+        startImageShimmer()
+        Glide.with(context)
+            .load(url)
+            .transform(BitmapScaleTransformation())
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .override(context.dpToPx(168), context.dpToPx(200))
+            .listener(imageListenerForShimmer)
+            .fitCenter()
+            .into(vb.ivImage)
+    }
+
     fun loadImageFromUrl(glideUrl: GlideUrl) {
         if (vb.ivImage.tag == glideUrl.toString()) return
         startImageShimmer()
@@ -138,6 +152,19 @@ class ImageMessageView @JvmOverloads constructor(
             .transform(BitmapScaleTransformation())
             .override(Target.SIZE_ORIGINAL)
             .listener(imageListenerForShimmer)
+            .into(vb.ivImage)
+    }
+
+    fun loadUserImageFromUrl(glideUrl: GlideUrl) {
+        if (vb.ivImage.tag == glideUrl.toString()) return
+        startImageShimmer()
+        Glide.with(context)
+            .load(glideUrl)
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .transform(BitmapScaleTransformation())
+            .override(context.dpToPx(168), context.dpToPx(200))
+            .listener(imageListenerForShimmer)
+            .fitCenter()
             .into(vb.ivImage)
     }
 

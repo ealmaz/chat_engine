@@ -11,3 +11,7 @@ fun Context.hideKeyboard() {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
+
+fun Context.dpToPx(dp: Int): Int {
+    return (dp * resources.displayMetrics.density).toInt()
+}
