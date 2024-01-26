@@ -10,18 +10,43 @@ import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creato
 import kg.nurtelecom.chat_engine.databinding.ChatEngineFormItemDatePickerBinding
 import kg.nurtelecom.chat_engine.model.DatePickerFieldInfo
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
-class DatePickerInputField @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null) : LinearLayout(context, attributeSet) {
+class DatePickerInputField @JvmOverloads constructor(
+    context: Context,
+    attributeSet: AttributeSet? = null
+) : LinearLayout(context, attributeSet) {
 
     private val dateFormat = SimpleDateFormat("dd.MM.yyyy")
     private var onNewValueListener: ((List<String>, Boolean) -> Unit)? = null
 
     private var datePickerFieldInfo: DatePickerFieldInfo? = null
 
-    private val vb: ChatEngineFormItemDatePickerBinding = ChatEngineFormItemDatePickerBinding.inflate(LayoutInflater.from(context), this, true)
+    private val vb: ChatEngineFormItemDatePickerBinding =
+        ChatEngineFormItemDatePickerBinding.inflate(LayoutInflater.from(context), this, true)
 
-    fun setupViews(datePickerFieldInfo: DatePickerFieldInfo, onSetNewValue: (List<String> , Boolean) -> Unit) {
+    init {
+        context.theme.obtainStyledAttributes(
+            attributeSet, R.styleable.chat_engine_ChatInputFieldView, 0, 0
+        ).apply {
+            try {
+                val cornerRadius =
+                    getDimension(R.styleable.chat_engine_ChatInputFieldView_corner_radius, 0f)
+                setCornerRadius(cornerRadius)
+            } finally {
+                recycle()
+            }
+        }
+    }
+
+    fun setCornerRadius(cornerRadius: Float) {
+        vb.cardViewDatePicker.radius = cornerRadius
+    }
+
+    fun setupViews(
+        datePickerFieldInfo: DatePickerFieldInfo,
+        onSetNewValue: (List<String>, Boolean) -> Unit
+    ) {
         setDate(datePickerFieldInfo.value)
         datePickerFieldInfo.hint?.let { setHelperText(it) }
         datePickerFieldInfo.placeHolder?.let { setHint(it) }
@@ -32,7 +57,12 @@ class DatePickerInputField @JvmOverloads constructor(context: Context, attribute
     fun setHint(hint: String) {
         vb.tvLabel.apply {
             text = hint
-            setTextColor(ContextCompat.getColor(context, com.design2.chili2.R.color.gray_1_alpha_50))
+            setTextColor(
+                ContextCompat.getColor(
+                    context,
+                    com.design2.chili2.R.color.gray_1_alpha_50
+                )
+            )
         }
     }
 
@@ -40,8 +70,12 @@ class DatePickerInputField @JvmOverloads constructor(context: Context, attribute
         if (text.isBlank()) return
         vb.tvLabel.apply {
             this.text = text
-            setTextColor(ContextCompat.getColor(context,
-                R.color.chat_engine_drop_down_item_text_color))
+            setTextColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.chat_engine_drop_down_item_text_color
+                )
+            )
         }
     }
 

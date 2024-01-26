@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat.getColor
 import com.design2.chili2.view.modals.bottom_sheet.serach_bottom_sheet.Option
 import com.design2.chili2.view.modals.bottom_sheet.serach_bottom_sheet.SearchSelectorBottomSheet
@@ -13,9 +14,13 @@ import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creato
 import kg.nurtelecom.chat_engine.model.ChooseType
 import kg.nurtelecom.chat_engine.model.DropDownFieldInfo
 
-class DropDownInputField @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null) : LinearLayout(context, attributeSet) {
+class DropDownInputField @JvmOverloads constructor(
+    context: Context,
+    attributeSet: AttributeSet? = null
+) : LinearLayout(context, attributeSet) {
 
     private val views: DropDownInputFiledData
+    private var cardView: CardView
 
     var options: List<Option> = listOf()
         set(value) {
@@ -28,16 +33,40 @@ class DropDownInputField @JvmOverloads constructor(context: Context, attributeSe
     private var dropDownListInfo: DropDownFieldInfo? = null
 
     init {
-        val view = LayoutInflater.from(context).inflate(R.layout.chat_engine_form_item_drop_down, this, true)
+        val view = LayoutInflater.from(context)
+            .inflate(R.layout.chat_engine_form_item_drop_down, this, true)
         views = DropDownInputFiledData(view.findViewById(R.id.tv_label))
+
+        cardView = view.findViewById(R.id.card_view_dd)
+        context.theme.obtainStyledAttributes(
+            attributeSet, R.styleable.chat_engine_ChatInputFieldView, 0, 0
+        ).apply {
+            try {
+                val cornerRadius =
+                    getDimension(R.styleable.chat_engine_ChatInputFieldView_corner_radius, 0f)
+                setCornerRadius(cornerRadius)
+            } finally {
+                recycle()
+            }
+        }
     }
 
-    fun setupViews(dropDownFieldInfo: DropDownFieldInfo, onSelectionChanged: (values: List<String>, Boolean) -> Unit) {
+    fun setCornerRadius(cornerRadius: Float) {
+        cardView.radius = cornerRadius
+    }
+
+    fun setupViews(
+        dropDownFieldInfo: DropDownFieldInfo,
+        onSelectionChanged: (values: List<String>, Boolean) -> Unit
+    ) {
         this.onSelectionChanged = onSelectionChanged
         this.dropDownListInfo = dropDownFieldInfo
         this.setOnClickListener {
             if (options.isEmpty()) return@setOnClickListener
-            val bs = createSearchBottomSheet(context, dropDownFieldInfo.chooseType != ChooseType.MULTIPLE)
+            val bs = createSearchBottomSheet(
+                context,
+                dropDownFieldInfo.chooseType != ChooseType.MULTIPLE
+            )
             bs.setOnDismissListener { onBottomSheetDismiss() }
             bs.show()
         }
@@ -59,7 +88,10 @@ class DropDownInputField @JvmOverloads constructor(context: Context, attributeSe
         }
     }
 
-    private fun createSearchBottomSheet(context: Context, isSingleSelection: Boolean): SearchSelectorBottomSheet {
+    private fun createSearchBottomSheet(
+        context: Context,
+        isSingleSelection: Boolean
+    ): SearchSelectorBottomSheet {
         return SearchSelectorBottomSheet.Builder()
             .setIsHeaderVisible(false)
             .setIsGroupList(false)
