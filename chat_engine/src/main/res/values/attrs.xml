@@ -49,6 +49,7 @@
     </declare-styleable>
 
     <declare-styleable name="chat_engine_ChatInputFieldView">
+        <attr name="corner_radius" format="dimension"/>
         <attr name="android:text"/>
         <attr name="android:hint"/>
         <attr name="android:inputType"/>
@@ -74,5 +75,4 @@
         <attr name="hintTextAppearance"/>
         <attr name="descriptionTextAppearance" format="reference"/>
     </declare-styleable>
-
 </resources>
