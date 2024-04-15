@@ -18,7 +18,6 @@ object InputFieldCreator : ValidatableItem() {
         onFiledChanged: (result: List<String>, isValid: Boolean) -> Unit
     ): MaskedInputView {
         return MaskedInputView(context).apply {
-            this.changeRepresentationChar('.')
             tag = fieldInfo.fieldId
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
