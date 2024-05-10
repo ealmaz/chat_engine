@@ -105,7 +105,7 @@ object MessagesMocker {
         ChatButton("LOADER", "Loader", ButtonStyle.ACCENT, properties = ButtonProperties(enableAt = (Date().time + 10000))),
         ChatButton("INPUT_SIGNATURE", "Input signature", ButtonStyle.SECONDARY),
         ChatButton("INPUT_FORM", "Input form", ButtonStyle.SECONDARY, ButtonProperties(formIdToOpen = "some _form")),
-//        ChatButton("WEB_VIEW", "WebView", ButtonStyle.SECONDARY, ButtonProperties(webViewIdToOpen = "some _webView")),
+        ChatButton("WEB_VIEW", "WebView", ButtonStyle.SECONDARY, ButtonProperties(webViewIdToOpen = "some _webView")),
         ChatButton("ADD_RESPONSE", "Add response", ButtonStyle.SECONDARY),
         ChatButton("ADD_REQUEST", "Add request", ButtonStyle.ACCENT),
     )
@@ -135,18 +135,6 @@ fun getInputForm() = InputForm(
                     Option("8", "Ыссык Кульская  область", false),
                     Option("9", "Чуйская область", false),
                 )
-            )
-        ),
-
-        FormItem(
-            FormItemType.DROP_DOWN_FORM_ITEM,
-            DropDownFieldInfo(
-                "drop_down_2",
-                null,
-                ChooseType.SINGLE,
-                "Single Selection",
-                null,
-                null
             )
         ),
 
