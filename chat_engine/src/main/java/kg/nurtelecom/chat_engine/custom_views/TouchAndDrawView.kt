@@ -47,7 +47,7 @@ class TouchAndDrawView @JvmOverloads constructor(
         return true
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (canvas == null) return
         if (drawingCallbackListener != null && drawingShapes.isNotEmpty() && !isStartedToDraw) {
