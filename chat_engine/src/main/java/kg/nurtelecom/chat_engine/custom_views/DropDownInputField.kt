@@ -65,7 +65,8 @@ class DropDownInputField @JvmOverloads constructor(
             if (options.isEmpty()) return@setOnClickListener
             val bs = createSearchBottomSheet(
                 context,
-                dropDownFieldInfo.chooseType != ChooseType.MULTIPLE
+                dropDownFieldInfo.chooseType != ChooseType.MULTIPLE,
+                options.size > 2
             )
             bs.setOnDismissListener { onBottomSheetDismiss() }
             bs.show()
@@ -90,12 +91,13 @@ class DropDownInputField @JvmOverloads constructor(
 
     private fun createSearchBottomSheet(
         context: Context,
-        isSingleSelection: Boolean
+        isSingleSelection: Boolean,
+        isSearchAvailable: Boolean = true,
     ): SearchSelectorBottomSheet {
         return SearchSelectorBottomSheet.Builder()
             .setIsHeaderVisible(false)
             .setIsGroupList(false)
-            .setIsSearchAvailable(true)
+            .setIsSearchAvailable(isSearchAvailable)
             .setIsSingleSelection(isSingleSelection)
             .build(context, options)
     }
