@@ -7,7 +7,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
+import androidx.annotation.DrawableRes
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import com.design2.chili2.view.input.text_watchers.MaskedTextWatcher
 import kg.nurtelecom.chat_engine.R
 import kg.nurtelecom.chat_engine.base.additional_fragment.input_form.item_creators.ValidatableItem
@@ -143,5 +145,19 @@ class ChatInputFieldView @JvmOverloads constructor(
 
     fun moveSelectionToEnd() {
         vb.etInput.moveSelectionToEnd()
+    }
+
+    fun setupSendButtonValidation(
+        @DrawableRes validDrawableRes: Int = R.drawable.chat_engine_ic_send,
+        @DrawableRes invalidDrawableRes: Int = R.drawable.chat_engine_ic_send_disable
+    ) {
+        vb.ivSend.setImageResource(
+            if (isInputValid()) validDrawableRes else invalidDrawableRes
+        )
+        vb.etInput.addTextChangedListener(afterTextChanged = {
+            vb.ivSend.setImageResource(
+                if (isInputValid()) validDrawableRes else invalidDrawableRes
+            )
+        })
     }
 }
